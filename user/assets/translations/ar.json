@@ -1,0 +1,57 @@
+{
+    "home": "الرئيسية",
+    "login": "تسجيل الدخول",
+    "signup": "انشاء حساب",
+    "login_screen": {
+        "Email": "البريد الالكتروني",
+        "EnterYourEmail": "ادخل البريد الالكتروني",
+        "Password": "كلمة المرور",
+        "EnterYourPassword": "ادخل كلمة المرور",
+        "ForgetPassword": "نسيت كلمة المرور؟",
+        "CreateAccount": "انشاء حساب"
+    },
+    "validation": {
+        "enter_at_least_num_characters": "ادخل على الاقل 6 احرف ",
+        "this_field_is_required": "هذا الحقل مطلوب ",
+        "please_enter_a_valid_email": "   يرجى إدخال البريد الإلكتروني الصحيح. ",
+        "this_field_can_not_be_empty": "هذا الحقل يجب ان لا يكون فارغ",
+        "can_not_be_empty_please_enter_correct_password": "لا يمكن أن يكون فارغا الرجاء إدخال كلمة المرور الصحيحة",
+        "password_and_confirmation_password_mismatch": "كلمة المرور وتأكيد كلمة المرور غير متطابقين"
+    },
+    "signup_screen": {
+        "title": "إنشاء حساب",
+        "rewrite_password": "إعادة كتابة كلمة المرور",
+        "FullName": "الاسم كامل",
+        "EnterYourFullName": "ادخل اسمك الكامل",
+        "Email": "البريد الالكتروني",
+        "EnterYourEmail": "ادخل البريد الالكتروني",
+        "Password": "كلمة المرور",
+        "EnterYourPassword": "ادخل كلمة المرور"
+    },
+    "date": {
+        "ago": "منذ",
+        "minute": "دقيقة",
+        "second": "ثانية",
+        "hour": "ساعة",
+        "day": "يوم"
+    },
+    "add_post_screen": {
+        "new_post": "قطعة جديدة",
+        "add": "إضافة",
+        "title": "العنوان",
+        "content": "الوصف",
+        "price": "السعر",
+        "category": "الصنف",
+        "store": "المستودع الذي ستسلم القطعة له",
+        "photos": "الصور"
+    },
+    "delete_post": "حذف المنشور",
+    "sure_delete": "هل انت متأكد من حذف هذا المنشور؟",
+    "yes": "نعم",
+    "edit": "تعديل",
+    "cancel": "الغاء",
+    "delete": "حذف",
+    "likes": "إعجاب",
+    "comments": "تعليق",
+    "lbl_loading": " الرجاء الانتظار ..."
+}

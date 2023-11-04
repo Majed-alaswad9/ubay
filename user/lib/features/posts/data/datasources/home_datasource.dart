@@ -1,12 +1,18 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:user/core/api/api_utils.dart';
 import 'package:user/core/api/client.dart';
 import 'package:user/core/api/client_config.dart';
 import 'package:user/core/common/constants/configuration/uri_routs.dart';
-import 'package:user/core/common/model/page_state/page_state.dart';
 import 'package:user/features/posts/data/model/category_model/category_model.dart';
 import 'package:user/features/posts/data/model/city_model/city_model.dart';
+import 'package:user/features/posts/data/model/comments_model/comments_model.dart';
 import 'package:user/features/posts/data/model/posts_model.dart';
+import 'package:user/features/posts/domain/usecases/add_comment_use_case.dart';
+import 'package:user/features/posts/domain/usecases/add_post_use_case.dart';
+import 'package:user/features/posts/domain/usecases/get_comments_use_case.dart';
 
 import '../../../../core/common/model/response_wrapper/response_wrapper.dart';
 
@@ -26,6 +32,29 @@ class HomeDataSource {
       return ResponseWrapper.fromJson(response.data, (json) {
         final posts = PostsModel.fromJson(response.data);
         return posts;
+      });
+    });
+  }
+
+  Future<ResponseWrapper<bool>> addPost(
+      AddPostParams params, List<File> photos) {
+    return throwAppException(() async {
+      Map data = params.map;
+      List<MultipartFile> files = [];
+      for (File file in photos) {
+        files.add(await MultipartFile.fromFile(file.path));
+      }
+
+      data['photos'] = files;
+      print(data);
+      FormData formData = FormData.fromMap(data as Map<String, dynamic>);
+      print(formData.files.length);
+      final response = await clientApi.request(RequestConfig(
+          data: formData,
+          endpoint: EndPoints.product.product,
+          clientMethod: ClientMethod.post));
+      return ResponseWrapper.fromJson(response.data, (json) {
+        return true;
       });
     });
   }
@@ -67,6 +96,34 @@ class HomeDataSource {
       return ResponseWrapper.fromJson(response.data, (json) {
         final categories = CategoryModel.fromJson(response.data);
         return categories;
+      });
+    });
+  }
+
+  Future<ResponseWrapper<CommentsModel>> getComments(CommentsParams params) {
+    return throwAppException(() async {
+      final response = await clientApi.request(RequestConfig(
+          endpoint:
+              '${EndPoints.product.product}/${params.id}${EndPoints.product.comments}',
+          clientMethod: ClientMethod.get,
+          data: params.idMap,
+          queryParameters: params.queryMap));
+      return ResponseWrapper.fromJson(response.data, (json) {
+        final result = CommentsModel.fromJson(response.data);
+        return result;
+      });
+    });
+  }
+
+  Future<ResponseWrapper<bool>> addComment(AddCommentParams params) {
+    return throwAppException(() async {
+      final response = await clientApi.request(RequestConfig(
+          data: params.map,
+          endpoint: EndPoints.product.comments,
+          clientMethod: ClientMethod.post));
+
+      return ResponseWrapper.fromJson(response.data, (json) {
+        return true;
       });
     });
   }

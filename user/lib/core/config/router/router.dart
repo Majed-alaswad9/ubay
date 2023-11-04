@@ -10,6 +10,7 @@ import 'package:user/features/auth/presentation/pages/register_page.dart';
 import 'package:user/features/chat/presentation/pages/chat_screen.dart';
 import 'package:user/features/posts/presintation/pages/add_post_screen.dart';
 import 'package:user/features/posts/presintation/pages/home_screen.dart';
+import 'package:user/features/posts/presintation/widget/comments_widget.dart';
 import 'package:user/features/profile/presintation/pages/profile_screen.dart';
 import 'package:user/features/transaction/presintation/pages/transaction_screen.dart';
 import 'package:user/features/welcome/splash.dart';
@@ -74,8 +75,8 @@ class GRouter {
                             pageBuilder:
                                 (BuildContext context, GoRouterState state) {
                               return _builderPage(
-                                  child: AddPostScreen(), state: state);
-                            })
+                                  child: const AddPostScreen(), state: state);
+                            }),
                       ])
                 ]),
             StatefulShellBranch(

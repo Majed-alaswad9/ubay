@@ -28,7 +28,7 @@ class App extends StatelessWidget {
               title: 'uBay',
               debugShowCheckedModeBanner: false,
               theme: AppTheme.light(context),
-              darkTheme: AppTheme.dark(context),
+              //darkTheme: AppTheme.dark(context),
               routerConfig: GRouter.router,
               locale: context.locale,
               localizationsDelegates: context.localizationDelegates,

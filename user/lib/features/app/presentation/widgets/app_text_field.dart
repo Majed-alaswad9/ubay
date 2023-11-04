@@ -238,8 +238,8 @@ class _AppTextFieldState extends State<AppTextField> {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color:
-                          widget.borderSideColor ?? context.colorScheme.white,
+                      color: widget.borderSideColor ??
+                          context.colorScheme.onBackground,
                       width: widget.borderWidth ?? 0.5,
                     ),
                     borderRadius: widget.borderRadius ??
@@ -288,7 +288,7 @@ class _AppTextFieldState extends State<AppTextField> {
                       : widget.hintText,
                   hintStyle: widget.hintTextStyle ??
                       context.textTheme.bodyMedium?.s13
-                          .withColor(context.colorScheme.white),
+                          .withColor(context.colorScheme.primary),
                   labelText: widget.translateLabel
                       ? widget.labelText?.tr()
                       : widget.labelText,

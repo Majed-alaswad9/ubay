@@ -22,6 +22,7 @@ class _HomeRoutes {
 
   final String homeScreen = '/homeScreen';
   final String addPostScreen = 'addPostScreen';
+  final String commentsScreen = 'commentsScreen';
 }
 
 class _ChatRoutes {

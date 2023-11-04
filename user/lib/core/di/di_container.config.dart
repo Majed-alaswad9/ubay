@@ -21,28 +21,32 @@ import '../../features/app/data/prefs_repository_imp.dart' as _i10;
 import '../../features/app/domain/repository/prefs_repository.dart' as _i9;
 import '../../features/app/presentation/bloc/app_bloc.dart' as _i3;
 import '../../features/auth/data/datasources/auth_remote_datasource.dart'
-    as _i16;
-import '../../features/auth/data/repositories/auth_repository_impl.dart'
     as _i18;
-import '../../features/auth/domain/repositories/auth_repository.dart' as _i17;
-import '../../features/auth/domain/usecases/login_usecase.dart' as _i24;
-import '../../features/auth/domain/usecases/signup_use_case.dart' as _i25;
-import '../../features/auth/presentation/bloc/auth/auth_bloc.dart' as _i26;
+import '../../features/auth/data/repositories/auth_repository_impl.dart'
+    as _i20;
+import '../../features/auth/domain/repositories/auth_repository.dart' as _i19;
+import '../../features/auth/domain/usecases/login_usecase.dart' as _i27;
+import '../../features/auth/domain/usecases/signup_use_case.dart' as _i28;
+import '../../features/auth/presentation/bloc/auth/auth_bloc.dart' as _i29;
 import '../../features/posts/data/datasources/home_datasource.dart' as _i12;
 import '../../features/posts/data/repository/home_repository_implement.dart'
     as _i14;
 import '../../features/posts/domain/repository/home_repository.dart' as _i13;
-import '../../features/posts/domain/usecases/add_like_use_case.dart' as _i15;
-import '../../features/posts/domain/usecases/delete_like_use_case.dart' as _i19;
+import '../../features/posts/domain/usecases/add_comment_use_case.dart' as _i15;
+import '../../features/posts/domain/usecases/add_like_use_case.dart' as _i16;
+import '../../features/posts/domain/usecases/add_post_use_case.dart' as _i17;
+import '../../features/posts/domain/usecases/delete_like_use_case.dart' as _i21;
 import '../../features/posts/domain/usecases/get_all_posts_use_case.dart'
-    as _i20;
+    as _i22;
 import '../../features/posts/domain/usecases/get_category_use_case.dart'
-    as _i21;
-import '../../features/posts/domain/usecases/get_store_use_case.dart' as _i22;
-import '../../features/posts/presintation/bloc/home_bloc.dart' as _i23;
+    as _i23;
+import '../../features/posts/domain/usecases/get_comments_use_case.dart'
+    as _i24;
+import '../../features/posts/domain/usecases/get_store_use_case.dart' as _i25;
+import '../../features/posts/presintation/bloc/home_bloc.dart' as _i26;
 import '../api/client.dart' as _i11;
 import '../network_info.dart' as _i6;
-import 'di_container.dart' as _i27;
+import 'di_container.dart' as _i30;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 Future<_i1.GetIt> $initGetIt(
@@ -76,36 +80,45 @@ Future<_i1.GetIt> $initGetIt(
       () => _i12.HomeDataSource(gh<_i11.ClientApi>()));
   gh.factory<_i13.HomeRepository>(
       () => _i14.HomeRepositoryImplement(gh<_i12.HomeDataSource>()));
-  gh.factory<_i15.AddLikeUseCase>(
-      () => _i15.AddLikeUseCase(gh<_i13.HomeRepository>()));
-  gh.factory<_i16.AuthRemoteDataSource>(
-      () => _i16.AuthRemoteDataSource(clientApi: gh<_i11.ClientApi>()));
-  gh.factory<_i17.AuthRepository>(() => _i18.AuthRepositoryImplement(
-      authRemoteDataSource: gh<_i16.AuthRemoteDataSource>()));
-  gh.factory<_i19.DeleteLikeUseCase>(
-      () => _i19.DeleteLikeUseCase(gh<_i13.HomeRepository>()));
-  gh.factory<_i20.GetAllPostsUseCase>(
-      () => _i20.GetAllPostsUseCase(gh<_i13.HomeRepository>()));
-  gh.factory<_i21.GetCategoryUseCase>(
-      () => _i21.GetCategoryUseCase(gh<_i13.HomeRepository>()));
-  gh.factory<_i22.GetStoreUseCase>(
-      () => _i22.GetStoreUseCase(gh<_i13.HomeRepository>()));
-  gh.lazySingleton<_i23.HomeBloc>(() => _i23.HomeBloc(
-        gh<_i20.GetAllPostsUseCase>(),
-        gh<_i15.AddLikeUseCase>(),
-        gh<_i19.DeleteLikeUseCase>(),
-        gh<_i22.GetStoreUseCase>(),
-        gh<_i21.GetCategoryUseCase>(),
+  gh.factory<_i15.AddCommentUseCase>(
+      () => _i15.AddCommentUseCase(gh<_i13.HomeRepository>()));
+  gh.factory<_i16.AddLikeUseCase>(
+      () => _i16.AddLikeUseCase(gh<_i13.HomeRepository>()));
+  gh.factory<_i17.AddPostUseCase>(
+      () => _i17.AddPostUseCase(gh<_i13.HomeRepository>()));
+  gh.factory<_i18.AuthRemoteDataSource>(
+      () => _i18.AuthRemoteDataSource(clientApi: gh<_i11.ClientApi>()));
+  gh.factory<_i19.AuthRepository>(() => _i20.AuthRepositoryImplement(
+      authRemoteDataSource: gh<_i18.AuthRemoteDataSource>()));
+  gh.factory<_i21.DeleteLikeUseCase>(
+      () => _i21.DeleteLikeUseCase(gh<_i13.HomeRepository>()));
+  gh.factory<_i22.GetAllPostsUseCase>(
+      () => _i22.GetAllPostsUseCase(gh<_i13.HomeRepository>()));
+  gh.factory<_i23.GetCategoryUseCase>(
+      () => _i23.GetCategoryUseCase(gh<_i13.HomeRepository>()));
+  gh.factory<_i24.GetCommentsUseCase>(
+      () => _i24.GetCommentsUseCase(gh<_i13.HomeRepository>()));
+  gh.factory<_i25.GetStoreUseCase>(
+      () => _i25.GetStoreUseCase(gh<_i13.HomeRepository>()));
+  gh.lazySingleton<_i26.HomeBloc>(() => _i26.HomeBloc(
+        gh<_i22.GetAllPostsUseCase>(),
+        gh<_i16.AddLikeUseCase>(),
+        gh<_i21.DeleteLikeUseCase>(),
+        gh<_i25.GetStoreUseCase>(),
+        gh<_i23.GetCategoryUseCase>(),
+        gh<_i17.AddPostUseCase>(),
+        gh<_i24.GetCommentsUseCase>(),
+        gh<_i15.AddCommentUseCase>(),
       ));
-  gh.factory<_i24.LoginUseCase>(
-      () => _i24.LoginUseCase(gh<_i17.AuthRepository>()));
-  gh.factory<_i25.SignUpUseCase>(
-      () => _i25.SignUpUseCase(gh<_i17.AuthRepository>()));
-  gh.factory<_i26.AuthBloc>(() => _i26.AuthBloc(
-        gh<_i24.LoginUseCase>(),
-        gh<_i25.SignUpUseCase>(),
+  gh.factory<_i27.LoginUseCase>(
+      () => _i27.LoginUseCase(gh<_i19.AuthRepository>()));
+  gh.factory<_i28.SignUpUseCase>(
+      () => _i28.SignUpUseCase(gh<_i19.AuthRepository>()));
+  gh.factory<_i29.AuthBloc>(() => _i29.AuthBloc(
+        gh<_i27.LoginUseCase>(),
+        gh<_i28.SignUpUseCase>(),
       ));
   return getIt;
 }
 
-class _$AppModule extends _i27.AppModule {}
+class _$AppModule extends _i30.AppModule {}

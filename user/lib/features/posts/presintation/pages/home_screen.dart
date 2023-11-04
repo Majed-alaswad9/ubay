@@ -18,6 +18,7 @@ import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/features/app/presentation/widgets/photo_grid.dart';
 import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
+import 'package:user/features/posts/presintation/widget/comments_widget.dart';
 import 'package:user/features/posts/presintation/widget/like_button.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
@@ -52,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
           appBarParams: AppBarParams(
               title: LocaleKeys.home.tr(),
               backgroundColor: context.colorScheme.primary,
-              tittleStyle: context.textTheme.titleLarge)),
+              tittleStyle: context.textTheme.titleLarge!
+                  .copyWith(color: context.colorScheme.white))),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return PageStateBuilder(
@@ -72,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 2,
                   ),
                   itemBuilder: (context, index) => Card(
+                    color: Colors.white,
                     clipBehavior: Clip.antiAlias,
                     child: Padding(
                       padding: HWEdgeInsets.all(5),
@@ -93,7 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   AppTextView(
-                                      style: context.textTheme.titleSmall,
+                                      style: context.textTheme.titleSmall!
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold),
                                       data.data[index].user!.name),
                                   5.verticalSpace,
                                   AppTextView(
@@ -118,12 +123,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           10.verticalSpace,
                           AppTextView(data.data[index].title,
-                              style: context.textTheme.titleMedium!
-                                  .copyWith(color: Colors.white)),
+                              style: context.textTheme.titleLarge),
                           10.verticalSpace,
                           AppTextView(data.data[index].content,
-                              style: context.textTheme.titleSmall!
-                                  .copyWith(color: Colors.white)),
+                              style: context.textTheme.titleMedium),
                           10.verticalSpace,
                           Container(
                               padding: HWEdgeInsets.all(3.5),
@@ -142,13 +145,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               if (data.data[index].comments != 0)
                                 AppTextView(
                                     '${data.data[index].comments} ${LocaleKeys.comments.tr()}',
-                                    style: context.textTheme.titleSmall!
-                                        .copyWith(color: Colors.white)),
+                                    style: context.textTheme.titleSmall),
                               5.horizontalSpace,
-                              AppTextView(
-                                  '${data.data[index].likes} ${LocaleKeys.likes.tr()}',
-                                  style: context.textTheme.titleSmall!
-                                      .copyWith(color: Colors.white))
+                              if (data.data[index].likes != 0)
+                                AppTextView(
+                                    '${data.data[index].likes} ${LocaleKeys.likes.tr()}',
+                                    style: context.textTheme.titleSmall)
                             ],
                           ),
                           const Divider(
@@ -163,14 +165,37 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Expanded(
                                 child: MaterialButton(
-                                  onPressed: () {},
-                                  child: Icon(Icons.comment),
+                                  onPressed: () {
+                                    context.read<HomeBloc>().add(
+                                        GetCommentsEvent(data.data[index].id));
+                                    showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        context: context,
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.vertical(
+                                                top: Radius.circular(16))),
+                                        builder: (context) => SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.8,
+                                            child: CommentsWidget(
+                                              postId: data.data[index].id,
+                                            )));
+                                  },
+                                  child: Icon(
+                                    Icons.comment,
+                                    color: context.colorScheme.primary,
+                                  ),
                                 ),
                               ),
                               Expanded(
                                 child: MaterialButton(
                                   onPressed: () {},
-                                  child: Icon(Icons.send),
+                                  child: Icon(
+                                    Icons.send,
+                                    color: context.colorScheme.primary,
+                                  ),
                                 ),
                               )
                             ],
@@ -187,10 +212,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             error: (error) => Center(
               child: IconButton(
+                  color: context.colorScheme.primary,
                   onPressed: () {
                     loadData();
                   },
-                  icon: const Icon(Icons.refresh)),
+                  icon: const Icon(
+                    Icons.refresh,
+                    size: 25,
+                  )),
             ),
             empty: AppTextView(
               'No Data',

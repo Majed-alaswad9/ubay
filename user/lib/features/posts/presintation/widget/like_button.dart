@@ -15,10 +15,16 @@ class LikeButton extends StatefulWidget {
 
 class _LikeButtonState extends State<LikeButton> {
   late final ValueNotifier<bool> likeNotifier;
+  late IconData icon;
 
   @override
   void initState() {
     likeNotifier = ValueNotifier(widget.isLike);
+    if (likeNotifier.value) {
+      icon = Icons.thumb_up;
+    } else {
+      icon = Icons.thumb_up_alt_outlined;
+    }
     super.initState();
   }
 
@@ -36,8 +42,8 @@ class _LikeButtonState extends State<LikeButton> {
           likeNotifier.value = !obscureValue;
         },
         child: Icon(
-          Icons.thumb_up,
-          color: obscureValue ? context.colorScheme.primary : Colors.white,
+          obscureValue ? Icons.thumb_up : Icons.thumb_up_off_alt_outlined,
+          color: context.colorScheme.primary,
         ),
       ),
     );

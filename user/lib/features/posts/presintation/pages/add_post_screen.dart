@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:user/core/common/model/page_state/page_state.dart';
 import 'package:user/core/common/model/page_state/result_builder.dart';
 import 'package:user/core/config/themes/my_color_scheme.dart';
@@ -39,14 +42,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   final TextEditingController priceController = TextEditingController();
 
-  final TextEditingController storeController = TextEditingController();
-
-  final TextEditingController categoryController = TextEditingController();
-
   final GlobalKey<FormBuilderState> _formkey = GlobalKey<FormBuilderState>();
 
   late String storeId;
   late String categoryId;
+  late int price;
 
   @override
   void initState() {
@@ -70,73 +70,72 @@ class _AddPostScreenState extends State<AddPostScreen> {
           ),
           isLeading: true,
         ),
-        body: ListView(
-          padding: HWEdgeInsets.all(10),
-          children: [
-            30.verticalSpace,
-            AppTextView(
-                '${LocaleKeys.add_post_screen_add.tr()} ${LocaleKeys.add_post_screen_new_post.tr()}',
-                style: context.textTheme.titleLarge!
-                    .copyWith(color: context.colorScheme.primary)),
-            50.verticalSpace,
-            FormBuilder(
-                key: _formkey,
-                child: Column(
-                  children: [
-                    AppTextField(
-                      textInputType: TextInputType.text,
-                      name: 'title',
-                      controller: titleController,
-                      hintText: LocaleKeys.add_post_screen_title.tr(),
-                      maxLines: 1,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: LocaleKeys
-                                .validation_this_field_is_required
-                                .tr()),
-                      ]),
-                    ),
-                    16.verticalSpace,
-                    AppTextField(
-                      textInputType: TextInputType.text,
-                      name: 'content',
-                      controller: contentController,
-                      hintText: LocaleKeys.add_post_screen_content.tr(),
-                      maxLines: 5,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: LocaleKeys
-                                .validation_this_field_is_required
-                                .tr()),
-                      ]),
-                    ),
-                    16.verticalSpace,
-                    AppTextField(
-                      textInputType: TextInputType.number,
-                      name: 'price',
-                      hintText: LocaleKeys.add_post_screen_price.tr(),
-                      maxLines: 1,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: LocaleKeys
-                                .validation_this_field_is_required
-                                .tr()),
-                      ]),
-                    ),
-                    16.verticalSpace,
-                    BlocBuilder<HomeBloc, HomeState>(
-                      builder: (context, state) {
-                        return PageStateBuilder<StoreModel>(
-                          init: AppTextField(
-                            readOnly: true,
-                            name: 'store',
-                            hintText: LocaleKeys.add_post_screen_store.tr(),
-                            suffixIcon: Icon(
-                              Icons.arrow_drop_down,
-                              size: 20,
-                              color: context.colorScheme.primary,
-                            ),
-                          ),
+        body: BlocBuilder<HomeBloc, HomeState>(
+          buildWhen: (previous, current) => previous.photos != current.photos,
+          builder: (context, state) {
+            return ListView(
+              shrinkWrap: true,
+              padding: HWEdgeInsets.all(10),
+              children: [
+                30.verticalSpace,
+                Center(
+                  child: AppTextView(
+                      '${LocaleKeys.add_post_screen_add.tr()} ${LocaleKeys.add_post_screen_new_post.tr()}',
+                      style: context.textTheme.titleLarge!
+                          .copyWith(color: context.colorScheme.primary)),
+                ),
+                50.verticalSpace,
+                FormBuilder(
+                    key: _formkey,
+                    child: Column(
+                      children: [
+                        AppTextField(
+                          textInputType: TextInputType.text,
+                          name: 'title',
+                          controller: titleController,
+                          hintText: LocaleKeys.add_post_screen_title.tr(),
+                          maxLines: 1,
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(
+                                errorText: LocaleKeys
+                                    .validation_this_field_is_required
+                                    .tr()),
+                          ]),
+                        ),
+                        16.verticalSpace,
+                        AppTextField(
+                          textInputType: TextInputType.multiline,
+                          name: 'content',
+                          controller: contentController,
+                          hintText: LocaleKeys.add_post_screen_content.tr(),
+                          maxLines: 5,
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(
+                                errorText: LocaleKeys
+                                    .validation_this_field_is_required
+                                    .tr()),
+                          ]),
+                        ),
+                        16.verticalSpace,
+                        AppTextField(
+                          textInputType: TextInputType.number,
+                          name: 'price',
+                          onChange: (val) {
+                            price = int.parse(val.toString());
+                            print(price);
+                          },
+                          hintText: LocaleKeys.add_post_screen_price.tr(),
+                          maxLines: 1,
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(
+                                errorText: LocaleKeys
+                                    .validation_this_field_is_required
+                                    .tr()),
+                          ]),
+                        ),
+                        16.verticalSpace,
+                        PageStateBuilder<StoreModel>(
+                          init: const SizedBox.shrink(),
                           success: (data) {
                             return DropdownButtonFormField<Datum>(
                                 decoration: const InputDecoration(
@@ -144,12 +143,14 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                 validator: (value) => value == null
                                     ? LocaleKeys
                                         .validation_this_field_is_required
+                                        .tr()
                                     : null,
                                 borderRadius: BorderRadius.circular(16),
                                 hint: Text(
                                   LocaleKeys.add_post_screen_store.tr(),
                                   style: context.textTheme.bodyMedium?.s13!
-                                      .copyWith(color: Colors.white),
+                                      .copyWith(
+                                          color: context.colorScheme.primary),
                                 ),
                                 isExpanded: true,
                                 value: dropdownValueStore,
@@ -158,7 +159,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                 items: data.data.map((e) {
                                   return DropdownMenuItem<Datum>(
                                       value: e,
-                                      child: Text('${e.name}-${e.city.name}'));
+                                      child: Text(
+                                        '${e.name}-${e.city.name}',
+                                        style: context.textTheme.titleSmall,
+                                      ));
                                 }).toList(),
                                 onChanged: (value) {
                                   setState(() {
@@ -168,6 +172,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                 });
                           },
                           loading: AppTextField(
+                            readOnly: true,
                             name: 'store',
                             hintText: LocaleKeys.add_post_screen_store.tr(),
                             suffixIcon: LoadingIndicator(
@@ -175,30 +180,26 @@ class _AddPostScreenState extends State<AddPostScreen> {
                             ),
                           ),
                           error: (Exception? error) {
-                            return InkWell(
-                              onTap: () {
-                                context.read<HomeBloc>().add(GetStoreEvent());
-                              },
-                              child: AppTextField(
-                                name: 'store',
-                                hintText: LocaleKeys.add_post_screen_store.tr(),
-                                suffixIcon: Icon(
+                            return AppTextField(
+                              name: 'store',
+                              hintText: LocaleKeys.add_post_screen_store.tr(),
+                              suffixIcon: IconButton(
+                                onPressed: () => context
+                                    .read<HomeBloc>()
+                                    .add(GetStoreEvent()),
+                                icon: Icon(
                                   Icons.arrow_drop_down,
-                                  size: 20,
                                   color: context.colorScheme.primary,
                                 ),
+                                color: context.colorScheme.primary,
                               ),
                             );
                           },
                           result: state.storeStatus,
                           empty: Text('no store'),
-                        );
-                      },
-                    ),
-                    16.verticalSpace,
-                    BlocBuilder<HomeBloc, HomeState>(
-                      builder: (context, state) {
-                        return PageStateBuilder<CategoryModel>(
+                        ),
+                        16.verticalSpace,
+                        PageStateBuilder<CategoryModel>(
                           init: AppTextField(
                             name: 'category',
                             hintText: LocaleKeys.add_post_screen_category.tr(),
@@ -215,16 +216,18 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                 validator: (value) => value == null
                                     ? LocaleKeys
                                         .validation_this_field_is_required
+                                        .tr()
                                     : null,
                                 borderRadius: BorderRadius.circular(16),
                                 hint: Text(
                                   LocaleKeys.add_post_screen_store.tr(),
-                                  style: context.textTheme.bodyMedium?.s13,
+                                  style: context.textTheme.bodyMedium?.s13!
+                                      .copyWith(
+                                          color: context.colorScheme.primary),
                                 ),
                                 isExpanded: true,
                                 value: dropdownValueCategory,
-                                style: context.textTheme.titleSmall!
-                                    .copyWith(color: Colors.white),
+                                style: context.textTheme.titleSmall,
                                 items: data.data
                                     .map((e) => DropdownMenuItem<Data>(
                                         value: e, child: Text(e.name)))
@@ -233,8 +236,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                   setState(() {
                                     dropdownValueCategory = value!;
                                     categoryId = value.id;
-                                    print(dropdownValueCategory!.id);
-                                    print(value);
                                   });
                                 });
                           },
@@ -264,53 +265,70 @@ class _AddPostScreenState extends State<AddPostScreen> {
                           },
                           result: state.categoryStatus,
                           empty: Text('no category'),
-                        );
+                        ),
+                      ],
+                    )),
+                16.verticalSpace,
+                AppTextField(
+                  name: 'photos',
+                  readOnly: true,
+                  hintText: 'photos',
+                  onTap: () {
+                    context.read<HomeBloc>().add(PickImagesEvent());
+                  },
+                  suffixIcon: Icon(
+                    Icons.file_upload,
+                    color: context.colorScheme.primary,
+                  ),
+                ),
+                10.verticalSpace,
+                if (state.photos != null)
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.photos!.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 2 / 3,
+                            crossAxisSpacing: 2 / 3
+                            // Horizontally only 3 images will show
+                            ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return Expanded(
+                          child:
+                              Center(child: Image.file(state.photos![index])));
+                    },
+                  ),
+                20.verticalSpace,
+                BlocSelector<HomeBloc, HomeState, BlocStatus>(
+                  selector: (state) => state.addPost,
+                  builder: (context, state) {
+                    return AppElevatedButton(
+                      isLoading: state.isLoading(),
+                      onPressed: () {
+                        _formkey.currentState!.validate();
+                        _formkey.currentState!.save();
+                        if (_formkey.currentState!.isValid) {
+                          context.read<HomeBloc>().add(AddPostEvent(
+                              titleController.text,
+                              contentController.text,
+                              price,
+                              storeId,
+                              categoryId, []));
+                        }
                       },
-                    ),
-                  ],
-                )),
-            16.verticalSpace,
-            AppTextField(
-              name: 'photos',
-              readOnly: true,
-              hintText: 'photos',
-              onTap: () {
-                context.read<HomeBloc>().add(PickImagesEvent());
-              },
-              suffixIcon: const Icon(Icons.file_upload),
-            ),
-            10.verticalSpace,
-            Expanded(
-              child: BlocBuilder<HomeBloc, HomeState>(
-                buildWhen: (previous, current) => current.photos != null,
-                builder: (context, state) {
-                  return SizedBox(
-                    width: 300.0,
-                    child: GridView.builder(
-                      itemCount: state.photos!.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3),
-                      itemBuilder: (BuildContext context, int index) {
-                        return Center(
-                            child: kIsWeb
-                                ? Image.network(state.photos![index].path)
-                                : Image.file(state.photos![index]));
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
-            20.verticalSpace,
-            AppElevatedButton(
-              onPressed: () {},
-              child: AppTextView(
-                'Add',
-                style: context.textTheme.bodyMedium,
-              ),
-            )
-          ],
+                      child: AppTextView(
+                        'Add',
+                        style: context.textTheme.bodyLarge!
+                            .copyWith(color: Colors.white),
+                      ),
+                    );
+                  },
+                )
+              ],
+            );
+          },
         ));
   }
 }

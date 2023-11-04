@@ -22,7 +22,7 @@ class LoadingIndicator extends StatelessWidget {
           ? CircularProgressIndicator(
               backgroundColor:
                   color ?? context.theme.colorScheme.primary.withOpacity(0.6),
-              strokeWidth: 1.8,
+              strokeWidth: 2,
               valueColor: AlwaysStoppedAnimation<Color>(
                   color != null ? context.colorScheme.primary : Colors.white70),
             )

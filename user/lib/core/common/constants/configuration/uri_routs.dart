@@ -25,6 +25,7 @@ class Product {
   final likes = '/likes';
   final productMine = '/products/mine';
   final category = '/categories';
+  final comments = '/comments';
 }
 
 class Stores {

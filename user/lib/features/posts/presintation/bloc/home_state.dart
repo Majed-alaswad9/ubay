@@ -8,28 +8,40 @@ class HomeState {
   final List<File>? photos;
   final PageState<StoreModel> storeStatus;
   final PageState<CategoryModel> categoryStatus;
+  final BlocStatus addPost;
+  final PageState<CommentsModel> commentsStatus;
+  final BlocStatus addComment;
 
   const HomeState(
       {this.addLikeStatus = const BlocStatus.initial(),
+      this.addComment = const BlocStatus.initial(),
+      this.addPost = const BlocStatus.initial(),
       this.deleteLikeStatus = const BlocStatus.initial(),
       this.storeStatus = const PageState.init(),
       this.photos,
       this.categoryStatus = const PageState.init(),
-      this.allPosts = const PageState.init()});
+      this.allPosts = const PageState.init(),
+      this.commentsStatus = const PageState.init()});
 
   HomeState copyWith(
       {final PageState<PostsModel>? allPosts,
       final BlocStatus? addLikeStatus,
+      final BlocStatus? addPost,
       final PageState<StoreModel>? storeStatus,
       final List<File>? photos,
       final PageState<CategoryModel>? categoryStatus,
-      final BlocStatus? deleteLikeStatus}) {
+      final BlocStatus? deleteLikeStatus,
+      final PageState<CommentsModel>? commentsStatus,
+      final BlocStatus? addComment}) {
     return HomeState(
         allPosts: allPosts ?? this.allPosts,
+        addPost: addPost ?? this.addPost,
         addLikeStatus: addLikeStatus ?? this.addLikeStatus,
         deleteLikeStatus: deleteLikeStatus ?? this.deleteLikeStatus,
         categoryStatus: categoryStatus ?? this.categoryStatus,
         photos: photos ?? this.photos,
-        storeStatus: storeStatus ?? this.storeStatus);
+        storeStatus: storeStatus ?? this.storeStatus,
+        commentsStatus: commentsStatus ?? this.commentsStatus,
+        addComment: addComment ?? this.addComment);
   }
 }

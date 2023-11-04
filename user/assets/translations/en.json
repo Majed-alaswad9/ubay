@@ -53,5 +53,8 @@
     "cancel": "Cancel",
     "likes": "likes",
     "comments": "comments",
+    "no_data": "No Data",
+    "add": "Add",
+    "photos": "Photos",
     "lbl_loading": "Loading..."
 }

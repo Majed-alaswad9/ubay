@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:user/core/config/themes/my_color_scheme.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/services/language_service.dart';
@@ -76,7 +77,7 @@ class UBayAppBar extends StatelessWidget implements PreferredSizeWidget {
       ? IconButton(
           icon: Icon(
             Icons.arrow_back_ios_rounded,
-            color: context.colorScheme.onBackground,
+            color: context.colorScheme.white,
             size: 18,
           ),
           onPressed: appBarParams.onBack ?? () => Navigator.pop(context),

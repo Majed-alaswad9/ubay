@@ -23,7 +23,7 @@ mixin _$CommentsModel {
   int get pageNumber => throw _privateConstructorUsedError;
   int get totalPages => throw _privateConstructorUsedError;
   int get totalDataCount => throw _privateConstructorUsedError;
-  List<Datum> get data => throw _privateConstructorUsedError;
+  List<DataComment>? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,10 @@ abstract class $CommentsModelCopyWith<$Res> {
       _$CommentsModelCopyWithImpl<$Res, CommentsModel>;
   @useResult
   $Res call(
-      {int pageNumber, int totalPages, int totalDataCount, List<Datum> data});
+      {int pageNumber,
+      int totalPages,
+      int totalDataCount,
+      List<DataComment>? data});
 }
 
 /// @nodoc
@@ -57,7 +60,7 @@ class _$CommentsModelCopyWithImpl<$Res, $Val extends CommentsModel>
     Object? pageNumber = null,
     Object? totalPages = null,
     Object? totalDataCount = null,
-    Object? data = null,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
       pageNumber: null == pageNumber
@@ -72,10 +75,10 @@ class _$CommentsModelCopyWithImpl<$Res, $Val extends CommentsModel>
           ? _value.totalDataCount
           : totalDataCount // ignore: cast_nullable_to_non_nullable
               as int,
-      data: null == data
+      data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Datum>,
+              as List<DataComment>?,
     ) as $Val);
   }
 }
@@ -89,7 +92,10 @@ abstract class _$$CommentsModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int pageNumber, int totalPages, int totalDataCount, List<Datum> data});
+      {int pageNumber,
+      int totalPages,
+      int totalDataCount,
+      List<DataComment>? data});
 }
 
 /// @nodoc
@@ -106,7 +112,7 @@ class __$$CommentsModelImplCopyWithImpl<$Res>
     Object? pageNumber = null,
     Object? totalPages = null,
     Object? totalDataCount = null,
-    Object? data = null,
+    Object? data = freezed,
   }) {
     return _then(_$CommentsModelImpl(
       pageNumber: null == pageNumber
@@ -121,10 +127,10 @@ class __$$CommentsModelImplCopyWithImpl<$Res>
           ? _value.totalDataCount
           : totalDataCount // ignore: cast_nullable_to_non_nullable
               as int,
-      data: null == data
+      data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Datum>,
+              as List<DataComment>?,
     ));
   }
 }
@@ -136,7 +142,7 @@ class _$CommentsModelImpl implements _CommentsModel {
       {required this.pageNumber,
       required this.totalPages,
       required this.totalDataCount,
-      required final List<Datum> data})
+      final List<DataComment>? data})
       : _data = data;
 
   factory _$CommentsModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -148,12 +154,14 @@ class _$CommentsModelImpl implements _CommentsModel {
   final int totalPages;
   @override
   final int totalDataCount;
-  final List<Datum> _data;
+  final List<DataComment>? _data;
   @override
-  List<Datum> get data {
+  List<DataComment>? get data {
+    final value = _data;
+    if (value == null) return null;
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_data);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -199,7 +207,7 @@ abstract class _CommentsModel implements CommentsModel {
       {required final int pageNumber,
       required final int totalPages,
       required final int totalDataCount,
-      required final List<Datum> data}) = _$CommentsModelImpl;
+      final List<DataComment>? data}) = _$CommentsModelImpl;
 
   factory _CommentsModel.fromJson(Map<String, dynamic> json) =
       _$CommentsModelImpl.fromJson;
@@ -211,19 +219,19 @@ abstract class _CommentsModel implements CommentsModel {
   @override
   int get totalDataCount;
   @override
-  List<Datum> get data;
+  List<DataComment>? get data;
   @override
   @JsonKey(ignore: true)
   _$$CommentsModelImplCopyWith<_$CommentsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-Datum _$DatumFromJson(Map<String, dynamic> json) {
-  return _Datum.fromJson(json);
+DataComment _$DataCommentFromJson(Map<String, dynamic> json) {
+  return _DataComment.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Datum {
+mixin _$DataComment {
   String get id => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
@@ -233,13 +241,15 @@ mixin _$Datum {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DatumCopyWith<Datum> get copyWith => throw _privateConstructorUsedError;
+  $DataCommentCopyWith<DataComment> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DatumCopyWith<$Res> {
-  factory $DatumCopyWith(Datum value, $Res Function(Datum) then) =
-      _$DatumCopyWithImpl<$Res, Datum>;
+abstract class $DataCommentCopyWith<$Res> {
+  factory $DataCommentCopyWith(
+          DataComment value, $Res Function(DataComment) then) =
+      _$DataCommentCopyWithImpl<$Res, DataComment>;
   @useResult
   $Res call(
       {String id,
@@ -253,9 +263,9 @@ abstract class $DatumCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DatumCopyWithImpl<$Res, $Val extends Datum>
-    implements $DatumCopyWith<$Res> {
-  _$DatumCopyWithImpl(this._value, this._then);
+class _$DataCommentCopyWithImpl<$Res, $Val extends DataComment>
+    implements $DataCommentCopyWith<$Res> {
+  _$DataCommentCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -310,10 +320,11 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
 }
 
 /// @nodoc
-abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
-  factory _$$DatumImplCopyWith(
-          _$DatumImpl value, $Res Function(_$DatumImpl) then) =
-      __$$DatumImplCopyWithImpl<$Res>;
+abstract class _$$DataCommentImplCopyWith<$Res>
+    implements $DataCommentCopyWith<$Res> {
+  factory _$$DataCommentImplCopyWith(
+          _$DataCommentImpl value, $Res Function(_$DataCommentImpl) then) =
+      __$$DataCommentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -329,11 +340,11 @@ abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$DatumImplCopyWithImpl<$Res>
-    extends _$DatumCopyWithImpl<$Res, _$DatumImpl>
-    implements _$$DatumImplCopyWith<$Res> {
-  __$$DatumImplCopyWithImpl(
-      _$DatumImpl _value, $Res Function(_$DatumImpl) _then)
+class __$$DataCommentImplCopyWithImpl<$Res>
+    extends _$DataCommentCopyWithImpl<$Res, _$DataCommentImpl>
+    implements _$$DataCommentImplCopyWith<$Res> {
+  __$$DataCommentImplCopyWithImpl(
+      _$DataCommentImpl _value, $Res Function(_$DataCommentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -346,7 +357,7 @@ class __$$DatumImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$DatumImpl(
+    return _then(_$DataCommentImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -377,8 +388,8 @@ class __$$DatumImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DatumImpl implements _Datum {
-  const _$DatumImpl(
+class _$DataCommentImpl implements _DataComment {
+  const _$DataCommentImpl(
       {required this.id,
       required this.content,
       required this.user,
@@ -386,8 +397,8 @@ class _$DatumImpl implements _Datum {
       required this.createdAt,
       required this.updatedAt});
 
-  factory _$DatumImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DatumImplFromJson(json);
+  factory _$DataCommentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataCommentImplFromJson(json);
 
   @override
   final String id;
@@ -404,14 +415,14 @@ class _$DatumImpl implements _Datum {
 
   @override
   String toString() {
-    return 'Datum(id: $id, content: $content, user: $user, product: $product, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'DataComment(id: $id, content: $content, user: $user, product: $product, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DatumImpl &&
+            other is _$DataCommentImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.user, user) || other.user == user) &&
@@ -430,27 +441,28 @@ class _$DatumImpl implements _Datum {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DatumImplCopyWith<_$DatumImpl> get copyWith =>
-      __$$DatumImplCopyWithImpl<_$DatumImpl>(this, _$identity);
+  _$$DataCommentImplCopyWith<_$DataCommentImpl> get copyWith =>
+      __$$DataCommentImplCopyWithImpl<_$DataCommentImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DatumImplToJson(
+    return _$$DataCommentImplToJson(
       this,
     );
   }
 }
 
-abstract class _Datum implements Datum {
-  const factory _Datum(
+abstract class _DataComment implements DataComment {
+  const factory _DataComment(
       {required final String id,
       required final String content,
       required final User user,
       required final String product,
       required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$DatumImpl;
+      required final DateTime updatedAt}) = _$DataCommentImpl;
 
-  factory _Datum.fromJson(Map<String, dynamic> json) = _$DatumImpl.fromJson;
+  factory _DataComment.fromJson(Map<String, dynamic> json) =
+      _$DataCommentImpl.fromJson;
 
   @override
   String get id;
@@ -466,7 +478,7 @@ abstract class _Datum implements Datum {
   DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$DatumImplCopyWith<_$DatumImpl> get copyWith =>
+  _$$DataCommentImplCopyWith<_$DataCommentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

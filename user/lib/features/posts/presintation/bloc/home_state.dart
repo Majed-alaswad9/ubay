@@ -11,6 +11,7 @@ class HomeState {
   final BlocStatus addPost;
   final PageState<CommentsModel> commentsStatus;
   final BlocStatus addComment;
+  final DataComment? commentsModel;
 
   const HomeState(
       {this.addLikeStatus = const BlocStatus.initial(),
@@ -21,6 +22,7 @@ class HomeState {
       this.photos,
       this.categoryStatus = const PageState.init(),
       this.allPosts = const PageState.init(),
+      this.commentsModel,
       this.commentsStatus = const PageState.init()});
 
   HomeState copyWith(
@@ -32,6 +34,7 @@ class HomeState {
       final PageState<CategoryModel>? categoryStatus,
       final BlocStatus? deleteLikeStatus,
       final PageState<CommentsModel>? commentsStatus,
+      final DataComment? commentsModel,
       final BlocStatus? addComment}) {
     return HomeState(
         allPosts: allPosts ?? this.allPosts,
@@ -42,6 +45,7 @@ class HomeState {
         photos: photos ?? this.photos,
         storeStatus: storeStatus ?? this.storeStatus,
         commentsStatus: commentsStatus ?? this.commentsStatus,
+        commentsModel: commentsModel ?? this.commentsModel,
         addComment: addComment ?? this.addComment);
   }
 }

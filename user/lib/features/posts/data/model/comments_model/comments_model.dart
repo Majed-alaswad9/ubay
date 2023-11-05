@@ -9,7 +9,7 @@ class CommentsModel with _$CommentsModel {
     required int pageNumber,
     required int totalPages,
     required int totalDataCount,
-    required List<Datum> data,
+    List<DataComment>? data,
   }) = _CommentsModel;
 
   factory CommentsModel.fromJson(Map<String, dynamic> json) =>
@@ -17,17 +17,18 @@ class CommentsModel with _$CommentsModel {
 }
 
 @freezed
-class Datum with _$Datum {
-  const factory Datum({
+class DataComment with _$DataComment {
+  const factory DataComment({
     required String id,
     required String content,
     required User user,
     required String product,
     required DateTime createdAt,
     required DateTime updatedAt,
-  }) = _Datum;
+  }) = _DataComment;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+  factory DataComment.fromJson(Map<String, dynamic> json) =>
+      _$DataCommentFromJson(json);
 }
 
 @freezed

@@ -11,7 +11,7 @@ import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/chose_date_time.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/domain/repository/prefs_repository.dart';
-import 'package:user/features/app/presentation/widgets/app_drop_down.dart';
+import 'package:user/features/app/presentation/widgets/app_pop_up_edit_delete.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
 import 'package:user/features/app/presentation/widgets/app_text_view.dart';
 import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
@@ -114,7 +114,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               if (data.data[index].user!.id ==
                                   GetIt.I<PrefsRepository>().user!.user.id) ...[
                                 const Spacer(),
-                                PopUpMenuBottom(deleteFunction: () {})
+                                PopUpMenuDeleteEdit(
+                                  deleteFunction: () {},
+                                  fromContext: context,
+                                )
                               ]
                             ],
                           ),
@@ -180,6 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     .height *
                                                 0.8,
                                             child: CommentsWidget(
+                                              product: data.data[index],
                                               postId: data.data[index].id,
                                             )));
                                   },

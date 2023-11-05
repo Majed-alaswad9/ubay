@@ -4,9 +4,11 @@ import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
-class PopUpMenuBottom extends StatelessWidget {
-  const PopUpMenuBottom({super.key, required this.deleteFunction});
+class PopUpMenuDeleteEdit extends StatelessWidget {
+  const PopUpMenuDeleteEdit(
+      {super.key, required this.deleteFunction, required this.fromContext});
   final Function() deleteFunction;
+  final BuildContext fromContext;
 
   @override
   Widget build(BuildContext context) {

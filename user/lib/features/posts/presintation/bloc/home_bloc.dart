@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:user/core/common/model/page_state/bloc_status.dart';
 
@@ -150,12 +151,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.copyWith(commentsStatus: const PageState.loading()));
     final result = await getCommentsUseCase(CommentsParams(event.id, event.page,
         event.limit, event.sort, event.fields, event.search));
-
     result.fold((exception, message) {
       emit(state.copyWith(
           commentsStatus: PageState.error(exception: exception)));
     }, (value) {
-      if (value.data.data.isNotEmpty) {
+      if (value.data.data!.isNotEmpty) {
         emit(
             state.copyWith(commentsStatus: PageState.loaded(data: value.data)));
       } else {
@@ -167,12 +167,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> _onAddCommentEvent(
       AddCommentEvent event, Emitter<HomeState> emit) async {
     emit(state.copyWith(addComment: const BlocStatus.loading()));
-    final result = await addCommentUseCase(
+    var result = await addCommentUseCase(
         AddCommentParams(event.content, event.userId, event.postId));
     result.fold((exception, message) {
       emit(state.copyWith(addComment: BlocStatus.fail(error: message)));
     }, (value) {
-      emit(state.copyWith(addComment: const BlocStatus.success()));
+      emit(state.copyWith(
+          addComment: const BlocStatus.success(), commentsModel: value.data));
     });
+    //add(GetCommentsEvent(event.postId));
   }
 }

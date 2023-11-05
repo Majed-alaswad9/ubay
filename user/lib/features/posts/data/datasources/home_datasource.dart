@@ -115,7 +115,7 @@ class HomeDataSource {
     });
   }
 
-  Future<ResponseWrapper<bool>> addComment(AddCommentParams params) {
+  Future<ResponseWrapper<DataComment>> addComment(AddCommentParams params) {
     return throwAppException(() async {
       final response = await clientApi.request(RequestConfig(
           data: params.map,
@@ -123,7 +123,8 @@ class HomeDataSource {
           clientMethod: ClientMethod.post));
 
       return ResponseWrapper.fromJson(response.data, (json) {
-        return true;
+        final result = DataComment.fromJson(response.data);
+        return result;
       });
     });
   }

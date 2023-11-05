@@ -11,8 +11,8 @@ _$CommentsModelImpl _$$CommentsModelImplFromJson(Map<String, dynamic> json) =>
       pageNumber: json['pageNumber'] as int,
       totalPages: json['totalPages'] as int,
       totalDataCount: json['totalDataCount'] as int,
-      data: (json['data'] as List<dynamic>)
-          .map((e) => Datum.fromJson(e as Map<String, dynamic>))
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => DataComment.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -24,7 +24,8 @@ Map<String, dynamic> _$$CommentsModelImplToJson(_$CommentsModelImpl instance) =>
       'data': instance.data,
     };
 
-_$DatumImpl _$$DatumImplFromJson(Map<String, dynamic> json) => _$DatumImpl(
+_$DataCommentImpl _$$DataCommentImplFromJson(Map<String, dynamic> json) =>
+    _$DataCommentImpl(
       id: json['id'] as String,
       content: json['content'] as String,
       user: User.fromJson(json['user'] as Map<String, dynamic>),
@@ -33,7 +34,7 @@ _$DatumImpl _$$DatumImplFromJson(Map<String, dynamic> json) => _$DatumImpl(
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$DatumImplToJson(_$DatumImpl instance) =>
+Map<String, dynamic> _$$DataCommentImplToJson(_$DataCommentImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'content': instance.content,

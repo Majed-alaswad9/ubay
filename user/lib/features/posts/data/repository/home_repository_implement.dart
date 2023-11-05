@@ -77,7 +77,8 @@ class HomeRepositoryImplement extends HomeRepository {
   }
 
   @override
-  Future<Result<ResponseWrapper<bool>>> addComment(AddCommentParams params) {
+  Future<Result<ResponseWrapper<DataComment>>> addComment(
+      AddCommentParams params) {
     return toApiResult(() {
       final result = homeDataSource.addComment(params);
       return result;

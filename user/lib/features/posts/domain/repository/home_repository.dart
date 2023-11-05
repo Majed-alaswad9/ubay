@@ -21,5 +21,6 @@ abstract class HomeRepository {
   Future<Result<ResponseWrapper<CategoryModel>>> getCategory();
   Future<Result<ResponseWrapper<CommentsModel>>> getComments(
       CommentsParams commentsParams);
-  Future<Result<ResponseWrapper<bool>>> addComment(AddCommentParams params);
+  Future<Result<ResponseWrapper<DataComment>>> addComment(
+      AddCommentParams params);
 }

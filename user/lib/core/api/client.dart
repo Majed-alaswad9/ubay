@@ -97,7 +97,6 @@ class ClientApi {
         case DioExceptionType.unknown:
         default:
           if (exception.error is SocketException) {
-            print('no internet');
             throw AppNetworkException(
                 reason: AppNetworkExceptionReason.noInternet,
                 exception: exception);

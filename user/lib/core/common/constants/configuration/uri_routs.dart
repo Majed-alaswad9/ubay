@@ -3,7 +3,7 @@ import 'package:user/features/posts/data/model/posts_model.dart';
 abstract class EndPoints {
   EndPoints._();
 
-  static const String baseUrl = 'http://192.168.1.100:3000/api/v1/';
+  static const String baseUrl = 'http://192.168.1.102:3000/api/v1/';
   static const auth = Auth();
   static const product = Product();
   static const stores = Stores();

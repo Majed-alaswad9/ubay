@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:injectable/injectable.dart';
 import 'package:user/core/api/api_utils.dart';
 import 'package:user/core/api/client.dart';
@@ -10,9 +11,10 @@ import 'package:user/features/posts/data/model/category_model/category_model.dar
 import 'package:user/features/posts/data/model/city_model/city_model.dart';
 import 'package:user/features/posts/data/model/comments_model/comments_model.dart';
 import 'package:user/features/posts/data/model/posts_model.dart';
-import 'package:user/features/posts/domain/usecases/add_comment_use_case.dart';
-import 'package:user/features/posts/domain/usecases/add_post_use_case.dart';
-import 'package:user/features/posts/domain/usecases/get_comments_use_case.dart';
+import 'package:user/features/posts/domain/usecases/comment_use_case/add_comment_use_case.dart';
+import 'package:user/features/posts/domain/usecases/product_use_case/add_post_use_case.dart';
+import 'package:user/features/posts/domain/usecases/comment_use_case/get_comments_use_case.dart';
+import 'package:user/features/posts/domain/usecases/product_use_case/edit_product_use_case.dart';
 
 import '../../../../core/common/model/response_wrapper/response_wrapper.dart';
 
@@ -125,6 +127,37 @@ class HomeDataSource {
       return ResponseWrapper.fromJson(response.data, (json) {
         final result = DataComment.fromJson(response.data);
         return result;
+      });
+    });
+  }
+
+  Future<ResponseWrapper<bool>> editProduct(EditProductParams params) {
+    return throwAppException(() async {
+      Map data = params.map;
+      List<MultipartFile> files = [];
+      for (File file in params.photos) {
+        files.add(await MultipartFile.fromFile(file.path));
+      }
+      data['photos'] = files;
+      FormData formData = FormData.fromMap(data as Map<String, dynamic>);
+      final response = await clientApi.request(RequestConfig(
+          endpoint: '${EndPoints.product.product}/${params.id}',
+          data: formData,
+          clientMethod: ClientMethod.patch));
+
+      return ResponseWrapper.fromJson(response.data, (json) {
+        return true;
+      });
+    });
+  }
+
+  Future<ResponseWrapper<bool>> deleteProduct(String id) {
+    return throwAppException(() async {
+      final response = await clientApi.request(RequestConfig(
+          endpoint: '${EndPoints.product.product}/$id}',
+          clientMethod: ClientMethod.delete));
+      return ResponseWrapper.fromJson(response.data, (json) {
+        return true;
       });
     });
   }

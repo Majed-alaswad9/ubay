@@ -4,24 +4,30 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:user/core/common/model/page_state/bloc_status.dart';
 
 import 'package:user/core/common/model/page_state/page_state.dart';
+import 'package:user/core/config/router/router.dart';
 import 'package:user/core/use_case/use_case.dart';
 import 'package:user/features/posts/data/model/city_model/city_model.dart';
 
 import '../../data/model/category_model/category_model.dart';
 import '../../data/model/comments_model/comments_model.dart';
 import '../../data/model/posts_model.dart';
-import '../../domain/usecases/add_comment_use_case.dart';
+import '../../domain/usecases/comment_use_case/add_comment_use_case.dart';
 import '../../domain/usecases/add_like_use_case.dart';
-import '../../domain/usecases/add_post_use_case.dart';
+import '../../domain/usecases/comment_use_case/delete_comment_use_case.dart';
+import '../../domain/usecases/comment_use_case/edit_comment_use_case.dart';
+import '../../domain/usecases/product_use_case/add_post_use_case.dart';
 import '../../domain/usecases/delete_like_use_case.dart';
-import '../../domain/usecases/get_all_posts_use_case.dart';
-import '../../domain/usecases/get_category_use_case.dart';
-import '../../domain/usecases/get_comments_use_case.dart';
-import '../../domain/usecases/get_store_use_case.dart';
+import '../../domain/usecases/product_use_case/delete_product_use_case.dart';
+import '../../domain/usecases/product_use_case/edit_product_use_case.dart';
+import '../../domain/usecases/product_use_case/get_all_posts_use_case.dart';
+import '../../domain/usecases/product_use_case/get_category_use_case.dart';
+import '../../domain/usecases/comment_use_case/get_comments_use_case.dart';
+import '../../domain/usecases/product_use_case/get_store_use_case.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'home_event.dart';
@@ -37,6 +43,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final AddPostUseCase addPostUseCase;
   final GetCommentsUseCase getCommentsUseCase;
   final AddCommentUseCase addCommentUseCase;
+  final EditProductUseCase editProductUseCase;
+  final DeleteCommentUseCase deleteCommentUseCase;
+  final EditCommentUseCase editCommentUseCase;
+  final DeleteProductUseCase deleteProductUseCase;
   HomeBloc(
     this.getAllPostsUseCase,
     this.addLikeUseCase,
@@ -46,6 +56,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     this.addPostUseCase,
     this.getCommentsUseCase,
     this.addCommentUseCase,
+    this.editProductUseCase,
+    this.deleteCommentUseCase,
+    this.editCommentUseCase,
+    this.deleteProductUseCase,
   ) : super(const HomeState()) {
     on<GetAllPostsEvent>(_onGetAllPosts);
     on<AddPostEvent>(_onAddPostEvent);
@@ -56,6 +70,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<PickImagesEvent>(_onPickImage);
     on<GetCommentsEvent>(_onGetCommentsEvent);
     on<AddCommentEvent>(_onAddCommentEvent);
+    on<EditProductEvent>(_onEditProductEvent);
   }
 
   FutureOr<void> _onGetAllPosts(
@@ -167,7 +182,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> _onAddCommentEvent(
       AddCommentEvent event, Emitter<HomeState> emit) async {
     emit(state.copyWith(addComment: const BlocStatus.loading()));
-    var result = await addCommentUseCase(
+    final result = await addCommentUseCase(
         AddCommentParams(event.content, event.userId, event.postId));
     result.fold((exception, message) {
       emit(state.copyWith(addComment: BlocStatus.fail(error: message)));
@@ -176,5 +191,38 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           addComment: const BlocStatus.success(), commentsModel: value.data));
     });
     //add(GetCommentsEvent(event.postId));
+  }
+
+  FutureOr<void> _onDeleteProduct(
+      DeleteProductEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(deletePost: const BlocStatus.loading()));
+    final result = await deleteProductUseCase(event.id);
+    result.fold((exception, message) {
+      emit(state.copyWith(deletePost: BlocStatus.fail(error: message)));
+      emit(state.copyWith(deletePost: const BlocStatus.initial()));
+    }, (value) {
+      emit(state.copyWith(deletePost: const BlocStatus.success()));
+      emit(state.copyWith(deletePost: const BlocStatus.initial()));
+    });
+  }
+
+  FutureOr<void> _onEditProductEvent(
+      EditProductEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(editPost: const BlocStatus.loading()));
+    final result = await editProductUseCase(EditProductParams(
+        title: event.title,
+        content: event.content,
+        price: event.price,
+        idStore: event.store,
+        idCategory: event.category,
+        id: event.id,
+        photos: photos));
+
+    result.fold((exception, message) {
+      emit(state.copyWith(editPost: BlocStatus.fail(error: message)));
+    }, (value) {
+      emit(state.copyWith(editPost: const BlocStatus.success()));
+      event.context.goNamed(GRouter.config.homeScreen.homeScreen);
+    });
   }
 }

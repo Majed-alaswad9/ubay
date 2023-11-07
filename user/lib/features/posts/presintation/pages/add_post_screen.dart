@@ -1,36 +1,38 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:user/core/common/model/page_state/page_state.dart';
-import 'package:user/core/common/model/page_state/result_builder.dart';
-import 'package:user/core/config/themes/my_color_scheme.dart';
 import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/responsive_padding.dart';
 import 'package:user/features/app/presentation/widgets/app_elevated_button.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
 import 'package:user/features/app/presentation/widgets/app_text_view.dart';
-import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
 import 'package:user/features/posts/data/model/category_model/category_model.dart';
 import 'package:user/features/posts/data/model/city_model/city_model.dart';
+import 'package:user/features/posts/data/model/posts_model.dart';
+import 'package:user/features/posts/presintation/widget/drop_down_category.dart';
+import 'package:user/features/posts/presintation/widget/drop_down_store.dart';
 
 import '../../../../core/common/model/page_state/bloc_status.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../../app/presentation/widgets/app_text_field.dart';
 import '../bloc/home_bloc.dart';
 
-class AddPostScreen extends StatefulWidget {
-  const AddPostScreen({super.key});
+class AddPostScreenParams {
+  final bool isUpdate;
+  final Data? postsModel;
 
+  AddPostScreenParams({required this.isUpdate, this.postsModel});
+}
+
+class AddPostScreen extends StatefulWidget {
+  const AddPostScreen({super.key, required this.params});
+  final AddPostScreenParams params;
   @override
   State<AddPostScreen> createState() => _AddPostScreenState();
 }
@@ -50,13 +52,27 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   void initState() {
+    if (widget.params.isUpdate) {
+      titleController.text = widget.params.postsModel!.title;
+      contentController.text = widget.params.postsModel!.content;
+      priceController.text = widget.params.postsModel!.price.toString();
+      price = widget.params.postsModel!.price;
+      storeId = widget.params.postsModel!.store!.id;
+      categoryId = widget.params.postsModel!.category!.id;
+      storeName = widget.params.postsModel!.store!.name;
+      categoryName = widget.params.postsModel!.category!.name;
+      photos = widget.params.postsModel!.photos;
+    }
     context.read<HomeBloc>().add(GetStoreEvent());
     context.read<HomeBloc>().add(GetCategoryEvent());
     super.initState();
   }
 
   Datum? dropdownValueStore;
-  Data? dropdownValueCategory;
+  DataCategory? dropdownValueCategory;
+  String? storeName;
+  String? categoryName;
+  List<String>? photos;
 
   @override
   Widget build(BuildContext context) {
@@ -119,10 +135,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
                         16.verticalSpace,
                         AppTextField(
                           textInputType: TextInputType.number,
+                          controller: priceController,
                           name: 'price',
                           onChange: (val) {
                             price = int.parse(val.toString());
-                            print(price);
                           },
                           hintText: LocaleKeys.add_post_screen_price.tr(),
                           maxLines: 1,
@@ -134,23 +150,28 @@ class _AddPostScreenState extends State<AddPostScreen> {
                           ]),
                         ),
                         16.verticalSpace,
-                        PageStateBuilder<StoreModel>(
-                          init: const SizedBox.shrink(),
-                          success: (data) {
+                        DropDownStore(
+                          widget: (data) {
                             return DropdownButtonFormField<Datum>(
                                 decoration: const InputDecoration(
                                     border: OutlineInputBorder()),
-                                validator: (value) => value == null
-                                    ? LocaleKeys
-                                        .validation_this_field_is_required
-                                        .tr()
-                                    : null,
+                                validator: (value) {
+                                  return storeId == null
+                                      ? LocaleKeys
+                                          .validation_this_field_is_required
+                                          .tr()
+                                      : null;
+                                },
                                 borderRadius: BorderRadius.circular(16),
                                 hint: Text(
-                                  LocaleKeys.add_post_screen_store.tr(),
+                                  widget.params.isUpdate
+                                      ? widget.params.postsModel!.store!.name
+                                      : LocaleKeys.add_post_screen_store.tr(),
                                   style: context.textTheme.bodyMedium?.s13!
                                       .copyWith(
-                                          color: context.colorScheme.primary),
+                                          color: widget.params.isUpdate
+                                              ? Colors.black
+                                              : context.colorScheme.primary),
                                 ),
                                 isExpanded: true,
                                 value: dropdownValueStore,
@@ -171,101 +192,41 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                   });
                                 });
                           },
-                          loading: AppTextField(
-                            readOnly: true,
-                            name: 'store',
-                            hintText: LocaleKeys.add_post_screen_store.tr(),
-                            suffixIcon: LoadingIndicator(
-                              color: context.colorScheme.primary,
-                            ),
-                          ),
-                          error: (Exception? error) {
-                            return AppTextField(
-                              name: 'store',
-                              hintText: LocaleKeys.add_post_screen_store.tr(),
-                              suffixIcon: IconButton(
-                                onPressed: () => context
-                                    .read<HomeBloc>()
-                                    .add(GetStoreEvent()),
-                                icon: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: context.colorScheme.primary,
-                                ),
-                                color: context.colorScheme.primary,
-                              ),
-                            );
-                          },
-                          result: state.storeStatus,
-                          empty: Text('no store'),
                         ),
                         16.verticalSpace,
-                        PageStateBuilder<CategoryModel>(
-                          init: AppTextField(
-                            name: 'category',
-                            hintText: LocaleKeys.add_post_screen_category.tr(),
-                            suffixIcon: Icon(
-                              Icons.arrow_drop_down,
-                              size: 20,
-                              color: context.colorScheme.primary,
-                            ),
-                          ),
-                          success: (data) {
-                            return DropdownButtonFormField<Data>(
+                        DropDownCategory(
+                            widget: (data) => DropdownButtonFormField<
+                                    DataCategory>(
                                 decoration: const InputDecoration(
                                     border: OutlineInputBorder()),
-                                validator: (value) => value == null
+                                validator: (value) => categoryId == null
                                     ? LocaleKeys
                                         .validation_this_field_is_required
                                         .tr()
                                     : null,
                                 borderRadius: BorderRadius.circular(16),
                                 hint: Text(
-                                  LocaleKeys.add_post_screen_store.tr(),
+                                  widget.params.isUpdate
+                                      ? widget.params.postsModel!.category!.name
+                                      : LocaleKeys.add_post_screen_category
+                                          .tr(),
                                   style: context.textTheme.bodyMedium?.s13!
                                       .copyWith(
-                                          color: context.colorScheme.primary),
+                                          color: widget.params.isUpdate
+                                              ? Colors.black
+                                              : context.colorScheme.primary),
                                 ),
                                 isExpanded: true,
                                 value: dropdownValueCategory,
                                 style: context.textTheme.titleSmall,
                                 items: data.data
-                                    .map((e) => DropdownMenuItem<Data>(
+                                    .map((e) => DropdownMenuItem<DataCategory>(
                                         value: e, child: Text(e.name)))
                                     .toList(),
                                 onChanged: (value) {
-                                  setState(() {
-                                    dropdownValueCategory = value!;
-                                    categoryId = value.id;
-                                  });
-                                });
-                          },
-                          loading: AppTextField(
-                            name: 'category',
-                            hintText: LocaleKeys.add_post_screen_category.tr(),
-                            suffixIcon: LoadingIndicator(
-                              color: context.colorScheme.primary,
-                            ),
-                          ),
-                          error: (Exception? error) {
-                            return InkWell(
-                              onTap: () {
-                                context.read<HomeBloc>().add(GetStoreEvent());
-                              },
-                              child: AppTextField(
-                                readOnly: true,
-                                name: 'category',
-                                hintText: LocaleKeys.add_post_screen_store.tr(),
-                                suffixIcon: Icon(
-                                  Icons.arrow_drop_down,
-                                  size: 20,
-                                  color: context.colorScheme.primary,
-                                ),
-                              ),
-                            );
-                          },
-                          result: state.categoryStatus,
-                          empty: Text('no category'),
-                        ),
+                                  dropdownValueCategory = value;
+                                  categoryId = value!.id;
+                                }))
                       ],
                     )),
                 16.verticalSpace,
@@ -286,7 +247,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: state.photos!.length,
+                    itemCount: widget.params.isUpdate
+                        ? photos!.length
+                        : state.photos!.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -296,30 +259,53 @@ class _AddPostScreenState extends State<AddPostScreen> {
                             ),
                     itemBuilder: (BuildContext context, int index) {
                       return Expanded(
-                          child:
-                              Center(child: Image.file(state.photos![index])));
+                          child: Center(
+                              child: widget.params.isUpdate
+                                  ? Image.network(photos![index])
+                                  : Image.file(state.photos![index])));
                     },
                   ),
                 20.verticalSpace,
                 BlocSelector<HomeBloc, HomeState, BlocStatus>(
-                  selector: (state) => state.addPost,
+                  selector: (state) =>
+                      widget.params.isUpdate ? state.editPost : state.addPost,
                   builder: (context, state) {
+                    if (state.isSuccess()) {
+                      print('is Success\n');
+                    }
                     return AppElevatedButton(
                       isLoading: state.isLoading(),
                       onPressed: () {
                         _formkey.currentState!.validate();
                         _formkey.currentState!.save();
-                        if (_formkey.currentState!.isValid) {
-                          context.read<HomeBloc>().add(AddPostEvent(
-                              titleController.text,
-                              contentController.text,
-                              price,
-                              storeId,
-                              categoryId, []));
+                        if (_formkey.currentState!.isValid &&
+                            categoryId.isNotEmpty &&
+                            storeId.isNotEmpty) {
+                          if (widget.params.isUpdate) {
+                            print(titleController.text);
+                            print(contentController.text);
+                            context.read<HomeBloc>().add(EditProductEvent(
+                                widget.params.postsModel!.id,
+                                titleController.text,
+                                contentController.text,
+                                price,
+                                storeId,
+                                categoryId,
+                                context));
+                          } else {
+                            context.read<HomeBloc>().add(AddPostEvent(
+                                titleController.text,
+                                contentController.text,
+                                price,
+                                storeId,
+                                categoryId));
+                          }
                         }
                       },
                       child: AppTextView(
-                        'Add',
+                        widget.params.isUpdate
+                            ? LocaleKeys.edit.tr()
+                            : LocaleKeys.add.tr(),
                         style: context.textTheme.bodyLarge!
                             .copyWith(color: Colors.white),
                       ),

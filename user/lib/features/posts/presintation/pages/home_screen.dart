@@ -18,6 +18,7 @@ import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/features/app/presentation/widgets/photo_grid.dart';
 import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
+import 'package:user/features/posts/presintation/pages/add_post_screen.dart';
 import 'package:user/features/posts/presintation/widget/comments_widget.dart';
 import 'package:user/features/posts/presintation/widget/like_button.dart';
 import 'package:user/generated/locale_keys.g.dart';
@@ -115,8 +116,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   GetIt.I<PrefsRepository>().user!.user.id) ...[
                                 const Spacer(),
                                 PopUpMenuDeleteEdit(
-                                  deleteFunction: () {},
+                                  blocStatus: state.deletePost,
+                                  product: data.data[index],
+                                  deleteFunction: () {
+                                    context.read<HomeBloc>().add(
+                                        DeleteProductEvent(
+                                            data.data[index].id));
+                                  },
                                   fromContext: context,
+                                  isProduct: true,
                                 )
                               ]
                             ],
@@ -197,7 +205,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: MaterialButton(
                                   onPressed: () {},
                                   child: Icon(
-                                    Icons.send,
+                                    Icons.telegram_sharp,
+                                    size: 35,
                                     color: context.colorScheme.primary,
                                   ),
                                 ),
@@ -226,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )),
             ),
             empty: AppTextView(
-              'No Data',
+              LocaleKeys.no_data.tr(),
               style: context.textTheme.bodyMedium.s17,
             ),
             result: state.allPosts,
@@ -235,7 +244,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.pushNamed(GRouter.config.homeScreen.addPostScreen);
+          context.pushNamed(GRouter.config.homeScreen.addPostScreen,
+              extra: AddPostScreenParams(isUpdate: false));
         },
         backgroundColor: context.colorScheme.primary,
         child: const Icon(

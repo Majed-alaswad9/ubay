@@ -7,7 +7,7 @@ part 'category_model.g.dart';
 class CategoryModel with _$CategoryModel {
   const factory CategoryModel({
     required int totalDataCount,
-    required List<Data> data,
+    required List<DataCategory> data,
   }) = _CategoryModel;
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) =>
@@ -15,11 +15,12 @@ class CategoryModel with _$CategoryModel {
 }
 
 @freezed
-class Data with _$Data {
-  const factory Data({
+class DataCategory with _$DataCategory {
+  const factory DataCategory({
     required String id,
     required String name,
-  }) = _Data;
+  }) = _DataCategory;
 
-  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+  factory DataCategory.fromJson(Map<String, dynamic> json) =>
+      _$DataCategoryFromJson(json);
 }

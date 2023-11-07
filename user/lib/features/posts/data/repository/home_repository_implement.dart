@@ -10,9 +10,10 @@ import 'package:user/features/posts/data/model/city_model/city_model.dart';
 import 'package:user/features/posts/data/model/comments_model/comments_model.dart';
 import 'package:user/features/posts/data/model/posts_model.dart';
 import 'package:user/features/posts/domain/repository/home_repository.dart';
-import 'package:user/features/posts/domain/usecases/add_comment_use_case.dart';
-import 'package:user/features/posts/domain/usecases/add_post_use_case.dart';
-import 'package:user/features/posts/domain/usecases/get_comments_use_case.dart';
+import 'package:user/features/posts/domain/usecases/comment_use_case/add_comment_use_case.dart';
+import 'package:user/features/posts/domain/usecases/product_use_case/add_post_use_case.dart';
+import 'package:user/features/posts/domain/usecases/comment_use_case/get_comments_use_case.dart';
+import 'package:user/features/posts/domain/usecases/product_use_case/edit_product_use_case.dart';
 
 @Injectable(as: HomeRepository)
 class HomeRepositoryImplement extends HomeRepository {
@@ -81,6 +82,35 @@ class HomeRepositoryImplement extends HomeRepository {
       AddCommentParams params) {
     return toApiResult(() {
       final result = homeDataSource.addComment(params);
+      return result;
+    });
+  }
+
+  @override
+  Future<Result<ResponseWrapper<bool>>> deleteComment(String idComment) {
+    // TODO: implement deleteComment
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Result<ResponseWrapper<bool>>> deleteProduct(String id) {
+    return toApiResult(() {
+      final result = homeDataSource.deleteProduct(id);
+      return result;
+    });
+  }
+
+  @override
+  Future<Result<ResponseWrapper<DataComment>>> editComment(
+      AddCommentParams params) {
+    // TODO: implement editComment
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Result<ResponseWrapper<bool>>> editProduct(EditProductParams params) {
+    return toApiResult(() {
+      final result = homeDataSource.editProduct(params);
       return result;
     });
   }

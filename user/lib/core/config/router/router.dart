@@ -75,7 +75,10 @@ class GRouter {
                             pageBuilder:
                                 (BuildContext context, GoRouterState state) {
                               return _builderPage(
-                                  child: const AddPostScreen(), state: state);
+                                  child: AddPostScreen(
+                                      params:
+                                          state.extra as AddPostScreenParams),
+                                  state: state);
                             }),
                       ])
                 ]),

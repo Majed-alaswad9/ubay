@@ -10,7 +10,7 @@ _$CategoryModelImpl _$$CategoryModelImplFromJson(Map<String, dynamic> json) =>
     _$CategoryModelImpl(
       totalDataCount: json['totalDataCount'] as int,
       data: (json['data'] as List<dynamic>)
-          .map((e) => Data.fromJson(e as Map<String, dynamic>))
+          .map((e) => DataCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -20,12 +20,13 @@ Map<String, dynamic> _$$CategoryModelImplToJson(_$CategoryModelImpl instance) =>
       'data': instance.data,
     };
 
-_$DataImpl _$$DataImplFromJson(Map<String, dynamic> json) => _$DataImpl(
+_$DataCategoryImpl _$$DataCategoryImplFromJson(Map<String, dynamic> json) =>
+    _$DataCategoryImpl(
       id: json['id'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$DataImplToJson(_$DataImpl instance) =>
+Map<String, dynamic> _$$DataCategoryImplToJson(_$DataCategoryImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

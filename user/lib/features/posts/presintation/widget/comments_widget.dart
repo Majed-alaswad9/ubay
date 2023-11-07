@@ -160,6 +160,8 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                           PopUpMenuDeleteEdit(
                                             deleteFunction: () {},
                                             fromContext: context,
+                                            isProduct: false,
+                                            blocStatus: state.deleteComment,
                                           )
                                         else if (widget.product.user!.id ==
                                             user.user.id)

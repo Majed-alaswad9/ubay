@@ -50,6 +50,14 @@ abstract class  LocaleKeys {
   static const cancel = 'cancel';
   static const likes = 'likes';
   static const comments = 'comments';
+  static const no_data = 'no_data';
+  static const add = 'add';
+  static const photos = 'photos';
+  static const the_price_will_be_after_discount = 'the_price_will_be_after_discount';
+  static const end_of_validity = 'end_of_validity';
+  static const discount = 'discount';
+  static const the_user_who_will_receive_the_discount = 'the_user_who_will_receive_the_discount';
+  static const add_a_discount_for_the_item = 'add_a_discount_for_the_item';
   static const lbl_loading = 'lbl_loading';
 
 }

@@ -56,5 +56,10 @@
     "no_data": "لا يوجد بيانات لعرضها",
     "add": "إضافة",
     "photos": "الصور",
+    "the_price_will_be_after_discount": "سيصبح السعر بعد الحسم",
+    "end_of_validity": "انتهاء الصلاحية",
+    "discount": "الحسم",
+    "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",
+    "add_a_discount_for_the_item": "إضافة حسم للقطعة:",
     "lbl_loading": " الرجاء الانتظار ..."
 }

@@ -9,6 +9,9 @@ class HomeState {
   final PageState<StoreModel> storeStatus;
   final PageState<CategoryModel> categoryStatus;
   final BlocStatus addPost;
+  final BlocStatus editPost;
+  final BlocStatus deletePost;
+  final BlocStatus deleteComment;
   final PageState<CommentsModel> commentsStatus;
   final BlocStatus addComment;
   final DataComment? commentsModel;
@@ -17,6 +20,9 @@ class HomeState {
       {this.addLikeStatus = const BlocStatus.initial(),
       this.addComment = const BlocStatus.initial(),
       this.addPost = const BlocStatus.initial(),
+      this.editPost = const BlocStatus.initial(),
+      this.deletePost = const BlocStatus.initial(),
+      this.deleteComment = const BlocStatus.initial(),
       this.deleteLikeStatus = const BlocStatus.initial(),
       this.storeStatus = const PageState.init(),
       this.photos,
@@ -29,6 +35,9 @@ class HomeState {
       {final PageState<PostsModel>? allPosts,
       final BlocStatus? addLikeStatus,
       final BlocStatus? addPost,
+      final BlocStatus? editPost,
+      final BlocStatus? deletePost,
+      final BlocStatus? deleteComment,
       final PageState<StoreModel>? storeStatus,
       final List<File>? photos,
       final PageState<CategoryModel>? categoryStatus,
@@ -38,7 +47,10 @@ class HomeState {
       final BlocStatus? addComment}) {
     return HomeState(
         allPosts: allPosts ?? this.allPosts,
-        addPost: addPost ?? this.addPost,
+        addPost: addPost ?? const BlocStatus.initial(),
+        editPost: editPost ?? const BlocStatus.initial(),
+        deleteComment: deleteComment ?? const BlocStatus.initial(),
+        deletePost: deletePost ?? this.deletePost,
         addLikeStatus: addLikeStatus ?? this.addLikeStatus,
         deleteLikeStatus: deleteLikeStatus ?? this.deleteLikeStatus,
         categoryStatus: categoryStatus ?? this.categoryStatus,

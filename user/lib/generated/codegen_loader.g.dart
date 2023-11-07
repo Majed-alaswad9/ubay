@@ -69,6 +69,14 @@ class CodegenLoader extends AssetLoader{
   "cancel": "Cancel",
   "likes": "likes",
   "comments": "comments",
+  "no_data": "No Data",
+  "add": "Add",
+  "photos": "Photos",
+  "the_price_will_be_after_discount": "The price will be after discount",
+  "end_of_validity": "End of validity",
+  "discount": "discount",
+  "the_user_who_will_receive_the_discount": "The user who will receive the discount",
+  "add_a_discount_for_the_item": "Add a discount for the item:",
   "lbl_loading": "Loading..."
 };
 static const Map<String,dynamic> ar = {
@@ -126,6 +134,14 @@ static const Map<String,dynamic> ar = {
   "delete": "حذف",
   "likes": "إعجاب",
   "comments": "تعليق",
+  "no_data": "لا يوجد بيانات لعرضها",
+  "add": "إضافة",
+  "photos": "الصور",
+  "the_price_will_be_after_discount": "سيصبح السعر بعد الحسم",
+  "end_of_validity": "انتهاء الصلاحية",
+  "discount": "الحسم",
+  "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",
+  "add_a_discount_for_the_item": "إضافة حسم للقطعة:",
   "lbl_loading": " الرجاء الانتظار ..."
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ar": ar};

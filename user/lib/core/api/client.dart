@@ -46,7 +46,7 @@ class ClientApi {
         function() => _client.deleteUri<T>(requestUrl, data: data);
         response = await _mapException<T>(function);
         break;
-      case ClientMethod.put:
+      case ClientMethod.patch:
         function() => _client.patchUri<T>(requestUrl,
             onSendProgress: onSendProgress,
             onReceiveProgress: onReceiveProgress,

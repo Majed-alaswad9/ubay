@@ -21,7 +21,7 @@ CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CategoryModel {
   int get totalDataCount => throw _privateConstructorUsedError;
-  List<Data> get data => throw _privateConstructorUsedError;
+  List<DataCategory> get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $CategoryModelCopyWith<$Res> {
           CategoryModel value, $Res Function(CategoryModel) then) =
       _$CategoryModelCopyWithImpl<$Res, CategoryModel>;
   @useResult
-  $Res call({int totalDataCount, List<Data> data});
+  $Res call({int totalDataCount, List<DataCategory> data});
 }
 
 /// @nodoc
@@ -62,7 +62,7 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Data>,
+              as List<DataCategory>,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$CategoryModelImplCopyWith<$Res>
       __$$CategoryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int totalDataCount, List<Data> data});
+  $Res call({int totalDataCount, List<DataCategory> data});
 }
 
 /// @nodoc
@@ -100,7 +100,7 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Data>,
+              as List<DataCategory>,
     ));
   }
 }
@@ -109,7 +109,7 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CategoryModelImpl implements _CategoryModel {
   const _$CategoryModelImpl(
-      {required this.totalDataCount, required final List<Data> data})
+      {required this.totalDataCount, required final List<DataCategory> data})
       : _data = data;
 
   factory _$CategoryModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -117,9 +117,9 @@ class _$CategoryModelImpl implements _CategoryModel {
 
   @override
   final int totalDataCount;
-  final List<Data> _data;
+  final List<DataCategory> _data;
   @override
-  List<Data> get data {
+  List<DataCategory> get data {
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_data);
@@ -162,7 +162,7 @@ class _$CategoryModelImpl implements _CategoryModel {
 abstract class _CategoryModel implements CategoryModel {
   const factory _CategoryModel(
       {required final int totalDataCount,
-      required final List<Data> data}) = _$CategoryModelImpl;
+      required final List<DataCategory> data}) = _$CategoryModelImpl;
 
   factory _CategoryModel.fromJson(Map<String, dynamic> json) =
       _$CategoryModelImpl.fromJson;
@@ -170,39 +170,41 @@ abstract class _CategoryModel implements CategoryModel {
   @override
   int get totalDataCount;
   @override
-  List<Data> get data;
+  List<DataCategory> get data;
   @override
   @JsonKey(ignore: true)
   _$$CategoryModelImplCopyWith<_$CategoryModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-Data _$DataFromJson(Map<String, dynamic> json) {
-  return _Data.fromJson(json);
+DataCategory _$DataCategoryFromJson(Map<String, dynamic> json) {
+  return _DataCategory.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Data {
+mixin _$DataCategory {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DataCopyWith<Data> get copyWith => throw _privateConstructorUsedError;
+  $DataCategoryCopyWith<DataCategory> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DataCopyWith<$Res> {
-  factory $DataCopyWith(Data value, $Res Function(Data) then) =
-      _$DataCopyWithImpl<$Res, Data>;
+abstract class $DataCategoryCopyWith<$Res> {
+  factory $DataCategoryCopyWith(
+          DataCategory value, $Res Function(DataCategory) then) =
+      _$DataCategoryCopyWithImpl<$Res, DataCategory>;
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class _$DataCopyWithImpl<$Res, $Val extends Data>
-    implements $DataCopyWith<$Res> {
-  _$DataCopyWithImpl(this._value, this._then);
+class _$DataCategoryCopyWithImpl<$Res, $Val extends DataCategory>
+    implements $DataCategoryCopyWith<$Res> {
+  _$DataCategoryCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -229,20 +231,22 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
 }
 
 /// @nodoc
-abstract class _$$DataImplCopyWith<$Res> implements $DataCopyWith<$Res> {
-  factory _$$DataImplCopyWith(
-          _$DataImpl value, $Res Function(_$DataImpl) then) =
-      __$$DataImplCopyWithImpl<$Res>;
+abstract class _$$DataCategoryImplCopyWith<$Res>
+    implements $DataCategoryCopyWith<$Res> {
+  factory _$$DataCategoryImplCopyWith(
+          _$DataCategoryImpl value, $Res Function(_$DataCategoryImpl) then) =
+      __$$DataCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class __$$DataImplCopyWithImpl<$Res>
-    extends _$DataCopyWithImpl<$Res, _$DataImpl>
-    implements _$$DataImplCopyWith<$Res> {
-  __$$DataImplCopyWithImpl(_$DataImpl _value, $Res Function(_$DataImpl) _then)
+class __$$DataCategoryImplCopyWithImpl<$Res>
+    extends _$DataCategoryCopyWithImpl<$Res, _$DataCategoryImpl>
+    implements _$$DataCategoryImplCopyWith<$Res> {
+  __$$DataCategoryImplCopyWithImpl(
+      _$DataCategoryImpl _value, $Res Function(_$DataCategoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -251,7 +255,7 @@ class __$$DataImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$DataImpl(
+    return _then(_$DataCategoryImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -266,11 +270,11 @@ class __$$DataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DataImpl implements _Data {
-  const _$DataImpl({required this.id, required this.name});
+class _$DataCategoryImpl implements _DataCategory {
+  const _$DataCategoryImpl({required this.id, required this.name});
 
-  factory _$DataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DataImplFromJson(json);
+  factory _$DataCategoryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataCategoryImplFromJson(json);
 
   @override
   final String id;
@@ -279,14 +283,14 @@ class _$DataImpl implements _Data {
 
   @override
   String toString() {
-    return 'Data(id: $id, name: $name)';
+    return 'DataCategory(id: $id, name: $name)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DataImpl &&
+            other is _$DataCategoryImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -298,22 +302,24 @@ class _$DataImpl implements _Data {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
-      __$$DataImplCopyWithImpl<_$DataImpl>(this, _$identity);
+  _$$DataCategoryImplCopyWith<_$DataCategoryImpl> get copyWith =>
+      __$$DataCategoryImplCopyWithImpl<_$DataCategoryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DataImplToJson(
+    return _$$DataCategoryImplToJson(
       this,
     );
   }
 }
 
-abstract class _Data implements Data {
-  const factory _Data({required final String id, required final String name}) =
-      _$DataImpl;
+abstract class _DataCategory implements DataCategory {
+  const factory _DataCategory(
+      {required final String id,
+      required final String name}) = _$DataCategoryImpl;
 
-  factory _Data.fromJson(Map<String, dynamic> json) = _$DataImpl.fromJson;
+  factory _DataCategory.fromJson(Map<String, dynamic> json) =
+      _$DataCategoryImpl.fromJson;
 
   @override
   String get id;
@@ -321,6 +327,6 @@ abstract class _Data implements Data {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
+  _$$DataCategoryImplCopyWith<_$DataCategoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

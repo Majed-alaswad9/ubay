@@ -1,6 +1,6 @@
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
 
-enum ClientMethod { get, post, put, delete }
+enum ClientMethod { get, post, patch, delete }
 
 class RequestConfig<T> {
   late final dynamic queryParameters;

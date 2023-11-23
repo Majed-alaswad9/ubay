@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/presentation/widgets/app_elevated_button.dart';
 import 'package:user/features/app/presentation/widgets/app_text_field.dart';
-import 'package:user/features/posts/data/model/comments_model/comments_model.dart';
-import 'package:user/features/posts/data/model/posts_model.dart';
+import 'package:user/features/products/data/model/comments_model/comments_model.dart';
+import 'package:user/features/products/data/model/posts_model.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
 class PopUpMenuCoupon extends StatefulWidget {

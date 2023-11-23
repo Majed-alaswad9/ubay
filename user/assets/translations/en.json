@@ -1,5 +1,11 @@
 {
     "home": "Home",
+    "transactions": "Transactions",
+    "chat": "Chat",
+    "profile": "Profile",
+    "sales": "Sales",
+    "purchases": "Purchases",
+    "logout": "Logout",
     "login": "Login",
     "signup": "Signup",
     "login_screen": {
@@ -53,6 +59,7 @@
     "cancel": "Cancel",
     "likes": "likes",
     "comments": "comments",
+    "write_comment": "Write Comment",
     "no_data": "No Data",
     "add": "Add",
     "photos": "Photos",
@@ -61,5 +68,21 @@
     "discount": "discount",
     "the_user_who_will_receive_the_discount": "The user who will receive the discount",
     "add_a_discount_for_the_item": "Add a discount for the item:",
-    "lbl_loading": "Loading..."
+    "lbl_loading": "Loading...",
+    "details": "product details",
+    "price": "price: ",
+    "generate_qr": "Generate QR",
+    "deliveryStatus": {
+        "seller": {
+            "seller": "Delivered to the warehouse",
+            "customer": "Delivered to the customer",
+            "wait": "Please go deliver the item",
+            "unpaid": "Not sold yet..."
+        },
+        "customer": {
+            "seller": "Please go pick it up",
+            "customer": "It was received",
+            "wait": "Waiting for the seller to bring the item to the warehouse"
+        }
+    }
 }

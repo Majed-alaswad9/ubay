@@ -2,6 +2,12 @@
 
 abstract class  LocaleKeys {
   static const home = 'home';
+  static const transactions = 'transactions';
+  static const chat = 'chat';
+  static const profile = 'profile';
+  static const sales = 'sales';
+  static const purchases = 'purchases';
+  static const logout = 'logout';
   static const login = 'login';
   static const signup = 'signup';
   static const login_screen_Email = 'login_screen.Email';
@@ -50,6 +56,7 @@ abstract class  LocaleKeys {
   static const cancel = 'cancel';
   static const likes = 'likes';
   static const comments = 'comments';
+  static const write_comment = 'write_comment';
   static const no_data = 'no_data';
   static const add = 'add';
   static const photos = 'photos';
@@ -59,5 +66,18 @@ abstract class  LocaleKeys {
   static const the_user_who_will_receive_the_discount = 'the_user_who_will_receive_the_discount';
   static const add_a_discount_for_the_item = 'add_a_discount_for_the_item';
   static const lbl_loading = 'lbl_loading';
+  static const details = 'details';
+  static const price = 'price';
+  static const generate_qr = 'generate_qr';
+  static const deliveryStatus_seller_seller = 'deliveryStatus.seller.seller';
+  static const deliveryStatus_seller_customer = 'deliveryStatus.seller.customer';
+  static const deliveryStatus_seller_wait = 'deliveryStatus.seller.wait';
+  static const deliveryStatus_seller_unpaid = 'deliveryStatus.seller.unpaid';
+  static const deliveryStatus_seller = 'deliveryStatus.seller';
+  static const deliveryStatus_customer_seller = 'deliveryStatus.customer.seller';
+  static const deliveryStatus_customer_customer = 'deliveryStatus.customer.customer';
+  static const deliveryStatus_customer_wait = 'deliveryStatus.customer.wait';
+  static const deliveryStatus_customer = 'deliveryStatus.customer';
+  static const deliveryStatus = 'deliveryStatus';
 
 }

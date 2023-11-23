@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 Color primaryColor = const Color(0xFF6D28D9);
 Color primaryColor1 = const Color(0xFFEDE9FE);
 Color primaryColor12 = const Color(0xFFDDD6FE);
-Color primaryColor13 = const Color(0xFFC4B5FD);
 Color primaryColor2 = const Color(0xFFC4B5FD);
 Color primaryColor3 = const Color(0xFFA78BFA);
 Color primaryColor4 = const Color(0xFF8B5CF6);
@@ -21,9 +20,7 @@ Color backGround = const Color(0xFFEFF5F5);
 final lightTheme = ThemeData(
   useMaterial3: true,
   scaffoldBackgroundColor: backGround,
-  textTheme: TextTheme(
-
-  ),
+  textTheme: TextTheme(),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     elevation: 10,
     selectedItemColor: primaryColor,
@@ -31,7 +28,6 @@ final lightTheme = ThemeData(
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     elevation: 10,
     backgroundColor: primaryColor,
-
   ),
   appBarTheme: AppBarTheme(
       backgroundColor: primaryColor,

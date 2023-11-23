@@ -4,6 +4,7 @@ enum StatusCode {
   operationFailed,
   serverError,
   unAuthorized,
+  noContent,
 }
 
 extension FetchCode on StatusCode {
@@ -13,6 +14,8 @@ extension FetchCode on StatusCode {
         return 200;
       case StatusCode.operationCreated:
         return 201;
+      case StatusCode.noContent:
+        return 204;
       case StatusCode.operationFailed:
         return 400;
       case StatusCode.serverError:

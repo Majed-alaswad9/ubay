@@ -16,6 +16,12 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> en = {
   "home": "Home",
+  "transactions": "Transactions",
+  "chat": "Chat",
+  "profile": "Profile",
+  "sales": "Sales",
+  "purchases": "Purchases",
+  "logout": "Logout",
   "login": "Login",
   "signup": "Signup",
   "login_screen": {
@@ -69,6 +75,7 @@ class CodegenLoader extends AssetLoader{
   "cancel": "Cancel",
   "likes": "likes",
   "comments": "comments",
+  "write_comment": "Write Comment",
   "no_data": "No Data",
   "add": "Add",
   "photos": "Photos",
@@ -77,11 +84,33 @@ class CodegenLoader extends AssetLoader{
   "discount": "discount",
   "the_user_who_will_receive_the_discount": "The user who will receive the discount",
   "add_a_discount_for_the_item": "Add a discount for the item:",
-  "lbl_loading": "Loading..."
+  "lbl_loading": "Loading...",
+  "details": "product details",
+  "price": "price: ",
+  "generate_qr": "Generate QR",
+  "deliveryStatus": {
+    "seller": {
+      "seller": "Delivered to the warehouse",
+      "customer": "Delivered to the customer",
+      "wait": "Please go deliver the item",
+      "unpaid": "Not sold yet..."
+    },
+    "customer": {
+      "seller": "Please go pick it up",
+      "customer": "It was received",
+      "wait": "Waiting for the seller to bring the item to the warehouse"
+    }
+  }
 };
 static const Map<String,dynamic> ar = {
   "home": "الرئيسية",
+  "transactions": "معاملاتي",
+  "chat": "محادثات",
+  "profile": "الملف الشخصي",
+  "sales": "مبيعاتي",
+  "purchases": "مشترياتي",
   "login": "تسجيل الدخول",
+  "logout": "تسجيل الخروج",
   "signup": "انشاء حساب",
   "login_screen": {
     "Email": "البريد الالكتروني",
@@ -134,6 +163,7 @@ static const Map<String,dynamic> ar = {
   "delete": "حذف",
   "likes": "إعجاب",
   "comments": "تعليق",
+  "write_comment": "اكتب تعليق",
   "no_data": "لا يوجد بيانات لعرضها",
   "add": "إضافة",
   "photos": "الصور",
@@ -142,7 +172,23 @@ static const Map<String,dynamic> ar = {
   "discount": "الحسم",
   "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",
   "add_a_discount_for_the_item": "إضافة حسم للقطعة:",
-  "lbl_loading": " الرجاء الانتظار ..."
+  "lbl_loading": " الرجاء الانتظار ...",
+  "details": "تفاصيل القطعة",
+  "price": "السعر: ",
+  "generate_qr": "توليد رمز QR",
+  "deliveryStatus": {
+    "seller": {
+      "seller": "تم التسليم للمستودع",
+      "customer": "تم التسليم للزبون",
+      "wait": "يرجى الذهاب لتسليم القطعة",
+      "unpaid": "لم يتم البيع بعد..."
+    },
+    "customer": {
+      "seller": "يرجى الذهاب لإستلام القطعة",
+      "customer": "تم الإستلام",
+      "wait": "بإنتظار البائع لإحضار القطعة للمستودع"
+    }
+  }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ar": ar};
 }

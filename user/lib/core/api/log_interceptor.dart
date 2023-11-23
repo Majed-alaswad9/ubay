@@ -43,7 +43,8 @@ class LoggerInterceptor extends Interceptor with LoggerHelper {
     if (kDebugMode) {
       _StatusType statusType;
       if (response.statusCode == StatusCode.operationSucceeded.code ||
-          response.statusCode == StatusCode.operationCreated.code) {
+          response.statusCode == StatusCode.operationCreated.code ||
+          response.statusCode == StatusCode.noContent.code) {
         statusType = _StatusType.succeed;
       } else {
         statusType = _StatusType.failed;

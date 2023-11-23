@@ -8,12 +8,13 @@ import 'package:user/features/app/presentation/pages/base_page.dart';
 import 'package:user/features/auth/presentation/pages/login_page.dart';
 import 'package:user/features/auth/presentation/pages/register_page.dart';
 import 'package:user/features/chat/presentation/pages/chat_screen.dart';
-import 'package:user/features/posts/presintation/pages/add_post_screen.dart';
-import 'package:user/features/posts/presintation/pages/home_screen.dart';
-import 'package:user/features/posts/presintation/widget/comments_widget.dart';
+import 'package:user/features/products/presintation/pages/add_post_screen.dart';
+import 'package:user/features/products/presintation/pages/home_screen.dart';
+import 'package:user/features/products/presintation/widget/comments_widget.dart';
 import 'package:user/features/profile/presintation/pages/profile_screen.dart';
-import 'package:user/features/transaction/presintation/pages/transaction_screen.dart';
 import 'package:user/features/welcome/splash.dart';
+
+import '../../../features/my_transactions/presintation/pages/transaction_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');

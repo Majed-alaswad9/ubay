@@ -1,29 +1,29 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:user/core/common/model/page_state/bloc_status.dart';
 import 'package:user/core/config/router/router.dart';
-import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/extensions/build_context.dart';
-import 'package:user/features/app/presentation/widgets/app_elevated_button.dart';
-import 'package:user/features/posts/data/model/posts_model.dart';
-import 'package:user/features/posts/presintation/bloc/home_bloc.dart';
-import 'package:user/features/posts/presintation/pages/add_post_screen.dart';
+import 'package:user/core/util/responsive_padding.dart';
+import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
+import 'package:user/features/products/data/model/posts_model.dart';
+import 'package:user/features/products/presintation/bloc/home_bloc.dart';
+import 'package:user/features/products/presintation/pages/add_post_screen.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
 class PopUpMenuDeleteEdit extends StatelessWidget {
-  const PopUpMenuDeleteEdit(
-      {super.key,
-      required this.deleteFunction,
-      required this.fromContext,
-      this.product,
-      required this.isProduct,
-      required this.blocStatus});
+  const PopUpMenuDeleteEdit({
+    super.key,
+    required this.deleteFunction,
+    required this.fromContext,
+    this.product,
+    required this.isProduct,
+  });
 
   final Function() deleteFunction;
   final BuildContext fromContext;
-  final BlocStatus blocStatus;
   final Data? product;
   final bool isProduct;
 
@@ -43,11 +43,11 @@ class PopUpMenuDeleteEdit extends StatelessWidget {
             }
           } else if (value == Const.delete) {
             Const.showMyDialog(
-                context: context,
-                title: LocaleKeys.delete_post.tr(),
-                content: LocaleKeys.sure_delete.tr(),
-                blocStatus: blocStatus,
-                onPressed: deleteFunction);
+              context: context,
+              title: LocaleKeys.delete_post.tr(),
+              content: LocaleKeys.sure_delete.tr(),
+              onPressed: deleteFunction,
+            );
           }
         },
         itemBuilder: (BuildContext context) {
@@ -68,7 +68,6 @@ class Const {
           {required context,
           required String title,
           required String content,
-          required BlocStatus blocStatus,
           required dynamic Function()? onPressed}) =>
       showDialog<String>(
           context: context,
@@ -86,23 +85,37 @@ class Const {
                     TextButton(
                         onPressed: () =>
                             Navigator.pop(context, LocaleKeys.cancel.tr()),
-                        child: Text(
-                          LocaleKeys.cancel.tr(),
-                          style: context.textTheme.titleSmall.s13,
+                        child: Container(
+                          padding: HWEdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: context.colorScheme.primary),
+                              borderRadius: BorderRadius.circular(16),
+                              color: context.colorScheme.secondaryContainer),
+                          child: Text(
+                            LocaleKeys.cancel.tr(),
+                            style: context.textTheme.titleSmall!
+                                .copyWith(color: context.colorScheme.primary),
+                          ),
                         )),
                     BlocSelector<HomeBloc, HomeState, BlocStatus>(
-                      selector: (state) => blocStatus,
+                      selector: (state) => state.deletePostOrComment,
                       builder: (context, state) {
-                        return Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: Colors.red),
-                          child: MaterialButton(
-                              onPressed: onPressed,
-                              child: Text(
-                                LocaleKeys.yes.tr(),
-                                style: context.textTheme.titleSmall.s13,
-                              )),
+                        return ConditionalBuilder(
+                          condition: !state.isLoading(),
+                          fallback: (context) => const LoadingIndicator(),
+                          builder: (context) => Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                color: Colors.red),
+                            child: MaterialButton(
+                                onPressed: onPressed,
+                                child: Text(
+                                  LocaleKeys.yes.tr(),
+                                  style: context.textTheme.titleSmall!
+                                      .copyWith(color: Colors.white),
+                                )),
+                          ),
                         );
                       },
                     )

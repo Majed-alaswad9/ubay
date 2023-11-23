@@ -1,6 +1,12 @@
 {
     "home": "الرئيسية",
+    "transactions": "معاملاتي",
+    "chat": "محادثات",
+    "profile": "الملف الشخصي",
+    "sales": "مبيعاتي",
+    "purchases": "مشترياتي",
     "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
     "signup": "انشاء حساب",
     "login_screen": {
         "Email": "البريد الالكتروني",
@@ -53,6 +59,7 @@
     "delete": "حذف",
     "likes": "إعجاب",
     "comments": "تعليق",
+    "write_comment": "اكتب تعليق",
     "no_data": "لا يوجد بيانات لعرضها",
     "add": "إضافة",
     "photos": "الصور",
@@ -61,5 +68,22 @@
     "discount": "الحسم",
     "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",
     "add_a_discount_for_the_item": "إضافة حسم للقطعة:",
-    "lbl_loading": " الرجاء الانتظار ..."
+    "lbl_loading": " الرجاء الانتظار ...",
+
+    "details": "تفاصيل القطعة",
+    "price": "السعر: ",
+    "generate_qr": "توليد رمز QR",
+    "deliveryStatus": {
+        "seller": {
+            "seller": "تم التسليم للمستودع",
+            "customer": "تم التسليم للزبون",
+            "wait": "يرجى الذهاب لتسليم القطعة",
+            "unpaid": "لم يتم البيع بعد..."
+        },
+        "customer": {
+            "seller": "يرجى الذهاب لإستلام القطعة",
+            "customer": "تم الإستلام",
+            "wait": "بإنتظار البائع لإحضار القطعة للمستودع"
+        }
+    }
 }

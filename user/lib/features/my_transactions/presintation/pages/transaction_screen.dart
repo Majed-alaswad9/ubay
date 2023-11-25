@@ -7,6 +7,7 @@ import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
 import 'package:user/features/app/presentation/widgets/app_text_view.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
+import 'package:user/features/my_transactions/presintation/pages/purchases_screen.dart';
 import 'package:user/features/my_transactions/presintation/pages/sales_screen.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
@@ -49,6 +50,7 @@ class _TransactionScreenState extends State<TransactionScreen>
               labelStyle: context.textTheme.titleMedium,
               unselectedLabelColor: Colors.white,
               indicatorColor: context.colorScheme.primary,
+              padding: EdgeInsets.zero,
               tabs: [
                 Tab(
                   text: LocaleKeys.sales.tr(),
@@ -63,7 +65,8 @@ class _TransactionScreenState extends State<TransactionScreen>
       },
       body: TabBarView(
         controller: tabController,
-        children: [SalesPage()],
+        clipBehavior: Clip.antiAlias,
+        children: const [SalesPage(), PurchasesScreen()],
       ),
     ));
   }

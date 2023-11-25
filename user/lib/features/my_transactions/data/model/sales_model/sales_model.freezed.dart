@@ -252,10 +252,13 @@ CustomerElement _$CustomerElementFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CustomerElement {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   Payment get payment => throw _privateConstructorUsedError;
-  DateTime get customerDate => throw _privateConstructorUsedError;
-  DateTime get sellerDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'customer_date')
+  DateTime? get customerDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'seller_date')
+  DateTime? get sellerDate => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   Customer get customer => throw _privateConstructorUsedError;
   Unpaid get product => throw _privateConstructorUsedError;
@@ -273,10 +276,10 @@ abstract class $CustomerElementCopyWith<$Res> {
       _$CustomerElementCopyWithImpl<$Res, CustomerElement>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       Payment payment,
-      DateTime customerDate,
-      DateTime sellerDate,
+      @JsonKey(name: 'customer_date') DateTime? customerDate,
+      @JsonKey(name: 'seller_date') DateTime? sellerDate,
       DateTime createdAt,
       Customer customer,
       Unpaid product});
@@ -301,8 +304,8 @@ class _$CustomerElementCopyWithImpl<$Res, $Val extends CustomerElement>
   $Res call({
     Object? id = null,
     Object? payment = null,
-    Object? customerDate = null,
-    Object? sellerDate = null,
+    Object? customerDate = freezed,
+    Object? sellerDate = freezed,
     Object? createdAt = null,
     Object? customer = null,
     Object? product = null,
@@ -316,14 +319,14 @@ class _$CustomerElementCopyWithImpl<$Res, $Val extends CustomerElement>
           ? _value.payment
           : payment // ignore: cast_nullable_to_non_nullable
               as Payment,
-      customerDate: null == customerDate
+      customerDate: freezed == customerDate
           ? _value.customerDate
           : customerDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      sellerDate: null == sellerDate
+              as DateTime?,
+      sellerDate: freezed == sellerDate
           ? _value.sellerDate
           : sellerDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -373,10 +376,10 @@ abstract class _$$CustomerElementImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       Payment payment,
-      DateTime customerDate,
-      DateTime sellerDate,
+      @JsonKey(name: 'customer_date') DateTime? customerDate,
+      @JsonKey(name: 'seller_date') DateTime? sellerDate,
       DateTime createdAt,
       Customer customer,
       Unpaid product});
@@ -402,8 +405,8 @@ class __$$CustomerElementImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? payment = null,
-    Object? customerDate = null,
-    Object? sellerDate = null,
+    Object? customerDate = freezed,
+    Object? sellerDate = freezed,
     Object? createdAt = null,
     Object? customer = null,
     Object? product = null,
@@ -417,14 +420,14 @@ class __$$CustomerElementImplCopyWithImpl<$Res>
           ? _value.payment
           : payment // ignore: cast_nullable_to_non_nullable
               as Payment,
-      customerDate: null == customerDate
+      customerDate: freezed == customerDate
           ? _value.customerDate
           : customerDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      sellerDate: null == sellerDate
+              as DateTime?,
+      sellerDate: freezed == sellerDate
           ? _value.sellerDate
           : sellerDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -445,10 +448,10 @@ class __$$CustomerElementImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CustomerElementImpl implements _CustomerElement {
   const _$CustomerElementImpl(
-      {required this.id,
+      {@JsonKey(name: '_id') required this.id,
       required this.payment,
-      required this.customerDate,
-      required this.sellerDate,
+      @JsonKey(name: 'customer_date') this.customerDate,
+      @JsonKey(name: 'seller_date') this.sellerDate,
       required this.createdAt,
       required this.customer,
       required this.product});
@@ -457,13 +460,16 @@ class _$CustomerElementImpl implements _CustomerElement {
       _$$CustomerElementImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final Payment payment;
   @override
-  final DateTime customerDate;
+  @JsonKey(name: 'customer_date')
+  final DateTime? customerDate;
   @override
-  final DateTime sellerDate;
+  @JsonKey(name: 'seller_date')
+  final DateTime? sellerDate;
   @override
   final DateTime createdAt;
   @override
@@ -516,10 +522,10 @@ class _$CustomerElementImpl implements _CustomerElement {
 
 abstract class _CustomerElement implements CustomerElement {
   const factory _CustomerElement(
-      {required final String id,
+      {@JsonKey(name: '_id') required final String id,
       required final Payment payment,
-      required final DateTime customerDate,
-      required final DateTime sellerDate,
+      @JsonKey(name: 'customer_date') final DateTime? customerDate,
+      @JsonKey(name: 'seller_date') final DateTime? sellerDate,
       required final DateTime createdAt,
       required final Customer customer,
       required final Unpaid product}) = _$CustomerElementImpl;
@@ -528,13 +534,16 @@ abstract class _CustomerElement implements CustomerElement {
       _$CustomerElementImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
   Payment get payment;
   @override
-  DateTime get customerDate;
+  @JsonKey(name: 'customer_date')
+  DateTime? get customerDate;
   @override
-  DateTime get sellerDate;
+  @JsonKey(name: 'seller_date')
+  DateTime? get sellerDate;
   @override
   DateTime get createdAt;
   @override
@@ -553,6 +562,7 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Customer {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get photo => throw _privateConstructorUsedError;
@@ -568,7 +578,7 @@ abstract class $CustomerCopyWith<$Res> {
   factory $CustomerCopyWith(Customer value, $Res Function(Customer) then) =
       _$CustomerCopyWithImpl<$Res, Customer>;
   @useResult
-  $Res call({String id, String name, String photo});
+  $Res call({@JsonKey(name: '_id') String id, String name, String photo});
 }
 
 /// @nodoc
@@ -613,7 +623,7 @@ abstract class _$$CustomerImplCopyWith<$Res>
       __$$CustomerImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String photo});
+  $Res call({@JsonKey(name: '_id') String id, String name, String photo});
 }
 
 /// @nodoc
@@ -652,12 +662,15 @@ class __$$CustomerImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CustomerImpl implements _Customer {
   const _$CustomerImpl(
-      {required this.id, required this.name, required this.photo});
+      {@JsonKey(name: '_id') required this.id,
+      required this.name,
+      required this.photo});
 
   factory _$CustomerImpl.fromJson(Map<String, dynamic> json) =>
       _$$CustomerImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final String name;
@@ -699,7 +712,7 @@ class _$CustomerImpl implements _Customer {
 
 abstract class _Customer implements Customer {
   const factory _Customer(
-      {required final String id,
+      {@JsonKey(name: '_id') required final String id,
       required final String name,
       required final String photo}) = _$CustomerImpl;
 
@@ -707,6 +720,7 @@ abstract class _Customer implements Customer {
       _$CustomerImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
   String get name;
@@ -724,9 +738,12 @@ Payment _$PaymentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Payment {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_discount')
   bool get isDiscount => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'price_after')
   int get priceAfter => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -739,7 +756,11 @@ abstract class $PaymentCopyWith<$Res> {
   factory $PaymentCopyWith(Payment value, $Res Function(Payment) then) =
       _$PaymentCopyWithImpl<$Res, Payment>;
   @useResult
-  $Res call({String id, bool isDiscount, DateTime createdAt, int priceAfter});
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      @JsonKey(name: 'is_discount') bool isDiscount,
+      DateTime createdAt,
+      @JsonKey(name: 'price_after') int priceAfter});
 }
 
 /// @nodoc
@@ -788,7 +809,11 @@ abstract class _$$PaymentImplCopyWith<$Res> implements $PaymentCopyWith<$Res> {
       __$$PaymentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, bool isDiscount, DateTime createdAt, int priceAfter});
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      @JsonKey(name: 'is_discount') bool isDiscount,
+      DateTime createdAt,
+      @JsonKey(name: 'price_after') int priceAfter});
 }
 
 /// @nodoc
@@ -832,21 +857,24 @@ class __$$PaymentImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PaymentImpl implements _Payment {
   const _$PaymentImpl(
-      {required this.id,
-      required this.isDiscount,
+      {@JsonKey(name: '_id') required this.id,
+      @JsonKey(name: 'is_discount') required this.isDiscount,
       required this.createdAt,
-      required this.priceAfter});
+      @JsonKey(name: 'price_after') required this.priceAfter});
 
   factory _$PaymentImpl.fromJson(Map<String, dynamic> json) =>
       _$$PaymentImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
+  @JsonKey(name: 'is_discount')
   final bool isDiscount;
   @override
   final DateTime createdAt;
   @override
+  @JsonKey(name: 'price_after')
   final int priceAfter;
 
   @override
@@ -889,20 +917,24 @@ class _$PaymentImpl implements _Payment {
 
 abstract class _Payment implements Payment {
   const factory _Payment(
-      {required final String id,
-      required final bool isDiscount,
-      required final DateTime createdAt,
-      required final int priceAfter}) = _$PaymentImpl;
+          {@JsonKey(name: '_id') required final String id,
+          @JsonKey(name: 'is_discount') required final bool isDiscount,
+          required final DateTime createdAt,
+          @JsonKey(name: 'price_after') required final int priceAfter}) =
+      _$PaymentImpl;
 
   factory _Payment.fromJson(Map<String, dynamic> json) = _$PaymentImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
+  @JsonKey(name: 'is_discount')
   bool get isDiscount;
   @override
   DateTime get createdAt;
   @override
+  @JsonKey(name: 'price_after')
   int get priceAfter;
   @override
   @JsonKey(ignore: true)
@@ -916,13 +948,14 @@ Unpaid _$UnpaidFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Unpaid {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   List<String> get photos => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   String get store => throw _privateConstructorUsedError;
-  List<Coupons> get coupons => throw _privateConstructorUsedError;
+  List<Coupons>? get coupons => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -935,13 +968,13 @@ abstract class $UnpaidCopyWith<$Res> {
       _$UnpaidCopyWithImpl<$Res, Unpaid>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String title,
       List<String> photos,
       int price,
       String category,
       String store,
-      List<Coupons> coupons});
+      List<Coupons>? coupons});
 }
 
 /// @nodoc
@@ -963,7 +996,7 @@ class _$UnpaidCopyWithImpl<$Res, $Val extends Unpaid>
     Object? price = null,
     Object? category = null,
     Object? store = null,
-    Object? coupons = null,
+    Object? coupons = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -990,10 +1023,10 @@ class _$UnpaidCopyWithImpl<$Res, $Val extends Unpaid>
           ? _value.store
           : store // ignore: cast_nullable_to_non_nullable
               as String,
-      coupons: null == coupons
+      coupons: freezed == coupons
           ? _value.coupons
           : coupons // ignore: cast_nullable_to_non_nullable
-              as List<Coupons>,
+              as List<Coupons>?,
     ) as $Val);
   }
 }
@@ -1006,13 +1039,13 @@ abstract class _$$UnpaidImplCopyWith<$Res> implements $UnpaidCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String title,
       List<String> photos,
       int price,
       String category,
       String store,
-      List<Coupons> coupons});
+      List<Coupons>? coupons});
 }
 
 /// @nodoc
@@ -1032,7 +1065,7 @@ class __$$UnpaidImplCopyWithImpl<$Res>
     Object? price = null,
     Object? category = null,
     Object? store = null,
-    Object? coupons = null,
+    Object? coupons = freezed,
   }) {
     return _then(_$UnpaidImpl(
       id: null == id
@@ -1059,10 +1092,10 @@ class __$$UnpaidImplCopyWithImpl<$Res>
           ? _value.store
           : store // ignore: cast_nullable_to_non_nullable
               as String,
-      coupons: null == coupons
+      coupons: freezed == coupons
           ? _value._coupons
           : coupons // ignore: cast_nullable_to_non_nullable
-              as List<Coupons>,
+              as List<Coupons>?,
     ));
   }
 }
@@ -1071,13 +1104,13 @@ class __$$UnpaidImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UnpaidImpl implements _Unpaid {
   const _$UnpaidImpl(
-      {required this.id,
+      {@JsonKey(name: '_id') required this.id,
       required this.title,
       required final List<String> photos,
       required this.price,
       required this.category,
       required this.store,
-      required final List<Coupons> coupons})
+      final List<Coupons>? coupons})
       : _photos = photos,
         _coupons = coupons;
 
@@ -1085,6 +1118,7 @@ class _$UnpaidImpl implements _Unpaid {
       _$$UnpaidImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final String title;
@@ -1102,12 +1136,14 @@ class _$UnpaidImpl implements _Unpaid {
   final String category;
   @override
   final String store;
-  final List<Coupons> _coupons;
+  final List<Coupons>? _coupons;
   @override
-  List<Coupons> get coupons {
+  List<Coupons>? get coupons {
+    final value = _coupons;
+    if (value == null) return null;
     if (_coupons is EqualUnmodifiableListView) return _coupons;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_coupons);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -1158,17 +1194,18 @@ class _$UnpaidImpl implements _Unpaid {
 
 abstract class _Unpaid implements Unpaid {
   const factory _Unpaid(
-      {required final String id,
+      {@JsonKey(name: '_id') required final String id,
       required final String title,
       required final List<String> photos,
       required final int price,
       required final String category,
       required final String store,
-      required final List<Coupons> coupons}) = _$UnpaidImpl;
+      final List<Coupons>? coupons}) = _$UnpaidImpl;
 
   factory _Unpaid.fromJson(Map<String, dynamic> json) = _$UnpaidImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
   String get title;
@@ -1181,7 +1218,7 @@ abstract class _Unpaid implements Unpaid {
   @override
   String get store;
   @override
-  List<Coupons> get coupons;
+  List<Coupons>? get coupons;
   @override
   @JsonKey(ignore: true)
   _$$UnpaidImplCopyWith<_$UnpaidImpl> get copyWith =>

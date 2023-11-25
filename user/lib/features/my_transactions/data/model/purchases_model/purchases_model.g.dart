@@ -30,10 +30,14 @@ Map<String, dynamic> _$$PurchasesModelImplToJson(
 _$CustomerElementImpl _$$CustomerElementImplFromJson(
         Map<String, dynamic> json) =>
     _$CustomerElementImpl(
-      id: json['id'] as String,
+      id: json['_id'] as String,
       payment: Payment.fromJson(json['payment'] as Map<String, dynamic>),
-      customerDate: DateTime.parse(json['customerDate'] as String),
-      sellerDate: DateTime.parse(json['sellerDate'] as String),
+      customerDate: json['customer_date'] == null
+          ? null
+          : DateTime.parse(json['customer_date'] as String),
+      sellerDate: json['seller_date'] == null
+          ? null
+          : DateTime.parse(json['seller_date'] as String),
       createdAt: DateTime.parse(json['createdAt'] as String),
       product: Unpaid.fromJson(json['product'] as Map<String, dynamic>),
       seller: Customer.fromJson(json['seller'] as Map<String, dynamic>),
@@ -42,10 +46,10 @@ _$CustomerElementImpl _$$CustomerElementImplFromJson(
 Map<String, dynamic> _$$CustomerElementImplToJson(
         _$CustomerElementImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'payment': instance.payment,
-      'customerDate': instance.customerDate.toIso8601String(),
-      'sellerDate': instance.sellerDate.toIso8601String(),
+      'customer_date': instance.customerDate?.toIso8601String(),
+      'seller_date': instance.sellerDate?.toIso8601String(),
       'createdAt': instance.createdAt.toIso8601String(),
       'product': instance.product,
       'seller': instance.seller,

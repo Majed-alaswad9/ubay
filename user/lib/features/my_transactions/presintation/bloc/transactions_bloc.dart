@@ -31,7 +31,13 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
     result.fold((exception, message) {
       emit(state.copyWith(allSales: PageState.error(exception: exception)));
     }, (value) {
-      emit(state.copyWith(allSales: PageState.loaded(data: value.data)));
+      if (value.data.wait.isEmpty &&
+          value.data.seller.isEmpty &&
+          value.data.customer.isEmpty) {
+        emit(state.copyWith(allSales: const PageState.empty()));
+      } else {
+        emit(state.copyWith(allSales: PageState.loaded(data: value.data)));
+      }
     });
   }
 
@@ -42,7 +48,13 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
     result.fold((exception, message) {
       emit(state.copyWith(allPurchases: PageState.error(exception: exception)));
     }, (value) {
-      emit(state.copyWith(allPurchases: PageState.loaded(data: value.data)));
+      if (value.data.wait.isEmpty &&
+          value.data.seller.isEmpty &&
+          value.data.customer.isEmpty) {
+        emit(state.copyWith(allPurchases: const PageState.empty()));
+      } else {
+        emit(state.copyWith(allPurchases: PageState.loaded(data: value.data)));
+      }
     });
   }
 }

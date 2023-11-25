@@ -21,10 +21,10 @@ class SalesModel with _$SalesModel {
 @freezed
 class CustomerElement with _$CustomerElement {
   const factory CustomerElement({
-    required String id,
+    @JsonKey(name: '_id') required String id,
     required Payment payment,
-    required DateTime customerDate,
-    required DateTime sellerDate,
+    @JsonKey(name: 'customer_date') DateTime? customerDate,
+    @JsonKey(name: 'seller_date') DateTime? sellerDate,
     required DateTime createdAt,
     required Customer customer,
     required Unpaid product,
@@ -37,7 +37,7 @@ class CustomerElement with _$CustomerElement {
 @freezed
 class Customer with _$Customer {
   const factory Customer({
-    required String id,
+    @JsonKey(name: '_id') required String id,
     required String name,
     required String photo,
   }) = _Customer;
@@ -49,10 +49,10 @@ class Customer with _$Customer {
 @freezed
 class Payment with _$Payment {
   const factory Payment({
-    required String id,
-    required bool isDiscount,
+    @JsonKey(name: '_id') required String id,
+    @JsonKey(name: 'is_discount') required bool isDiscount,
     required DateTime createdAt,
-    required int priceAfter,
+    @JsonKey(name: 'price_after') required int priceAfter,
   }) = _Payment;
 
   factory Payment.fromJson(Map<String, dynamic> json) =>
@@ -62,13 +62,13 @@ class Payment with _$Payment {
 @freezed
 class Unpaid with _$Unpaid {
   const factory Unpaid({
-    required String id,
+    @JsonKey(name: '_id') required String id,
     required String title,
     required List<String> photos,
     required int price,
     required String category,
     required String store,
-    required List<Coupons> coupons,
+    List<Coupons>? coupons,
   }) = _Unpaid;
 
   factory Unpaid.fromJson(Map<String, dynamic> json) => _$UnpaidFromJson(json);

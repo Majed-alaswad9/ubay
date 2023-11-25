@@ -33,10 +33,14 @@ Map<String, dynamic> _$$SalesModelImplToJson(_$SalesModelImpl instance) =>
 _$CustomerElementImpl _$$CustomerElementImplFromJson(
         Map<String, dynamic> json) =>
     _$CustomerElementImpl(
-      id: json['id'] as String,
+      id: json['_id'] as String,
       payment: Payment.fromJson(json['payment'] as Map<String, dynamic>),
-      customerDate: DateTime.parse(json['customerDate'] as String),
-      sellerDate: DateTime.parse(json['sellerDate'] as String),
+      customerDate: json['customer_date'] == null
+          ? null
+          : DateTime.parse(json['customer_date'] as String),
+      sellerDate: json['seller_date'] == null
+          ? null
+          : DateTime.parse(json['seller_date'] as String),
       createdAt: DateTime.parse(json['createdAt'] as String),
       customer: Customer.fromJson(json['customer'] as Map<String, dynamic>),
       product: Unpaid.fromJson(json['product'] as Map<String, dynamic>),
@@ -45,10 +49,10 @@ _$CustomerElementImpl _$$CustomerElementImplFromJson(
 Map<String, dynamic> _$$CustomerElementImplToJson(
         _$CustomerElementImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'payment': instance.payment,
-      'customerDate': instance.customerDate.toIso8601String(),
-      'sellerDate': instance.sellerDate.toIso8601String(),
+      'customer_date': instance.customerDate?.toIso8601String(),
+      'seller_date': instance.sellerDate?.toIso8601String(),
       'createdAt': instance.createdAt.toIso8601String(),
       'customer': instance.customer,
       'product': instance.product,
@@ -56,50 +60,50 @@ Map<String, dynamic> _$$CustomerElementImplToJson(
 
 _$CustomerImpl _$$CustomerImplFromJson(Map<String, dynamic> json) =>
     _$CustomerImpl(
-      id: json['id'] as String,
+      id: json['_id'] as String,
       name: json['name'] as String,
       photo: json['photo'] as String,
     );
 
 Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'name': instance.name,
       'photo': instance.photo,
     };
 
 _$PaymentImpl _$$PaymentImplFromJson(Map<String, dynamic> json) =>
     _$PaymentImpl(
-      id: json['id'] as String,
-      isDiscount: json['isDiscount'] as bool,
+      id: json['_id'] as String,
+      isDiscount: json['is_discount'] as bool,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      priceAfter: json['priceAfter'] as int,
+      priceAfter: json['price_after'] as int,
     );
 
 Map<String, dynamic> _$$PaymentImplToJson(_$PaymentImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'isDiscount': instance.isDiscount,
+      '_id': instance.id,
+      'is_discount': instance.isDiscount,
       'createdAt': instance.createdAt.toIso8601String(),
-      'priceAfter': instance.priceAfter,
+      'price_after': instance.priceAfter,
     };
 
 _$UnpaidImpl _$$UnpaidImplFromJson(Map<String, dynamic> json) => _$UnpaidImpl(
-      id: json['id'] as String,
+      id: json['_id'] as String,
       title: json['title'] as String,
       photos:
           (json['photos'] as List<dynamic>).map((e) => e as String).toList(),
       price: json['price'] as int,
       category: json['category'] as String,
       store: json['store'] as String,
-      coupons: (json['coupons'] as List<dynamic>)
-          .map((e) => Coupons.fromJson(e as Map<String, dynamic>))
+      coupons: (json['coupons'] as List<dynamic>?)
+          ?.map((e) => Coupons.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$$UnpaidImplToJson(_$UnpaidImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'title': instance.title,
       'photos': instance.photos,
       'price': instance.price,

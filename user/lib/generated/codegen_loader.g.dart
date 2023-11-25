@@ -100,7 +100,9 @@ class CodegenLoader extends AssetLoader{
       "customer": "It was received",
       "wait": "Waiting for the seller to bring the item to the warehouse"
     }
-  }
+  },
+  "delivery_of_the_product": "Delivery of the product: ",
+  "receive_the_product": "Receive the product: "
 };
 static const Map<String,dynamic> ar = {
   "home": "الرئيسية",
@@ -188,7 +190,9 @@ static const Map<String,dynamic> ar = {
       "customer": "تم الإستلام",
       "wait": "بإنتظار البائع لإحضار القطعة للمستودع"
     }
-  }
+  },
+  "delivery_of_the_product": "تسليم القطعة: ",
+  "receive_the_product": "استلام القطعة: "
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ar": ar};
 }

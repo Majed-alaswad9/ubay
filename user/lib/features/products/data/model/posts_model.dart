@@ -68,8 +68,8 @@ class Coupons with _$Coupons {
       DateTime? expire,
       int? discount,
       bool? active,
-      required DateTime createdAt,
-      required DateTime updatedAt}) = _Coupons;
+      DateTime? createdAt,
+      DateTime? updatedAt}) = _Coupons;
 
   factory Coupons.fromJson(Map<String, dynamic> json) =>
       _$CouponsFromJson(json);

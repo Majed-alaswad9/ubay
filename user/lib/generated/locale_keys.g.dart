@@ -79,5 +79,7 @@ abstract class  LocaleKeys {
   static const deliveryStatus_customer_wait = 'deliveryStatus.customer.wait';
   static const deliveryStatus_customer = 'deliveryStatus.customer';
   static const deliveryStatus = 'deliveryStatus';
+  static const delivery_of_the_product = 'delivery_of_the_product';
+  static const receive_the_product = 'receive_the_product';
 
 }

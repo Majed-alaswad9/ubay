@@ -1117,8 +1117,8 @@ mixin _$Coupons {
   DateTime? get expire => throw _privateConstructorUsedError;
   int? get discount => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1137,8 +1137,8 @@ abstract class $CouponsCopyWith<$Res> {
       DateTime? expire,
       int? discount,
       bool? active,
-      DateTime createdAt,
-      DateTime updatedAt});
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -1160,8 +1160,8 @@ class _$CouponsCopyWithImpl<$Res, $Val extends Coupons>
     Object? expire = freezed,
     Object? discount = freezed,
     Object? active = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -1188,14 +1188,14 @@ class _$CouponsCopyWithImpl<$Res, $Val extends Coupons>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool?,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
+              as DateTime?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -1214,8 +1214,8 @@ abstract class _$$CouponsImplCopyWith<$Res> implements $CouponsCopyWith<$Res> {
       DateTime? expire,
       int? discount,
       bool? active,
-      DateTime createdAt,
-      DateTime updatedAt});
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -1235,8 +1235,8 @@ class __$$CouponsImplCopyWithImpl<$Res>
     Object? expire = freezed,
     Object? discount = freezed,
     Object? active = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$CouponsImpl(
       id: null == id
@@ -1263,14 +1263,14 @@ class __$$CouponsImplCopyWithImpl<$Res>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool?,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
+              as DateTime?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -1285,8 +1285,8 @@ class _$CouponsImpl implements _Coupons {
       this.expire,
       this.discount,
       this.active,
-      required this.createdAt,
-      required this.updatedAt});
+      this.createdAt,
+      this.updatedAt});
 
   factory _$CouponsImpl.fromJson(Map<String, dynamic> json) =>
       _$$CouponsImplFromJson(json);
@@ -1305,9 +1305,9 @@ class _$CouponsImpl implements _Coupons {
   @override
   final bool? active;
   @override
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
 
   @override
   String toString() {
@@ -1359,8 +1359,8 @@ abstract class _Coupons implements Coupons {
       final DateTime? expire,
       final int? discount,
       final bool? active,
-      required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$CouponsImpl;
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$CouponsImpl;
 
   factory _Coupons.fromJson(Map<String, dynamic> json) = _$CouponsImpl.fromJson;
 
@@ -1378,9 +1378,9 @@ abstract class _Coupons implements Coupons {
   @override
   bool? get active;
   @override
-  DateTime get createdAt;
+  DateTime? get createdAt;
   @override
-  DateTime get updatedAt;
+  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$CouponsImplCopyWith<_$CouponsImpl> get copyWith =>

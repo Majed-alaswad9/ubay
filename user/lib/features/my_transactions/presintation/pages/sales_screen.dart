@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user/core/common/model/page_state/result_builder.dart';
 import 'package:user/core/util/extensions/build_context.dart';
-import 'package:user/features/app/presentation/widgets/app_text_view.dart';
 import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
 import 'package:user/features/my_transactions/data/model/sales_model/sales_model.dart';
 import 'package:user/features/my_transactions/presintation/widget/card_sales.dart';
@@ -11,15 +10,26 @@ import 'package:user/generated/locale_keys.g.dart';
 
 import '../bloc/transactions_bloc.dart';
 
-class SalesPage extends StatelessWidget {
+class SalesPage extends StatefulWidget {
   const SalesPage({super.key});
+
+  @override
+  State<SalesPage> createState() => _SalesPageState();
+}
+
+class _SalesPageState extends State<SalesPage> {
+  @override
+  void initState() {
+    context.read<TransactionsBloc>().add(GetAllSalesEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TransactionsBloc, TransactionsState>(
       builder: (context, state) {
         return PageStateBuilder<SalesModel>(
-          loading: const LoadingIndicator(),
+          loading: const Center(child: LoadingIndicator()),
           init: const SizedBox.shrink(),
           empty: Center(
             child: Text(LocaleKeys.no_data.tr()),
@@ -28,148 +38,90 @@ class SalesPage extends StatelessWidget {
             child: Text(error.toString()),
           ),
           result: state.allSales,
-          success: (data) => Column(
-            children: [
-              Stack(
-                children: [
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.warning_amber,
-                        color: Colors.orangeAccent,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        color: const Color(0xFFF9A8D4),
-                        child: AppTextView(
-                          LocaleKeys.deliveryStatus_seller_wait.tr(),
-                          style: context.textTheme.bodyMedium,
+          success: (data) => RefreshIndicator(
+            onRefresh: () async {
+              context.read<TransactionsBloc>().add(GetAllSalesEvent());
+            },
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => CardSales(
+                          iconData: Icons.warning_amber,
+                          iconColor: Colors.orange,
+                          color: context.colorScheme.errorContainer,
+                          title: data.wait[index].product.title,
+                          header: LocaleKeys.deliveryStatus_seller_wait.tr(),
+                          price: data.wait[index].product.price,
+                          photos: data.wait[index].product.photos,
+                          barcode: true,
+                          isReceive: false,
+                          productId: data.wait[index].product.id,
+                          payment: data.wait[index].payment,
                         ),
-                      ),
-                    ],
-                  ),
-                  ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => CardSales(
-                            title: data.wait[index].product.title,
-                            price: data.wait[index].product.price,
-                            photos: data.wait[index].product.photos,
-                            wait: true,
-                          ),
-                      separatorBuilder: (context, _) => const SizedBox(
-                            height: 5,
-                          ),
-                      itemCount: data.wait.length),
-                ],
-              ),
-              Stack(
-                children: [
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.error_outline,
-                        color: Color(0xFF8B5CF6),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        color: const Color(0xFFC4B5FD),
-                        child: AppTextView(
-                          LocaleKeys.deliveryStatus_seller_unpaid.tr(),
-                          style: context.textTheme.bodyMedium!
-                              .copyWith(color: const Color(0xFF8B5CF6)),
+                    separatorBuilder: (context, _) => const SizedBox(
+                          height: 5,
                         ),
-                      ),
-                    ],
-                  ),
-                  ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => CardSales(
-                            title: data.unpaid[index].title,
-                            price: data.unpaid[index].price,
-                            photos: data.unpaid[index].photos,
-                            wait: false,
-                          ),
-                      separatorBuilder: (context, _) => const SizedBox(
-                            height: 5,
-                          ),
-                      itemCount: data.unpaid.length),
-                ],
-              ),
-              Stack(
-                children: [
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.check_circle_outline_outlined,
-                        color: Colors.green,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        color: const Color(0xFFC4B5FD),
-                        child: AppTextView(
-                          LocaleKeys.deliveryStatus_seller_seller.tr(),
-                          style: context.textTheme.bodyMedium!
-                              .copyWith(color: Colors.green),
+                    itemCount: data.wait.length),
+                ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => CardSales(
+                          iconData: Icons.error_outline,
+                          iconColor: Colors.lightBlueAccent,
+                          color: Colors.blue.shade50,
+                          title: data.unpaid[index].title,
+                          header: LocaleKeys.deliveryStatus_seller_unpaid.tr(),
+                          price: data.unpaid[index].price,
+                          photos: data.unpaid[index].photos,
+                          barcode: false,
+                          isReceive: false,
                         ),
-                      ),
-                    ],
-                  ),
-                  ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => CardSales(
-                            title: data.seller[index].product.title,
-                            price: data.seller[index].product.price,
-                            photos: data.seller[index].product.photos,
-                            wait: false,
-                          ),
-                      separatorBuilder: (context, _) => const SizedBox(
-                            height: 5,
-                          ),
-                      itemCount: data.seller.length),
-                ],
-              ),
-              Stack(
-                children: [
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.check_circle_outline_outlined,
-                        color: Colors.green,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        color: const Color(0xFFC4B5FD),
-                        child: AppTextView(
-                          LocaleKeys.deliveryStatus_customer_customer.tr(),
-                          style: context.textTheme.bodyMedium!
-                              .copyWith(color: Colors.green),
+                    separatorBuilder: (context, _) => const SizedBox(
+                          height: 5,
                         ),
-                      ),
-                    ],
-                  ),
-                  ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => CardSales(
-                            title: data.customer[index].product.title,
-                            price: data.customer[index].product.price,
-                            photos: data.customer[index].product.photos,
-                            wait: false,
-                          ),
-                      separatorBuilder: (context, _) => const SizedBox(
-                            height: 5,
-                          ),
-                      itemCount: data.customer.length),
-                ],
-              ),
-            ],
+                    itemCount: data.unpaid.length),
+                ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => CardSales(
+                          iconColor: Colors.green,
+                          iconData: Icons.check_circle_outline_outlined,
+                          color: const Color(0xFFC4B5FD),
+                          header: LocaleKeys.deliveryStatus_seller_seller.tr(),
+                          title: data.seller[index].product.title,
+                          price: data.seller[index].product.price,
+                          photos: data.seller[index].product.photos,
+                          barcode: false,
+                          isReceive: false,
+                        ),
+                    separatorBuilder: (context, _) => const SizedBox(
+                          height: 5,
+                        ),
+                    itemCount: data.seller.length),
+                ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => CardSales(
+                          iconColor: Colors.green,
+                          iconData: Icons.check_circle_outline_outlined,
+                          color: const Color(0xFFC4B5FD),
+                          header:
+                              LocaleKeys.deliveryStatus_customer_customer.tr(),
+                          title: data.customer[index].product.title,
+                          price: data.customer[index].product.price,
+                          photos: data.customer[index].product.photos,
+                          barcode: false,
+                          isReceive: false,
+                        ),
+                    separatorBuilder: (context, _) => const SizedBox(
+                          height: 5,
+                        ),
+                    itemCount: data.customer.length),
+              ],
+            ),
           ),
         );
       },

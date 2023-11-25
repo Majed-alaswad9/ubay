@@ -20,10 +20,10 @@ class PurchasesModel with _$PurchasesModel {
 @freezed
 class CustomerElement with _$CustomerElement {
   const factory CustomerElement({
-    required String id,
+    @JsonKey(name: '_id') required String id,
     required Payment payment,
-    required DateTime customerDate,
-    required DateTime sellerDate,
+    @JsonKey(name: 'customer_date') DateTime? customerDate,
+    @JsonKey(name: 'seller_date') DateTime? sellerDate,
     required DateTime createdAt,
     required Unpaid product,
     required Customer seller,

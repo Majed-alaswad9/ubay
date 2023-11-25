@@ -225,10 +225,13 @@ CustomerElement _$CustomerElementFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CustomerElement {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   Payment get payment => throw _privateConstructorUsedError;
-  DateTime get customerDate => throw _privateConstructorUsedError;
-  DateTime get sellerDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'customer_date')
+  DateTime? get customerDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'seller_date')
+  DateTime? get sellerDate => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   Unpaid get product => throw _privateConstructorUsedError;
   Customer get seller => throw _privateConstructorUsedError;
@@ -246,10 +249,10 @@ abstract class $CustomerElementCopyWith<$Res> {
       _$CustomerElementCopyWithImpl<$Res, CustomerElement>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       Payment payment,
-      DateTime customerDate,
-      DateTime sellerDate,
+      @JsonKey(name: 'customer_date') DateTime? customerDate,
+      @JsonKey(name: 'seller_date') DateTime? sellerDate,
       DateTime createdAt,
       Unpaid product,
       Customer seller});
@@ -274,8 +277,8 @@ class _$CustomerElementCopyWithImpl<$Res, $Val extends CustomerElement>
   $Res call({
     Object? id = null,
     Object? payment = null,
-    Object? customerDate = null,
-    Object? sellerDate = null,
+    Object? customerDate = freezed,
+    Object? sellerDate = freezed,
     Object? createdAt = null,
     Object? product = null,
     Object? seller = null,
@@ -289,14 +292,14 @@ class _$CustomerElementCopyWithImpl<$Res, $Val extends CustomerElement>
           ? _value.payment
           : payment // ignore: cast_nullable_to_non_nullable
               as Payment,
-      customerDate: null == customerDate
+      customerDate: freezed == customerDate
           ? _value.customerDate
           : customerDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      sellerDate: null == sellerDate
+              as DateTime?,
+      sellerDate: freezed == sellerDate
           ? _value.sellerDate
           : sellerDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -346,10 +349,10 @@ abstract class _$$CustomerElementImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       Payment payment,
-      DateTime customerDate,
-      DateTime sellerDate,
+      @JsonKey(name: 'customer_date') DateTime? customerDate,
+      @JsonKey(name: 'seller_date') DateTime? sellerDate,
       DateTime createdAt,
       Unpaid product,
       Customer seller});
@@ -375,8 +378,8 @@ class __$$CustomerElementImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? payment = null,
-    Object? customerDate = null,
-    Object? sellerDate = null,
+    Object? customerDate = freezed,
+    Object? sellerDate = freezed,
     Object? createdAt = null,
     Object? product = null,
     Object? seller = null,
@@ -390,14 +393,14 @@ class __$$CustomerElementImplCopyWithImpl<$Res>
           ? _value.payment
           : payment // ignore: cast_nullable_to_non_nullable
               as Payment,
-      customerDate: null == customerDate
+      customerDate: freezed == customerDate
           ? _value.customerDate
           : customerDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      sellerDate: null == sellerDate
+              as DateTime?,
+      sellerDate: freezed == sellerDate
           ? _value.sellerDate
           : sellerDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -418,10 +421,10 @@ class __$$CustomerElementImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CustomerElementImpl implements _CustomerElement {
   const _$CustomerElementImpl(
-      {required this.id,
+      {@JsonKey(name: '_id') required this.id,
       required this.payment,
-      required this.customerDate,
-      required this.sellerDate,
+      @JsonKey(name: 'customer_date') this.customerDate,
+      @JsonKey(name: 'seller_date') this.sellerDate,
       required this.createdAt,
       required this.product,
       required this.seller});
@@ -430,13 +433,16 @@ class _$CustomerElementImpl implements _CustomerElement {
       _$$CustomerElementImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final Payment payment;
   @override
-  final DateTime customerDate;
+  @JsonKey(name: 'customer_date')
+  final DateTime? customerDate;
   @override
-  final DateTime sellerDate;
+  @JsonKey(name: 'seller_date')
+  final DateTime? sellerDate;
   @override
   final DateTime createdAt;
   @override
@@ -488,10 +494,10 @@ class _$CustomerElementImpl implements _CustomerElement {
 
 abstract class _CustomerElement implements CustomerElement {
   const factory _CustomerElement(
-      {required final String id,
+      {@JsonKey(name: '_id') required final String id,
       required final Payment payment,
-      required final DateTime customerDate,
-      required final DateTime sellerDate,
+      @JsonKey(name: 'customer_date') final DateTime? customerDate,
+      @JsonKey(name: 'seller_date') final DateTime? sellerDate,
       required final DateTime createdAt,
       required final Unpaid product,
       required final Customer seller}) = _$CustomerElementImpl;
@@ -500,13 +506,16 @@ abstract class _CustomerElement implements CustomerElement {
       _$CustomerElementImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
   Payment get payment;
   @override
-  DateTime get customerDate;
+  @JsonKey(name: 'customer_date')
+  DateTime? get customerDate;
   @override
-  DateTime get sellerDate;
+  @JsonKey(name: 'seller_date')
+  DateTime? get sellerDate;
   @override
   DateTime get createdAt;
   @override

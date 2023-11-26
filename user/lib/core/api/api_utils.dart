@@ -13,7 +13,6 @@ Future<T> throwAppException<T>(FutureOr<T> Function() call) async {
   } on AppException catch (e) {
     rethrow;
   } on SocketException catch (e) {
-    print('socket exception');
     showMessage(e.message);
     throw AppNetworkException(
         reason: AppNetworkExceptionReason.noInternet,

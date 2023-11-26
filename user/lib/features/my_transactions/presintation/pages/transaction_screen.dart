@@ -50,7 +50,6 @@ class _TransactionScreenState extends State<TransactionScreen>
               labelStyle: context.textTheme.titleMedium,
               unselectedLabelColor: Colors.white,
               indicatorColor: context.colorScheme.primary,
-              padding: EdgeInsets.zero,
               tabs: [
                 Tab(
                   text: LocaleKeys.sales.tr(),

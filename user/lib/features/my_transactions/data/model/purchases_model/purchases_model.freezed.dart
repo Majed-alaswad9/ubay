@@ -232,9 +232,7 @@ mixin _$CustomerElement {
   DateTime? get customerDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'seller_date')
   DateTime? get sellerDate => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
   Unpaid get product => throw _privateConstructorUsedError;
-  Customer get seller => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -253,13 +251,10 @@ abstract class $CustomerElementCopyWith<$Res> {
       Payment payment,
       @JsonKey(name: 'customer_date') DateTime? customerDate,
       @JsonKey(name: 'seller_date') DateTime? sellerDate,
-      DateTime createdAt,
-      Unpaid product,
-      Customer seller});
+      Unpaid product});
 
   $PaymentCopyWith<$Res> get payment;
   $UnpaidCopyWith<$Res> get product;
-  $CustomerCopyWith<$Res> get seller;
 }
 
 /// @nodoc
@@ -279,9 +274,7 @@ class _$CustomerElementCopyWithImpl<$Res, $Val extends CustomerElement>
     Object? payment = null,
     Object? customerDate = freezed,
     Object? sellerDate = freezed,
-    Object? createdAt = null,
     Object? product = null,
-    Object? seller = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -300,18 +293,10 @@ class _$CustomerElementCopyWithImpl<$Res, $Val extends CustomerElement>
           ? _value.sellerDate
           : sellerDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as Unpaid,
-      seller: null == seller
-          ? _value.seller
-          : seller // ignore: cast_nullable_to_non_nullable
-              as Customer,
     ) as $Val);
   }
 
@@ -330,14 +315,6 @@ class _$CustomerElementCopyWithImpl<$Res, $Val extends CustomerElement>
       return _then(_value.copyWith(product: value) as $Val);
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCopyWith<$Res> get seller {
-    return $CustomerCopyWith<$Res>(_value.seller, (value) {
-      return _then(_value.copyWith(seller: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -353,16 +330,12 @@ abstract class _$$CustomerElementImplCopyWith<$Res>
       Payment payment,
       @JsonKey(name: 'customer_date') DateTime? customerDate,
       @JsonKey(name: 'seller_date') DateTime? sellerDate,
-      DateTime createdAt,
-      Unpaid product,
-      Customer seller});
+      Unpaid product});
 
   @override
   $PaymentCopyWith<$Res> get payment;
   @override
   $UnpaidCopyWith<$Res> get product;
-  @override
-  $CustomerCopyWith<$Res> get seller;
 }
 
 /// @nodoc
@@ -380,9 +353,7 @@ class __$$CustomerElementImplCopyWithImpl<$Res>
     Object? payment = null,
     Object? customerDate = freezed,
     Object? sellerDate = freezed,
-    Object? createdAt = null,
     Object? product = null,
-    Object? seller = null,
   }) {
     return _then(_$CustomerElementImpl(
       id: null == id
@@ -401,18 +372,10 @@ class __$$CustomerElementImplCopyWithImpl<$Res>
           ? _value.sellerDate
           : sellerDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as Unpaid,
-      seller: null == seller
-          ? _value.seller
-          : seller // ignore: cast_nullable_to_non_nullable
-              as Customer,
     ));
   }
 }
@@ -425,9 +388,7 @@ class _$CustomerElementImpl implements _CustomerElement {
       required this.payment,
       @JsonKey(name: 'customer_date') this.customerDate,
       @JsonKey(name: 'seller_date') this.sellerDate,
-      required this.createdAt,
-      required this.product,
-      required this.seller});
+      required this.product});
 
   factory _$CustomerElementImpl.fromJson(Map<String, dynamic> json) =>
       _$$CustomerElementImplFromJson(json);
@@ -444,15 +405,11 @@ class _$CustomerElementImpl implements _CustomerElement {
   @JsonKey(name: 'seller_date')
   final DateTime? sellerDate;
   @override
-  final DateTime createdAt;
-  @override
   final Unpaid product;
-  @override
-  final Customer seller;
 
   @override
   String toString() {
-    return 'CustomerElement(id: $id, payment: $payment, customerDate: $customerDate, sellerDate: $sellerDate, createdAt: $createdAt, product: $product, seller: $seller)';
+    return 'CustomerElement(id: $id, payment: $payment, customerDate: $customerDate, sellerDate: $sellerDate, product: $product)';
   }
 
   @override
@@ -466,16 +423,13 @@ class _$CustomerElementImpl implements _CustomerElement {
                 other.customerDate == customerDate) &&
             (identical(other.sellerDate, sellerDate) ||
                 other.sellerDate == sellerDate) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.product, product) || other.product == product) &&
-            (identical(other.seller, seller) || other.seller == seller));
+            (identical(other.product, product) || other.product == product));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, payment, customerDate,
-      sellerDate, createdAt, product, seller);
+  int get hashCode =>
+      Object.hash(runtimeType, id, payment, customerDate, sellerDate, product);
 
   @JsonKey(ignore: true)
   @override
@@ -498,9 +452,7 @@ abstract class _CustomerElement implements CustomerElement {
       required final Payment payment,
       @JsonKey(name: 'customer_date') final DateTime? customerDate,
       @JsonKey(name: 'seller_date') final DateTime? sellerDate,
-      required final DateTime createdAt,
-      required final Unpaid product,
-      required final Customer seller}) = _$CustomerElementImpl;
+      required final Unpaid product}) = _$CustomerElementImpl;
 
   factory _CustomerElement.fromJson(Map<String, dynamic> json) =
       _$CustomerElementImpl.fromJson;
@@ -517,11 +469,7 @@ abstract class _CustomerElement implements CustomerElement {
   @JsonKey(name: 'seller_date')
   DateTime? get sellerDate;
   @override
-  DateTime get createdAt;
-  @override
   Unpaid get product;
-  @override
-  Customer get seller;
   @override
   @JsonKey(ignore: true)
   _$$CustomerElementImplCopyWith<_$CustomerElementImpl> get copyWith =>

@@ -24,9 +24,7 @@ class CustomerElement with _$CustomerElement {
     required Payment payment,
     @JsonKey(name: 'customer_date') DateTime? customerDate,
     @JsonKey(name: 'seller_date') DateTime? sellerDate,
-    required DateTime createdAt,
     required Unpaid product,
-    required Customer seller,
   }) = _CustomerElement;
 
   factory CustomerElement.fromJson(Map<String, dynamic> json) =>

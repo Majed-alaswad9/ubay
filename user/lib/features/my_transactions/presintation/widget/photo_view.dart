@@ -30,7 +30,7 @@ class _PhotoViewState extends State<PhotoView> {
                 color: Colors.black54,
                 child: Text(
                   '+$remaining',
-                  style: const TextStyle(fontSize: 32),
+                  style: const TextStyle(fontSize: 32, color: Colors.white),
                 ),
               ),
             ),

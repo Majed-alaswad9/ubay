@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:user/core/config/themes/my_color_scheme.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
+import 'package:user/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:user/generated/locale_keys.g.dart';
 
 class BasePage extends StatelessWidget {
   const BasePage({super.key, required this.child});
@@ -12,6 +15,9 @@ class BasePage extends StatelessWidget {
 
   void _onTap(BuildContext context, int index) {
     child.goBranch(index);
+    if (index == 2) {
+      context.read<ChatBloc>().add(GetAllChatsEvent());
+    }
   }
 
   @override
@@ -25,10 +31,10 @@ class BasePage extends StatelessWidget {
         unselectedItemColor: context.colorScheme.grey,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(
+              icon: const Icon(
                 Icons.home,
               ),
-              label: 'home',
+              label: LocaleKeys.home.tr(),
               activeIcon: Icon(
                 Icons.home,
                 color: context.colorScheme.primary,

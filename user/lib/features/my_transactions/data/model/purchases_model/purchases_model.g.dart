@@ -38,9 +38,7 @@ _$CustomerElementImpl _$$CustomerElementImplFromJson(
       sellerDate: json['seller_date'] == null
           ? null
           : DateTime.parse(json['seller_date'] as String),
-      createdAt: DateTime.parse(json['createdAt'] as String),
       product: Unpaid.fromJson(json['product'] as Map<String, dynamic>),
-      seller: Customer.fromJson(json['seller'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CustomerElementImplToJson(
@@ -50,7 +48,5 @@ Map<String, dynamic> _$$CustomerElementImplToJson(
       'payment': instance.payment,
       'customer_date': instance.customerDate?.toIso8601String(),
       'seller_date': instance.sellerDate?.toIso8601String(),
-      'createdAt': instance.createdAt.toIso8601String(),
       'product': instance.product,
-      'seller': instance.seller,
     };

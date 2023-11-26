@@ -259,8 +259,6 @@ mixin _$CustomerElement {
   DateTime? get customerDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'seller_date')
   DateTime? get sellerDate => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  Customer get customer => throw _privateConstructorUsedError;
   Unpaid get product => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -280,12 +278,9 @@ abstract class $CustomerElementCopyWith<$Res> {
       Payment payment,
       @JsonKey(name: 'customer_date') DateTime? customerDate,
       @JsonKey(name: 'seller_date') DateTime? sellerDate,
-      DateTime createdAt,
-      Customer customer,
       Unpaid product});
 
   $PaymentCopyWith<$Res> get payment;
-  $CustomerCopyWith<$Res> get customer;
   $UnpaidCopyWith<$Res> get product;
 }
 
@@ -306,8 +301,6 @@ class _$CustomerElementCopyWithImpl<$Res, $Val extends CustomerElement>
     Object? payment = null,
     Object? customerDate = freezed,
     Object? sellerDate = freezed,
-    Object? createdAt = null,
-    Object? customer = null,
     Object? product = null,
   }) {
     return _then(_value.copyWith(
@@ -327,14 +320,6 @@ class _$CustomerElementCopyWithImpl<$Res, $Val extends CustomerElement>
           ? _value.sellerDate
           : sellerDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      customer: null == customer
-          ? _value.customer
-          : customer // ignore: cast_nullable_to_non_nullable
-              as Customer,
       product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -347,14 +332,6 @@ class _$CustomerElementCopyWithImpl<$Res, $Val extends CustomerElement>
   $PaymentCopyWith<$Res> get payment {
     return $PaymentCopyWith<$Res>(_value.payment, (value) {
       return _then(_value.copyWith(payment: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCopyWith<$Res> get customer {
-    return $CustomerCopyWith<$Res>(_value.customer, (value) {
-      return _then(_value.copyWith(customer: value) as $Val);
     });
   }
 
@@ -380,14 +357,10 @@ abstract class _$$CustomerElementImplCopyWith<$Res>
       Payment payment,
       @JsonKey(name: 'customer_date') DateTime? customerDate,
       @JsonKey(name: 'seller_date') DateTime? sellerDate,
-      DateTime createdAt,
-      Customer customer,
       Unpaid product});
 
   @override
   $PaymentCopyWith<$Res> get payment;
-  @override
-  $CustomerCopyWith<$Res> get customer;
   @override
   $UnpaidCopyWith<$Res> get product;
 }
@@ -407,8 +380,6 @@ class __$$CustomerElementImplCopyWithImpl<$Res>
     Object? payment = null,
     Object? customerDate = freezed,
     Object? sellerDate = freezed,
-    Object? createdAt = null,
-    Object? customer = null,
     Object? product = null,
   }) {
     return _then(_$CustomerElementImpl(
@@ -428,14 +399,6 @@ class __$$CustomerElementImplCopyWithImpl<$Res>
           ? _value.sellerDate
           : sellerDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      customer: null == customer
-          ? _value.customer
-          : customer // ignore: cast_nullable_to_non_nullable
-              as Customer,
       product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -452,8 +415,6 @@ class _$CustomerElementImpl implements _CustomerElement {
       required this.payment,
       @JsonKey(name: 'customer_date') this.customerDate,
       @JsonKey(name: 'seller_date') this.sellerDate,
-      required this.createdAt,
-      required this.customer,
       required this.product});
 
   factory _$CustomerElementImpl.fromJson(Map<String, dynamic> json) =>
@@ -471,15 +432,11 @@ class _$CustomerElementImpl implements _CustomerElement {
   @JsonKey(name: 'seller_date')
   final DateTime? sellerDate;
   @override
-  final DateTime createdAt;
-  @override
-  final Customer customer;
-  @override
   final Unpaid product;
 
   @override
   String toString() {
-    return 'CustomerElement(id: $id, payment: $payment, customerDate: $customerDate, sellerDate: $sellerDate, createdAt: $createdAt, customer: $customer, product: $product)';
+    return 'CustomerElement(id: $id, payment: $payment, customerDate: $customerDate, sellerDate: $sellerDate, product: $product)';
   }
 
   @override
@@ -493,17 +450,13 @@ class _$CustomerElementImpl implements _CustomerElement {
                 other.customerDate == customerDate) &&
             (identical(other.sellerDate, sellerDate) ||
                 other.sellerDate == sellerDate) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.customer, customer) ||
-                other.customer == customer) &&
             (identical(other.product, product) || other.product == product));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, payment, customerDate,
-      sellerDate, createdAt, customer, product);
+  int get hashCode =>
+      Object.hash(runtimeType, id, payment, customerDate, sellerDate, product);
 
   @JsonKey(ignore: true)
   @override
@@ -526,8 +479,6 @@ abstract class _CustomerElement implements CustomerElement {
       required final Payment payment,
       @JsonKey(name: 'customer_date') final DateTime? customerDate,
       @JsonKey(name: 'seller_date') final DateTime? sellerDate,
-      required final DateTime createdAt,
-      required final Customer customer,
       required final Unpaid product}) = _$CustomerElementImpl;
 
   factory _CustomerElement.fromJson(Map<String, dynamic> json) =
@@ -545,190 +496,10 @@ abstract class _CustomerElement implements CustomerElement {
   @JsonKey(name: 'seller_date')
   DateTime? get sellerDate;
   @override
-  DateTime get createdAt;
-  @override
-  Customer get customer;
-  @override
   Unpaid get product;
   @override
   @JsonKey(ignore: true)
   _$$CustomerElementImplCopyWith<_$CustomerElementImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Customer _$CustomerFromJson(Map<String, dynamic> json) {
-  return _Customer.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Customer {
-  @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get photo => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $CustomerCopyWith<Customer> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CustomerCopyWith<$Res> {
-  factory $CustomerCopyWith(Customer value, $Res Function(Customer) then) =
-      _$CustomerCopyWithImpl<$Res, Customer>;
-  @useResult
-  $Res call({@JsonKey(name: '_id') String id, String name, String photo});
-}
-
-/// @nodoc
-class _$CustomerCopyWithImpl<$Res, $Val extends Customer>
-    implements $CustomerCopyWith<$Res> {
-  _$CustomerCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? photo = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      photo: null == photo
-          ? _value.photo
-          : photo // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$CustomerImplCopyWith<$Res>
-    implements $CustomerCopyWith<$Res> {
-  factory _$$CustomerImplCopyWith(
-          _$CustomerImpl value, $Res Function(_$CustomerImpl) then) =
-      __$$CustomerImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({@JsonKey(name: '_id') String id, String name, String photo});
-}
-
-/// @nodoc
-class __$$CustomerImplCopyWithImpl<$Res>
-    extends _$CustomerCopyWithImpl<$Res, _$CustomerImpl>
-    implements _$$CustomerImplCopyWith<$Res> {
-  __$$CustomerImplCopyWithImpl(
-      _$CustomerImpl _value, $Res Function(_$CustomerImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? photo = null,
-  }) {
-    return _then(_$CustomerImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      photo: null == photo
-          ? _value.photo
-          : photo // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$CustomerImpl implements _Customer {
-  const _$CustomerImpl(
-      {@JsonKey(name: '_id') required this.id,
-      required this.name,
-      required this.photo});
-
-  factory _$CustomerImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CustomerImplFromJson(json);
-
-  @override
-  @JsonKey(name: '_id')
-  final String id;
-  @override
-  final String name;
-  @override
-  final String photo;
-
-  @override
-  String toString() {
-    return 'Customer(id: $id, name: $name, photo: $photo)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CustomerImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.photo, photo) || other.photo == photo));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name, photo);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CustomerImplCopyWith<_$CustomerImpl> get copyWith =>
-      __$$CustomerImplCopyWithImpl<_$CustomerImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CustomerImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Customer implements Customer {
-  const factory _Customer(
-      {@JsonKey(name: '_id') required final String id,
-      required final String name,
-      required final String photo}) = _$CustomerImpl;
-
-  factory _Customer.fromJson(Map<String, dynamic> json) =
-      _$CustomerImpl.fromJson;
-
-  @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  String get name;
-  @override
-  String get photo;
-  @override
-  @JsonKey(ignore: true)
-  _$$CustomerImplCopyWith<_$CustomerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -740,11 +511,6 @@ Payment _$PaymentFromJson(Map<String, dynamic> json) {
 mixin _$Payment {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_discount')
-  bool get isDiscount => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'price_after')
-  int get priceAfter => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -756,11 +522,7 @@ abstract class $PaymentCopyWith<$Res> {
   factory $PaymentCopyWith(Payment value, $Res Function(Payment) then) =
       _$PaymentCopyWithImpl<$Res, Payment>;
   @useResult
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      @JsonKey(name: 'is_discount') bool isDiscount,
-      DateTime createdAt,
-      @JsonKey(name: 'price_after') int priceAfter});
+  $Res call({@JsonKey(name: '_id') String id});
 }
 
 /// @nodoc
@@ -777,27 +539,12 @@ class _$PaymentCopyWithImpl<$Res, $Val extends Payment>
   @override
   $Res call({
     Object? id = null,
-    Object? isDiscount = null,
-    Object? createdAt = null,
-    Object? priceAfter = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      isDiscount: null == isDiscount
-          ? _value.isDiscount
-          : isDiscount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      priceAfter: null == priceAfter
-          ? _value.priceAfter
-          : priceAfter // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 }
@@ -809,11 +556,7 @@ abstract class _$$PaymentImplCopyWith<$Res> implements $PaymentCopyWith<$Res> {
       __$$PaymentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      @JsonKey(name: 'is_discount') bool isDiscount,
-      DateTime createdAt,
-      @JsonKey(name: 'price_after') int priceAfter});
+  $Res call({@JsonKey(name: '_id') String id});
 }
 
 /// @nodoc
@@ -828,27 +571,12 @@ class __$$PaymentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? isDiscount = null,
-    Object? createdAt = null,
-    Object? priceAfter = null,
   }) {
     return _then(_$PaymentImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      isDiscount: null == isDiscount
-          ? _value.isDiscount
-          : isDiscount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      priceAfter: null == priceAfter
-          ? _value.priceAfter
-          : priceAfter // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -856,11 +584,7 @@ class __$$PaymentImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PaymentImpl implements _Payment {
-  const _$PaymentImpl(
-      {@JsonKey(name: '_id') required this.id,
-      @JsonKey(name: 'is_discount') required this.isDiscount,
-      required this.createdAt,
-      @JsonKey(name: 'price_after') required this.priceAfter});
+  const _$PaymentImpl({@JsonKey(name: '_id') required this.id});
 
   factory _$PaymentImpl.fromJson(Map<String, dynamic> json) =>
       _$$PaymentImplFromJson(json);
@@ -868,18 +592,10 @@ class _$PaymentImpl implements _Payment {
   @override
   @JsonKey(name: '_id')
   final String id;
-  @override
-  @JsonKey(name: 'is_discount')
-  final bool isDiscount;
-  @override
-  final DateTime createdAt;
-  @override
-  @JsonKey(name: 'price_after')
-  final int priceAfter;
 
   @override
   String toString() {
-    return 'Payment(id: $id, isDiscount: $isDiscount, createdAt: $createdAt, priceAfter: $priceAfter)';
+    return 'Payment(id: $id)';
   }
 
   @override
@@ -887,19 +603,12 @@ class _$PaymentImpl implements _Payment {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PaymentImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.isDiscount, isDiscount) ||
-                other.isDiscount == isDiscount) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.priceAfter, priceAfter) ||
-                other.priceAfter == priceAfter));
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, isDiscount, createdAt, priceAfter);
+  int get hashCode => Object.hash(runtimeType, id);
 
   @JsonKey(ignore: true)
   @override
@@ -916,11 +625,7 @@ class _$PaymentImpl implements _Payment {
 }
 
 abstract class _Payment implements Payment {
-  const factory _Payment(
-          {@JsonKey(name: '_id') required final String id,
-          @JsonKey(name: 'is_discount') required final bool isDiscount,
-          required final DateTime createdAt,
-          @JsonKey(name: 'price_after') required final int priceAfter}) =
+  const factory _Payment({@JsonKey(name: '_id') required final String id}) =
       _$PaymentImpl;
 
   factory _Payment.fromJson(Map<String, dynamic> json) = _$PaymentImpl.fromJson;
@@ -928,14 +633,6 @@ abstract class _Payment implements Payment {
   @override
   @JsonKey(name: '_id')
   String get id;
-  @override
-  @JsonKey(name: 'is_discount')
-  bool get isDiscount;
-  @override
-  DateTime get createdAt;
-  @override
-  @JsonKey(name: 'price_after')
-  int get priceAfter;
   @override
   @JsonKey(ignore: true)
   _$$PaymentImplCopyWith<_$PaymentImpl> get copyWith =>
@@ -953,9 +650,6 @@ mixin _$Unpaid {
   String get title => throw _privateConstructorUsedError;
   List<String> get photos => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
-  String get store => throw _privateConstructorUsedError;
-  List<Coupons>? get coupons => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -971,10 +665,7 @@ abstract class $UnpaidCopyWith<$Res> {
       {@JsonKey(name: '_id') String id,
       String title,
       List<String> photos,
-      int price,
-      String category,
-      String store,
-      List<Coupons>? coupons});
+      int price});
 }
 
 /// @nodoc
@@ -994,9 +685,6 @@ class _$UnpaidCopyWithImpl<$Res, $Val extends Unpaid>
     Object? title = null,
     Object? photos = null,
     Object? price = null,
-    Object? category = null,
-    Object? store = null,
-    Object? coupons = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -1015,18 +703,6 @@ class _$UnpaidCopyWithImpl<$Res, $Val extends Unpaid>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
-      store: null == store
-          ? _value.store
-          : store // ignore: cast_nullable_to_non_nullable
-              as String,
-      coupons: freezed == coupons
-          ? _value.coupons
-          : coupons // ignore: cast_nullable_to_non_nullable
-              as List<Coupons>?,
     ) as $Val);
   }
 }
@@ -1042,10 +718,7 @@ abstract class _$$UnpaidImplCopyWith<$Res> implements $UnpaidCopyWith<$Res> {
       {@JsonKey(name: '_id') String id,
       String title,
       List<String> photos,
-      int price,
-      String category,
-      String store,
-      List<Coupons>? coupons});
+      int price});
 }
 
 /// @nodoc
@@ -1063,9 +736,6 @@ class __$$UnpaidImplCopyWithImpl<$Res>
     Object? title = null,
     Object? photos = null,
     Object? price = null,
-    Object? category = null,
-    Object? store = null,
-    Object? coupons = freezed,
   }) {
     return _then(_$UnpaidImpl(
       id: null == id
@@ -1084,18 +754,6 @@ class __$$UnpaidImplCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
-      store: null == store
-          ? _value.store
-          : store // ignore: cast_nullable_to_non_nullable
-              as String,
-      coupons: freezed == coupons
-          ? _value._coupons
-          : coupons // ignore: cast_nullable_to_non_nullable
-              as List<Coupons>?,
     ));
   }
 }
@@ -1107,12 +765,8 @@ class _$UnpaidImpl implements _Unpaid {
       {@JsonKey(name: '_id') required this.id,
       required this.title,
       required final List<String> photos,
-      required this.price,
-      required this.category,
-      required this.store,
-      final List<Coupons>? coupons})
-      : _photos = photos,
-        _coupons = coupons;
+      required this.price})
+      : _photos = photos;
 
   factory _$UnpaidImpl.fromJson(Map<String, dynamic> json) =>
       _$$UnpaidImplFromJson(json);
@@ -1132,23 +786,10 @@ class _$UnpaidImpl implements _Unpaid {
 
   @override
   final int price;
-  @override
-  final String category;
-  @override
-  final String store;
-  final List<Coupons>? _coupons;
-  @override
-  List<Coupons>? get coupons {
-    final value = _coupons;
-    if (value == null) return null;
-    if (_coupons is EqualUnmodifiableListView) return _coupons;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @override
   String toString() {
-    return 'Unpaid(id: $id, title: $title, photos: $photos, price: $price, category: $category, store: $store, coupons: $coupons)';
+    return 'Unpaid(id: $id, title: $title, photos: $photos, price: $price)';
   }
 
   @override
@@ -1159,24 +800,13 @@ class _$UnpaidImpl implements _Unpaid {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             const DeepCollectionEquality().equals(other._photos, _photos) &&
-            (identical(other.price, price) || other.price == price) &&
-            (identical(other.category, category) ||
-                other.category == category) &&
-            (identical(other.store, store) || other.store == store) &&
-            const DeepCollectionEquality().equals(other._coupons, _coupons));
+            (identical(other.price, price) || other.price == price));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      title,
-      const DeepCollectionEquality().hash(_photos),
-      price,
-      category,
-      store,
-      const DeepCollectionEquality().hash(_coupons));
+  int get hashCode => Object.hash(runtimeType, id, title,
+      const DeepCollectionEquality().hash(_photos), price);
 
   @JsonKey(ignore: true)
   @override
@@ -1197,10 +827,7 @@ abstract class _Unpaid implements Unpaid {
       {@JsonKey(name: '_id') required final String id,
       required final String title,
       required final List<String> photos,
-      required final int price,
-      required final String category,
-      required final String store,
-      final List<Coupons>? coupons}) = _$UnpaidImpl;
+      required final int price}) = _$UnpaidImpl;
 
   factory _Unpaid.fromJson(Map<String, dynamic> json) = _$UnpaidImpl.fromJson;
 
@@ -1213,12 +840,6 @@ abstract class _Unpaid implements Unpaid {
   List<String> get photos;
   @override
   int get price;
-  @override
-  String get category;
-  @override
-  String get store;
-  @override
-  List<Coupons>? get coupons;
   @override
   @JsonKey(ignore: true)
   _$$UnpaidImplCopyWith<_$UnpaidImpl> get copyWith =>

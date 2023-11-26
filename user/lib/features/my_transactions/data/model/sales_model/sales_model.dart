@@ -25,8 +25,6 @@ class CustomerElement with _$CustomerElement {
     required Payment payment,
     @JsonKey(name: 'customer_date') DateTime? customerDate,
     @JsonKey(name: 'seller_date') DateTime? sellerDate,
-    required DateTime createdAt,
-    required Customer customer,
     required Unpaid product,
   }) = _CustomerElement;
 
@@ -35,24 +33,9 @@ class CustomerElement with _$CustomerElement {
 }
 
 @freezed
-class Customer with _$Customer {
-  const factory Customer({
-    @JsonKey(name: '_id') required String id,
-    required String name,
-    required String photo,
-  }) = _Customer;
-
-  factory Customer.fromJson(Map<String, dynamic> json) =>
-      _$CustomerFromJson(json);
-}
-
-@freezed
 class Payment with _$Payment {
   const factory Payment({
     @JsonKey(name: '_id') required String id,
-    @JsonKey(name: 'is_discount') required bool isDiscount,
-    required DateTime createdAt,
-    @JsonKey(name: 'price_after') required int priceAfter,
   }) = _Payment;
 
   factory Payment.fromJson(Map<String, dynamic> json) =>
@@ -66,9 +49,6 @@ class Unpaid with _$Unpaid {
     required String title,
     required List<String> photos,
     required int price,
-    required String category,
-    required String store,
-    List<Coupons>? coupons,
   }) = _Unpaid;
 
   factory Unpaid.fromJson(Map<String, dynamic> json) => _$UnpaidFromJson(json);

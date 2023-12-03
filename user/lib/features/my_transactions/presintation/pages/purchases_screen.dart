@@ -49,7 +49,7 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
                   ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => CardSales(
+                      itemBuilder: (context, index) => ListTransactions(
                             iconData: Icons.warning_amber,
                             iconColor: Colors.orange,
                             color: context.colorScheme.errorContainer,
@@ -68,7 +68,7 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
                   ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => CardSales(
+                      itemBuilder: (context, index) => ListTransactions(
                             iconColor: Colors.green,
                             iconData: Icons.check_circle_outline_outlined,
                             color: const Color(0xFFC4B5FD),
@@ -89,7 +89,7 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
                   ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => CardSales(
+                      itemBuilder: (context, index) => ListTransactions(
                             iconColor: Colors.green,
                             iconData: Icons.check_circle_outline_outlined,
                             color: const Color(0xFFC4B5FD),

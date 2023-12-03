@@ -19,8 +19,8 @@ class User with _$User {
       {required String name,
       required String email,
       required String photo,
-      required List<String> favoriteCategories,
-      required List<String> favoriteCities,
+      required List<Favorite> favoriteCategories,
+      required List<Favorite> favoriteCities,
       required DateTime createdAt,
       required DateTime updatedAt,
       required String role,
@@ -38,7 +38,21 @@ class Wallet with _$Wallet {
       required int pending,
       required DateTime createdAt,
       required DateTime updatedAt,
+      required Wallet wallet,
       required int available}) = _Wallet;
 
   factory Wallet.fromJson(Map<String, dynamic> json) => _$WalletFromJson(json);
+}
+
+@freezed
+class Favorite with _$Favorite {
+  const factory Favorite({
+    required String id,
+    required String name,
+    required String description,
+    required String favoriteCategoryId,
+  }) = _Favorite;
+
+  factory Favorite.fromJson(Map<String, dynamic> json) =>
+      _$FavoriteFromJson(json);
 }

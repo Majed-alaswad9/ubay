@@ -28,9 +28,8 @@ class ChatSalesScreen extends StatelessWidget {
                 shrinkWrap: true,
                 itemBuilder: (context, index) => CardChat(
                     chatId: data[index].id,
-                    userPhoto: data[index].customer.photo,
-                    userName: data[index].customer.name,
-                    productTitle: data[index].product.title),
+                    user: data[index].customer,
+                    product: data[index].product),
                 separatorBuilder: (context, _) => const Divider(),
                 itemCount: data.length),
           );

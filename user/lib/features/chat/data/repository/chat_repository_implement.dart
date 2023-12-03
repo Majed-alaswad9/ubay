@@ -26,7 +26,9 @@ class ChatRepositoryImplement implements ChatRepository {
   @override
   Future<Result<ResponseWrapper<MessagesModel>>> getAllMessages(
       GetMessagesParams params) {
-    // TODO: implement getAllMessages
-    throw UnimplementedError();
+    return toApiResult(() {
+      final result = chatDataSource.getAllMessages(params);
+      return result;
+    });
   }
 }

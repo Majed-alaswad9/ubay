@@ -12,7 +12,7 @@ _$MessagesModelImpl _$$MessagesModelImplFromJson(Map<String, dynamic> json) =>
       totalPages: json['totalPages'] as int,
       totalDataCount: json['totalDataCount'] as int,
       data: (json['data'] as List<dynamic>)
-          .map((e) => Data.fromJson(e as Map<String, dynamic>))
+          .map((e) => DataMessage.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -24,19 +24,18 @@ Map<String, dynamic> _$$MessagesModelImplToJson(_$MessagesModelImpl instance) =>
       'data': instance.data,
     };
 
-_$DataImpl _$$DataImplFromJson(Map<String, dynamic> json) => _$DataImpl(
+_$DataMessageImpl _$$DataMessageImplFromJson(Map<String, dynamic> json) =>
+    _$DataMessageImpl(
       id: json['_id'] as String,
       content: json['content'] as String,
       user: json['user'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      datumId: json['datumId'] as String,
     );
 
-Map<String, dynamic> _$$DataImplToJson(_$DataImpl instance) =>
+Map<String, dynamic> _$$DataMessageImplToJson(_$DataMessageImpl instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'content': instance.content,
       'user': instance.user,
       'createdAt': instance.createdAt.toIso8601String(),
-      'datumId': instance.datumId,
     };

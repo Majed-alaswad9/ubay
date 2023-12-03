@@ -23,7 +23,7 @@ mixin _$MessagesModel {
   int get pageNumber => throw _privateConstructorUsedError;
   int get totalPages => throw _privateConstructorUsedError;
   int get totalDataCount => throw _privateConstructorUsedError;
-  List<Data> get data => throw _privateConstructorUsedError;
+  List<DataMessage> get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,10 @@ abstract class $MessagesModelCopyWith<$Res> {
       _$MessagesModelCopyWithImpl<$Res, MessagesModel>;
   @useResult
   $Res call(
-      {int pageNumber, int totalPages, int totalDataCount, List<Data> data});
+      {int pageNumber,
+      int totalPages,
+      int totalDataCount,
+      List<DataMessage> data});
 }
 
 /// @nodoc
@@ -75,7 +78,7 @@ class _$MessagesModelCopyWithImpl<$Res, $Val extends MessagesModel>
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Data>,
+              as List<DataMessage>,
     ) as $Val);
   }
 }
@@ -89,7 +92,10 @@ abstract class _$$MessagesModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int pageNumber, int totalPages, int totalDataCount, List<Data> data});
+      {int pageNumber,
+      int totalPages,
+      int totalDataCount,
+      List<DataMessage> data});
 }
 
 /// @nodoc
@@ -124,7 +130,7 @@ class __$$MessagesModelImplCopyWithImpl<$Res>
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Data>,
+              as List<DataMessage>,
     ));
   }
 }
@@ -136,7 +142,7 @@ class _$MessagesModelImpl implements _MessagesModel {
       {required this.pageNumber,
       required this.totalPages,
       required this.totalDataCount,
-      required final List<Data> data})
+      required final List<DataMessage> data})
       : _data = data;
 
   factory _$MessagesModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -148,9 +154,9 @@ class _$MessagesModelImpl implements _MessagesModel {
   final int totalPages;
   @override
   final int totalDataCount;
-  final List<Data> _data;
+  final List<DataMessage> _data;
   @override
-  List<Data> get data {
+  List<DataMessage> get data {
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_data);
@@ -199,7 +205,7 @@ abstract class _MessagesModel implements MessagesModel {
       {required final int pageNumber,
       required final int totalPages,
       required final int totalDataCount,
-      required final List<Data> data}) = _$MessagesModelImpl;
+      required final List<DataMessage> data}) = _$MessagesModelImpl;
 
   factory _MessagesModel.fromJson(Map<String, dynamic> json) =
       _$MessagesModelImpl.fromJson;
@@ -211,48 +217,48 @@ abstract class _MessagesModel implements MessagesModel {
   @override
   int get totalDataCount;
   @override
-  List<Data> get data;
+  List<DataMessage> get data;
   @override
   @JsonKey(ignore: true)
   _$$MessagesModelImplCopyWith<_$MessagesModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-Data _$DataFromJson(Map<String, dynamic> json) {
-  return _Data.fromJson(json);
+DataMessage _$DataMessageFromJson(Map<String, dynamic> json) {
+  return _DataMessage.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Data {
+mixin _$DataMessage {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get user => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
-  String get datumId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DataCopyWith<Data> get copyWith => throw _privateConstructorUsedError;
+  $DataMessageCopyWith<DataMessage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DataCopyWith<$Res> {
-  factory $DataCopyWith(Data value, $Res Function(Data) then) =
-      _$DataCopyWithImpl<$Res, Data>;
+abstract class $DataMessageCopyWith<$Res> {
+  factory $DataMessageCopyWith(
+          DataMessage value, $Res Function(DataMessage) then) =
+      _$DataMessageCopyWithImpl<$Res, DataMessage>;
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
       String content,
       String user,
-      DateTime createdAt,
-      String datumId});
+      DateTime createdAt});
 }
 
 /// @nodoc
-class _$DataCopyWithImpl<$Res, $Val extends Data>
-    implements $DataCopyWith<$Res> {
-  _$DataCopyWithImpl(this._value, this._then);
+class _$DataMessageCopyWithImpl<$Res, $Val extends DataMessage>
+    implements $DataMessageCopyWith<$Res> {
+  _$DataMessageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -266,7 +272,6 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
     Object? content = null,
     Object? user = null,
     Object? createdAt = null,
-    Object? datumId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -285,34 +290,31 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      datumId: null == datumId
-          ? _value.datumId
-          : datumId // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$DataImplCopyWith<$Res> implements $DataCopyWith<$Res> {
-  factory _$$DataImplCopyWith(
-          _$DataImpl value, $Res Function(_$DataImpl) then) =
-      __$$DataImplCopyWithImpl<$Res>;
+abstract class _$$DataMessageImplCopyWith<$Res>
+    implements $DataMessageCopyWith<$Res> {
+  factory _$$DataMessageImplCopyWith(
+          _$DataMessageImpl value, $Res Function(_$DataMessageImpl) then) =
+      __$$DataMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
       String content,
       String user,
-      DateTime createdAt,
-      String datumId});
+      DateTime createdAt});
 }
 
 /// @nodoc
-class __$$DataImplCopyWithImpl<$Res>
-    extends _$DataCopyWithImpl<$Res, _$DataImpl>
-    implements _$$DataImplCopyWith<$Res> {
-  __$$DataImplCopyWithImpl(_$DataImpl _value, $Res Function(_$DataImpl) _then)
+class __$$DataMessageImplCopyWithImpl<$Res>
+    extends _$DataMessageCopyWithImpl<$Res, _$DataMessageImpl>
+    implements _$$DataMessageImplCopyWith<$Res> {
+  __$$DataMessageImplCopyWithImpl(
+      _$DataMessageImpl _value, $Res Function(_$DataMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -322,9 +324,8 @@ class __$$DataImplCopyWithImpl<$Res>
     Object? content = null,
     Object? user = null,
     Object? createdAt = null,
-    Object? datumId = null,
   }) {
-    return _then(_$DataImpl(
+    return _then(_$DataMessageImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -341,26 +342,21 @@ class __$$DataImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      datumId: null == datumId
-          ? _value.datumId
-          : datumId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$DataImpl implements _Data {
-  const _$DataImpl(
+class _$DataMessageImpl implements _DataMessage {
+  const _$DataMessageImpl(
       {@JsonKey(name: '_id') required this.id,
       required this.content,
       required this.user,
-      required this.createdAt,
-      required this.datumId});
+      required this.createdAt});
 
-  factory _$DataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DataImplFromJson(json);
+  factory _$DataMessageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataMessageImplFromJson(json);
 
   @override
   @JsonKey(name: '_id')
@@ -371,55 +367,51 @@ class _$DataImpl implements _Data {
   final String user;
   @override
   final DateTime createdAt;
-  @override
-  final String datumId;
 
   @override
   String toString() {
-    return 'Data(id: $id, content: $content, user: $user, createdAt: $createdAt, datumId: $datumId)';
+    return 'DataMessage(id: $id, content: $content, user: $user, createdAt: $createdAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DataImpl &&
+            other is _$DataMessageImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.datumId, datumId) || other.datumId == datumId));
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, content, user, createdAt, datumId);
+  int get hashCode => Object.hash(runtimeType, id, content, user, createdAt);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
-      __$$DataImplCopyWithImpl<_$DataImpl>(this, _$identity);
+  _$$DataMessageImplCopyWith<_$DataMessageImpl> get copyWith =>
+      __$$DataMessageImplCopyWithImpl<_$DataMessageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DataImplToJson(
+    return _$$DataMessageImplToJson(
       this,
     );
   }
 }
 
-abstract class _Data implements Data {
-  const factory _Data(
+abstract class _DataMessage implements DataMessage {
+  const factory _DataMessage(
       {@JsonKey(name: '_id') required final String id,
       required final String content,
       required final String user,
-      required final DateTime createdAt,
-      required final String datumId}) = _$DataImpl;
+      required final DateTime createdAt}) = _$DataMessageImpl;
 
-  factory _Data.fromJson(Map<String, dynamic> json) = _$DataImpl.fromJson;
+  factory _DataMessage.fromJson(Map<String, dynamic> json) =
+      _$DataMessageImpl.fromJson;
 
   @override
   @JsonKey(name: '_id')
@@ -431,9 +423,7 @@ abstract class _Data implements Data {
   @override
   DateTime get createdAt;
   @override
-  String get datumId;
-  @override
   @JsonKey(ignore: true)
-  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
+  _$$DataMessageImplCopyWith<_$DataMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -23,10 +23,10 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       email: json['email'] as String,
       photo: json['photo'] as String,
       favoriteCategories: (json['favoriteCategories'] as List<dynamic>)
-          .map((e) => e as String)
+          .map((e) => Favorite.fromJson(e as Map<String, dynamic>))
           .toList(),
       favoriteCities: (json['favoriteCities'] as List<dynamic>)
-          .map((e) => e as String)
+          .map((e) => Favorite.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
@@ -54,6 +54,7 @@ _$WalletImpl _$$WalletImplFromJson(Map<String, dynamic> json) => _$WalletImpl(
       pending: json['pending'] as int,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
+      wallet: Wallet.fromJson(json['wallet'] as Map<String, dynamic>),
       available: json['available'] as int,
     );
 
@@ -65,5 +66,22 @@ Map<String, dynamic> _$$WalletImplToJson(_$WalletImpl instance) =>
       'pending': instance.pending,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
+      'wallet': instance.wallet,
       'available': instance.available,
+    };
+
+_$FavoriteImpl _$$FavoriteImplFromJson(Map<String, dynamic> json) =>
+    _$FavoriteImpl(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String,
+      favoriteCategoryId: json['favoriteCategoryId'] as String,
+    );
+
+Map<String, dynamic> _$$FavoriteImplToJson(_$FavoriteImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'description': instance.description,
+      'favoriteCategoryId': instance.favoriteCategoryId,
     };

@@ -34,7 +34,8 @@ class ChatDataSource {
       final response = await clientApi.request(RequestConfig(
           endpoint:
               '${EndPoints.chats.chat}/${params.chatId}${EndPoints.chats.messages}',
-          clientMethod: ClientMethod.get));
+          clientMethod: ClientMethod.get,
+          queryParameters: params.map));
 
       return ResponseWrapper.fromJson(response.data, (json) {
         final result = MessagesModel.fromJson(response.data);

@@ -15,5 +15,5 @@ class GetAllMessagesEvent extends ChatEvent {
   final int limit;
   final String chatId;
 
-  GetAllMessagesEvent(this.page, this.limit, this.chatId);
+  GetAllMessagesEvent({this.page = 1, this.limit = 20, required this.chatId});
 }

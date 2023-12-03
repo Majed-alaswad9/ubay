@@ -57,7 +57,6 @@ class UBayAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (appBarParams.child != null) ...{
-            5.horizontalSpace,
             appBarParams.child!,
           },
           if (appBarParams.title != null)

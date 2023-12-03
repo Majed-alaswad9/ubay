@@ -7,11 +7,12 @@ import 'package:user/features/my_transactions/data/model/sales_model/sales_model
 import 'package:user/features/my_transactions/presintation/widget/photo_view.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
+import '../../../../core/common/constants/constants.dart';
 import '../../../../core/util/responsive_padding.dart';
 import '../../../app/presentation/widgets/app_text_view.dart';
 
-class CardSales extends StatelessWidget {
-  CardSales(
+class ListTransactions extends StatelessWidget {
+  const ListTransactions(
       {super.key,
       required this.title,
       required this.price,
@@ -35,8 +36,6 @@ class CardSales extends StatelessWidget {
   final Payment? payment;
   final bool barcode;
   final bool isReceive;
-
-  var formatter = NumberFormat('###,###,000');
 
   @override
   Widget build(BuildContext context) {

@@ -9,7 +9,7 @@ class MessagesModel with _$MessagesModel {
     required int pageNumber,
     required int totalPages,
     required int totalDataCount,
-    required List<Data> data,
+    required List<DataMessage> data,
   }) = _MessagesModel;
 
   factory MessagesModel.fromJson(Map<String, dynamic> json) =>
@@ -17,14 +17,14 @@ class MessagesModel with _$MessagesModel {
 }
 
 @freezed
-class Data with _$Data {
-  const factory Data({
+class DataMessage with _$DataMessage {
+  const factory DataMessage({
     @JsonKey(name: '_id') required String id,
     required String content,
     required String user,
     required DateTime createdAt,
-    required String datumId,
-  }) = _Data;
+  }) = _DataMessage;
 
-  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+  factory DataMessage.fromJson(Map<String, dynamic> json) =>
+      _$DataMessageFromJson(json);
 }

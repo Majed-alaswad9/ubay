@@ -48,7 +48,7 @@ class _SalesPageState extends State<SalesPage> {
                 ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) => CardSales(
+                    itemBuilder: (context, index) => ListTransactions(
                           iconData: Icons.warning_amber,
                           iconColor: Colors.orange,
                           color: context.colorScheme.errorContainer,
@@ -68,7 +68,7 @@ class _SalesPageState extends State<SalesPage> {
                 ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) => CardSales(
+                    itemBuilder: (context, index) => ListTransactions(
                           iconData: Icons.error_outline,
                           iconColor: Colors.lightBlueAccent,
                           color: Colors.blue.shade50,
@@ -86,7 +86,7 @@ class _SalesPageState extends State<SalesPage> {
                 ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) => CardSales(
+                    itemBuilder: (context, index) => ListTransactions(
                           iconColor: Colors.green,
                           iconData: Icons.check_circle_outline_outlined,
                           color: const Color(0xFFC4B5FD),
@@ -104,7 +104,7 @@ class _SalesPageState extends State<SalesPage> {
                 ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) => CardSales(
+                    itemBuilder: (context, index) => ListTransactions(
                           iconColor: Colors.green,
                           iconData: Icons.check_circle_outline_outlined,
                           color: const Color(0xFFC4B5FD),

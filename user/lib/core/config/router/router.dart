@@ -10,8 +10,7 @@ import 'package:user/features/auth/presentation/pages/register_page.dart';
 import 'package:user/features/chat/presentation/pages/chat_screen.dart';
 import 'package:user/features/products/presintation/pages/add_post_screen.dart';
 import 'package:user/features/products/presintation/pages/home_screen.dart';
-import 'package:user/features/products/presintation/widget/comments_widget.dart';
-import 'package:user/features/profile/presintation/pages/profile_screen.dart';
+import 'package:user/features/setting/presintation/pages/setting_screen.dart';
 import 'package:user/features/welcome/splash.dart';
 
 import '../../../features/my_transactions/presintation/pages/transaction_screen.dart';
@@ -113,7 +112,7 @@ class GRouter {
                       name: _config.profileScreen.profileScreen,
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return _builderPage(
-                            child: const ProfileScreen(), state: state);
+                            child: const SettingScreen(), state: state);
                       })
                 ]),
           ],

@@ -189,8 +189,8 @@ mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get photo => throw _privateConstructorUsedError;
-  List<String> get favoriteCategories => throw _privateConstructorUsedError;
-  List<String> get favoriteCities => throw _privateConstructorUsedError;
+  List<Favorite> get favoriteCategories => throw _privateConstructorUsedError;
+  List<Favorite> get favoriteCities => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
@@ -210,8 +210,8 @@ abstract class $UserCopyWith<$Res> {
       {String name,
       String email,
       String photo,
-      List<String> favoriteCategories,
-      List<String> favoriteCities,
+      List<Favorite> favoriteCategories,
+      List<Favorite> favoriteCities,
       DateTime createdAt,
       DateTime updatedAt,
       String role,
@@ -257,11 +257,11 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       favoriteCategories: null == favoriteCategories
           ? _value.favoriteCategories
           : favoriteCategories // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Favorite>,
       favoriteCities: null == favoriteCities
           ? _value.favoriteCities
           : favoriteCities // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Favorite>,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -293,8 +293,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       {String name,
       String email,
       String photo,
-      List<String> favoriteCategories,
-      List<String> favoriteCities,
+      List<Favorite> favoriteCategories,
+      List<Favorite> favoriteCities,
       DateTime createdAt,
       DateTime updatedAt,
       String role,
@@ -337,11 +337,11 @@ class __$$UserImplCopyWithImpl<$Res>
       favoriteCategories: null == favoriteCategories
           ? _value._favoriteCategories
           : favoriteCategories // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Favorite>,
       favoriteCities: null == favoriteCities
           ? _value._favoriteCities
           : favoriteCities // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Favorite>,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -369,8 +369,8 @@ class _$UserImpl implements _User {
       {required this.name,
       required this.email,
       required this.photo,
-      required final List<String> favoriteCategories,
-      required final List<String> favoriteCities,
+      required final List<Favorite> favoriteCategories,
+      required final List<Favorite> favoriteCities,
       required this.createdAt,
       required this.updatedAt,
       required this.role,
@@ -387,18 +387,18 @@ class _$UserImpl implements _User {
   final String email;
   @override
   final String photo;
-  final List<String> _favoriteCategories;
+  final List<Favorite> _favoriteCategories;
   @override
-  List<String> get favoriteCategories {
+  List<Favorite> get favoriteCategories {
     if (_favoriteCategories is EqualUnmodifiableListView)
       return _favoriteCategories;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_favoriteCategories);
   }
 
-  final List<String> _favoriteCities;
+  final List<Favorite> _favoriteCities;
   @override
-  List<String> get favoriteCities {
+  List<Favorite> get favoriteCities {
     if (_favoriteCities is EqualUnmodifiableListView) return _favoriteCities;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_favoriteCities);
@@ -471,8 +471,8 @@ abstract class _User implements User {
       {required final String name,
       required final String email,
       required final String photo,
-      required final List<String> favoriteCategories,
-      required final List<String> favoriteCities,
+      required final List<Favorite> favoriteCategories,
+      required final List<Favorite> favoriteCities,
       required final DateTime createdAt,
       required final DateTime updatedAt,
       required final String role,
@@ -487,9 +487,9 @@ abstract class _User implements User {
   @override
   String get photo;
   @override
-  List<String> get favoriteCategories;
+  List<Favorite> get favoriteCategories;
   @override
-  List<String> get favoriteCities;
+  List<Favorite> get favoriteCities;
   @override
   DateTime get createdAt;
   @override
@@ -516,6 +516,7 @@ mixin _$Wallet {
   int get pending => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
+  Wallet get wallet => throw _privateConstructorUsedError;
   int get available => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -535,7 +536,10 @@ abstract class $WalletCopyWith<$Res> {
       int pending,
       DateTime createdAt,
       DateTime updatedAt,
+      Wallet wallet,
       int available});
+
+  $WalletCopyWith<$Res> get wallet;
 }
 
 /// @nodoc
@@ -557,6 +561,7 @@ class _$WalletCopyWithImpl<$Res, $Val extends Wallet>
     Object? pending = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? wallet = null,
     Object? available = null,
   }) {
     return _then(_value.copyWith(
@@ -584,11 +589,23 @@ class _$WalletCopyWithImpl<$Res, $Val extends Wallet>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      wallet: null == wallet
+          ? _value.wallet
+          : wallet // ignore: cast_nullable_to_non_nullable
+              as Wallet,
       available: null == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WalletCopyWith<$Res> get wallet {
+    return $WalletCopyWith<$Res>(_value.wallet, (value) {
+      return _then(_value.copyWith(wallet: value) as $Val);
+    });
   }
 }
 
@@ -606,7 +623,11 @@ abstract class _$$WalletImplCopyWith<$Res> implements $WalletCopyWith<$Res> {
       int pending,
       DateTime createdAt,
       DateTime updatedAt,
+      Wallet wallet,
       int available});
+
+  @override
+  $WalletCopyWith<$Res> get wallet;
 }
 
 /// @nodoc
@@ -626,6 +647,7 @@ class __$$WalletImplCopyWithImpl<$Res>
     Object? pending = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? wallet = null,
     Object? available = null,
   }) {
     return _then(_$WalletImpl(
@@ -653,6 +675,10 @@ class __$$WalletImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      wallet: null == wallet
+          ? _value.wallet
+          : wallet // ignore: cast_nullable_to_non_nullable
+              as Wallet,
       available: null == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
@@ -671,6 +697,7 @@ class _$WalletImpl implements _Wallet {
       required this.pending,
       required this.createdAt,
       required this.updatedAt,
+      required this.wallet,
       required this.available});
 
   factory _$WalletImpl.fromJson(Map<String, dynamic> json) =>
@@ -689,11 +716,13 @@ class _$WalletImpl implements _Wallet {
   @override
   final DateTime updatedAt;
   @override
+  final Wallet wallet;
+  @override
   final int available;
 
   @override
   String toString() {
-    return 'Wallet(id: $id, user: $user, total: $total, pending: $pending, createdAt: $createdAt, updatedAt: $updatedAt, available: $available)';
+    return 'Wallet(id: $id, user: $user, total: $total, pending: $pending, createdAt: $createdAt, updatedAt: $updatedAt, wallet: $wallet, available: $available)';
   }
 
   @override
@@ -709,14 +738,15 @@ class _$WalletImpl implements _Wallet {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
+            (identical(other.wallet, wallet) || other.wallet == wallet) &&
             (identical(other.available, available) ||
                 other.available == available));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, user, total, pending, createdAt, updatedAt, available);
+  int get hashCode => Object.hash(runtimeType, id, user, total, pending,
+      createdAt, updatedAt, wallet, available);
 
   @JsonKey(ignore: true)
   @override
@@ -740,6 +770,7 @@ abstract class _Wallet implements Wallet {
       required final int pending,
       required final DateTime createdAt,
       required final DateTime updatedAt,
+      required final Wallet wallet,
       required final int available}) = _$WalletImpl;
 
   factory _Wallet.fromJson(Map<String, dynamic> json) = _$WalletImpl.fromJson;
@@ -757,9 +788,207 @@ abstract class _Wallet implements Wallet {
   @override
   DateTime get updatedAt;
   @override
+  Wallet get wallet;
+  @override
   int get available;
   @override
   @JsonKey(ignore: true)
   _$$WalletImplCopyWith<_$WalletImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Favorite _$FavoriteFromJson(Map<String, dynamic> json) {
+  return _Favorite.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Favorite {
+  String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  String get favoriteCategoryId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FavoriteCopyWith<Favorite> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FavoriteCopyWith<$Res> {
+  factory $FavoriteCopyWith(Favorite value, $Res Function(Favorite) then) =
+      _$FavoriteCopyWithImpl<$Res, Favorite>;
+  @useResult
+  $Res call(
+      {String id, String name, String description, String favoriteCategoryId});
+}
+
+/// @nodoc
+class _$FavoriteCopyWithImpl<$Res, $Val extends Favorite>
+    implements $FavoriteCopyWith<$Res> {
+  _$FavoriteCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = null,
+    Object? favoriteCategoryId = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      favoriteCategoryId: null == favoriteCategoryId
+          ? _value.favoriteCategoryId
+          : favoriteCategoryId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$FavoriteImplCopyWith<$Res>
+    implements $FavoriteCopyWith<$Res> {
+  factory _$$FavoriteImplCopyWith(
+          _$FavoriteImpl value, $Res Function(_$FavoriteImpl) then) =
+      __$$FavoriteImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id, String name, String description, String favoriteCategoryId});
+}
+
+/// @nodoc
+class __$$FavoriteImplCopyWithImpl<$Res>
+    extends _$FavoriteCopyWithImpl<$Res, _$FavoriteImpl>
+    implements _$$FavoriteImplCopyWith<$Res> {
+  __$$FavoriteImplCopyWithImpl(
+      _$FavoriteImpl _value, $Res Function(_$FavoriteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = null,
+    Object? favoriteCategoryId = null,
+  }) {
+    return _then(_$FavoriteImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      favoriteCategoryId: null == favoriteCategoryId
+          ? _value.favoriteCategoryId
+          : favoriteCategoryId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$FavoriteImpl implements _Favorite {
+  const _$FavoriteImpl(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.favoriteCategoryId});
+
+  factory _$FavoriteImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FavoriteImplFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String name;
+  @override
+  final String description;
+  @override
+  final String favoriteCategoryId;
+
+  @override
+  String toString() {
+    return 'Favorite(id: $id, name: $name, description: $description, favoriteCategoryId: $favoriteCategoryId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FavoriteImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.favoriteCategoryId, favoriteCategoryId) ||
+                other.favoriteCategoryId == favoriteCategoryId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, description, favoriteCategoryId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FavoriteImplCopyWith<_$FavoriteImpl> get copyWith =>
+      __$$FavoriteImplCopyWithImpl<_$FavoriteImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FavoriteImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Favorite implements Favorite {
+  const factory _Favorite(
+      {required final String id,
+      required final String name,
+      required final String description,
+      required final String favoriteCategoryId}) = _$FavoriteImpl;
+
+  factory _Favorite.fromJson(Map<String, dynamic> json) =
+      _$FavoriteImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get name;
+  @override
+  String get description;
+  @override
+  String get favoriteCategoryId;
+  @override
+  @JsonKey(ignore: true)
+  _$$FavoriteImplCopyWith<_$FavoriteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

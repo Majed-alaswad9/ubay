@@ -78,10 +78,6 @@ class _AppElevatedButtonState extends ThemeState<AppElevatedButton> {
       ),
     );
 
-    // if (widget.sensitiveNetwork) {
-    //   return NetworkBlocSensitive(child: child);
-    // }
-
     return child;
   }
 

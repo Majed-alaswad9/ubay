@@ -21,7 +21,7 @@ LoginModel _$LoginModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LoginModel {
   String get token => throw _privateConstructorUsedError;
-  User get user => throw _privateConstructorUsedError;
+  UserModel get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,9 +35,9 @@ abstract class $LoginModelCopyWith<$Res> {
           LoginModel value, $Res Function(LoginModel) then) =
       _$LoginModelCopyWithImpl<$Res, LoginModel>;
   @useResult
-  $Res call({String token, User user});
+  $Res call({String token, UserModel user});
 
-  $UserCopyWith<$Res> get user;
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -64,14 +64,14 @@ class _$LoginModelCopyWithImpl<$Res, $Val extends LoginModel>
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as UserModel,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -85,10 +85,10 @@ abstract class _$$LoginModelImplCopyWith<$Res>
       __$$LoginModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String token, User user});
+  $Res call({String token, UserModel user});
 
   @override
-  $UserCopyWith<$Res> get user;
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -113,7 +113,7 @@ class __$$LoginModelImplCopyWithImpl<$Res>
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as UserModel,
     ));
   }
 }
@@ -129,7 +129,7 @@ class _$LoginModelImpl implements _LoginModel {
   @override
   final String token;
   @override
-  final User user;
+  final UserModel user;
 
   @override
   String toString() {
@@ -164,8 +164,9 @@ class _$LoginModelImpl implements _LoginModel {
 }
 
 abstract class _LoginModel implements LoginModel {
-  factory _LoginModel({required final String token, required final User user}) =
-      _$LoginModelImpl;
+  factory _LoginModel(
+      {required final String token,
+      required final UserModel user}) = _$LoginModelImpl;
 
   factory _LoginModel.fromJson(Map<String, dynamic> json) =
       _$LoginModelImpl.fromJson;
@@ -173,24 +174,25 @@ abstract class _LoginModel implements LoginModel {
   @override
   String get token;
   @override
-  User get user;
+  UserModel get user;
   @override
   @JsonKey(ignore: true)
   _$$LoginModelImplCopyWith<_$LoginModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
+UserModel _$UserModelFromJson(Map<String, dynamic> json) {
+  return _UserModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$User {
+mixin _$UserModel {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get photo => throw _privateConstructorUsedError;
   List<Favorite> get favoriteCategories => throw _privateConstructorUsedError;
   List<Favorite> get favoriteCities => throw _privateConstructorUsedError;
+  Wallet get wallet => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
@@ -198,13 +200,14 @@ mixin _$User {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+  $UserModelCopyWith<UserModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res, User>;
+abstract class $UserModelCopyWith<$Res> {
+  factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
+      _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
       {String name,
@@ -212,16 +215,19 @@ abstract class $UserCopyWith<$Res> {
       String photo,
       List<Favorite> favoriteCategories,
       List<Favorite> favoriteCities,
+      Wallet wallet,
       DateTime createdAt,
       DateTime updatedAt,
       String role,
       String id});
+
+  $WalletCopyWith<$Res> get wallet;
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User>
-    implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
+    implements $UserModelCopyWith<$Res> {
+  _$UserModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -236,6 +242,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? photo = null,
     Object? favoriteCategories = null,
     Object? favoriteCities = null,
+    Object? wallet = null,
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? role = null,
@@ -262,6 +269,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.favoriteCities
           : favoriteCities // ignore: cast_nullable_to_non_nullable
               as List<Favorite>,
+      wallet: null == wallet
+          ? _value.wallet
+          : wallet // ignore: cast_nullable_to_non_nullable
+              as Wallet,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -280,13 +291,22 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
               as String,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WalletCopyWith<$Res> get wallet {
+    return $WalletCopyWith<$Res>(_value.wallet, (value) {
+      return _then(_value.copyWith(wallet: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$UserImplCopyWith(
-          _$UserImpl value, $Res Function(_$UserImpl) then) =
-      __$$UserImplCopyWithImpl<$Res>;
+abstract class _$$UserModelImplCopyWith<$Res>
+    implements $UserModelCopyWith<$Res> {
+  factory _$$UserModelImplCopyWith(
+          _$UserModelImpl value, $Res Function(_$UserModelImpl) then) =
+      __$$UserModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -295,17 +315,22 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String photo,
       List<Favorite> favoriteCategories,
       List<Favorite> favoriteCities,
+      Wallet wallet,
       DateTime createdAt,
       DateTime updatedAt,
       String role,
       String id});
+
+  @override
+  $WalletCopyWith<$Res> get wallet;
 }
 
 /// @nodoc
-class __$$UserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$UserImpl>
-    implements _$$UserImplCopyWith<$Res> {
-  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
+class __$$UserModelImplCopyWithImpl<$Res>
+    extends _$UserModelCopyWithImpl<$Res, _$UserModelImpl>
+    implements _$$UserModelImplCopyWith<$Res> {
+  __$$UserModelImplCopyWithImpl(
+      _$UserModelImpl _value, $Res Function(_$UserModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -316,12 +341,13 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? photo = null,
     Object? favoriteCategories = null,
     Object? favoriteCities = null,
+    Object? wallet = null,
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? role = null,
     Object? id = null,
   }) {
-    return _then(_$UserImpl(
+    return _then(_$UserModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -342,6 +368,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value._favoriteCities
           : favoriteCities // ignore: cast_nullable_to_non_nullable
               as List<Favorite>,
+      wallet: null == wallet
+          ? _value.wallet
+          : wallet // ignore: cast_nullable_to_non_nullable
+              as Wallet,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -364,13 +394,14 @@ class __$$UserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UserImpl implements _User {
-  _$UserImpl(
+class _$UserModelImpl implements _UserModel {
+  _$UserModelImpl(
       {required this.name,
       required this.email,
       required this.photo,
       required final List<Favorite> favoriteCategories,
       required final List<Favorite> favoriteCities,
+      required this.wallet,
       required this.createdAt,
       required this.updatedAt,
       required this.role,
@@ -378,8 +409,8 @@ class _$UserImpl implements _User {
       : _favoriteCategories = favoriteCategories,
         _favoriteCities = favoriteCities;
 
-  factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserImplFromJson(json);
+  factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserModelImplFromJson(json);
 
   @override
   final String name;
@@ -405,6 +436,8 @@ class _$UserImpl implements _User {
   }
 
   @override
+  final Wallet wallet;
+  @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
@@ -415,14 +448,14 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(name: $name, email: $email, photo: $photo, favoriteCategories: $favoriteCategories, favoriteCities: $favoriteCities, createdAt: $createdAt, updatedAt: $updatedAt, role: $role, id: $id)';
+    return 'UserModel(name: $name, email: $email, photo: $photo, favoriteCategories: $favoriteCategories, favoriteCities: $favoriteCities, wallet: $wallet, createdAt: $createdAt, updatedAt: $updatedAt, role: $role, id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserImpl &&
+            other is _$UserModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.photo, photo) || other.photo == photo) &&
@@ -430,6 +463,7 @@ class _$UserImpl implements _User {
                 .equals(other._favoriteCategories, _favoriteCategories) &&
             const DeepCollectionEquality()
                 .equals(other._favoriteCities, _favoriteCities) &&
+            (identical(other.wallet, wallet) || other.wallet == wallet) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -447,6 +481,7 @@ class _$UserImpl implements _User {
       photo,
       const DeepCollectionEquality().hash(_favoriteCategories),
       const DeepCollectionEquality().hash(_favoriteCities),
+      wallet,
       createdAt,
       updatedAt,
       role,
@@ -455,30 +490,32 @@ class _$UserImpl implements _User {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
-      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
+  _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
+      __$$UserModelImplCopyWithImpl<_$UserModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserImplToJson(
+    return _$$UserModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _User implements User {
-  factory _User(
+abstract class _UserModel implements UserModel {
+  factory _UserModel(
       {required final String name,
       required final String email,
       required final String photo,
       required final List<Favorite> favoriteCategories,
       required final List<Favorite> favoriteCities,
+      required final Wallet wallet,
       required final DateTime createdAt,
       required final DateTime updatedAt,
       required final String role,
-      required final String id}) = _$UserImpl;
+      required final String id}) = _$UserModelImpl;
 
-  factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
+  factory _UserModel.fromJson(Map<String, dynamic> json) =
+      _$UserModelImpl.fromJson;
 
   @override
   String get name;
@@ -491,6 +528,8 @@ abstract class _User implements User {
   @override
   List<Favorite> get favoriteCities;
   @override
+  Wallet get wallet;
+  @override
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
@@ -500,7 +539,7 @@ abstract class _User implements User {
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+  _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -510,13 +549,13 @@ Wallet _$WalletFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Wallet {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get user => throw _privateConstructorUsedError;
   int get total => throw _privateConstructorUsedError;
   int get pending => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  Wallet get wallet => throw _privateConstructorUsedError;
   int get available => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -530,16 +569,13 @@ abstract class $WalletCopyWith<$Res> {
       _$WalletCopyWithImpl<$Res, Wallet>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String user,
       int total,
       int pending,
       DateTime createdAt,
       DateTime updatedAt,
-      Wallet wallet,
       int available});
-
-  $WalletCopyWith<$Res> get wallet;
 }
 
 /// @nodoc
@@ -561,7 +597,6 @@ class _$WalletCopyWithImpl<$Res, $Val extends Wallet>
     Object? pending = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? wallet = null,
     Object? available = null,
   }) {
     return _then(_value.copyWith(
@@ -589,23 +624,11 @@ class _$WalletCopyWithImpl<$Res, $Val extends Wallet>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      wallet: null == wallet
-          ? _value.wallet
-          : wallet // ignore: cast_nullable_to_non_nullable
-              as Wallet,
       available: null == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $WalletCopyWith<$Res> get wallet {
-    return $WalletCopyWith<$Res>(_value.wallet, (value) {
-      return _then(_value.copyWith(wallet: value) as $Val);
-    });
   }
 }
 
@@ -617,17 +640,13 @@ abstract class _$$WalletImplCopyWith<$Res> implements $WalletCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String user,
       int total,
       int pending,
       DateTime createdAt,
       DateTime updatedAt,
-      Wallet wallet,
       int available});
-
-  @override
-  $WalletCopyWith<$Res> get wallet;
 }
 
 /// @nodoc
@@ -647,7 +666,6 @@ class __$$WalletImplCopyWithImpl<$Res>
     Object? pending = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? wallet = null,
     Object? available = null,
   }) {
     return _then(_$WalletImpl(
@@ -675,10 +693,6 @@ class __$$WalletImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      wallet: null == wallet
-          ? _value.wallet
-          : wallet // ignore: cast_nullable_to_non_nullable
-              as Wallet,
       available: null == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
@@ -691,19 +705,19 @@ class __$$WalletImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WalletImpl implements _Wallet {
   _$WalletImpl(
-      {required this.id,
+      {@JsonKey(name: '_id') required this.id,
       required this.user,
       required this.total,
       required this.pending,
       required this.createdAt,
       required this.updatedAt,
-      required this.wallet,
       required this.available});
 
   factory _$WalletImpl.fromJson(Map<String, dynamic> json) =>
       _$$WalletImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final String user;
@@ -716,13 +730,11 @@ class _$WalletImpl implements _Wallet {
   @override
   final DateTime updatedAt;
   @override
-  final Wallet wallet;
-  @override
   final int available;
 
   @override
   String toString() {
-    return 'Wallet(id: $id, user: $user, total: $total, pending: $pending, createdAt: $createdAt, updatedAt: $updatedAt, wallet: $wallet, available: $available)';
+    return 'Wallet(id: $id, user: $user, total: $total, pending: $pending, createdAt: $createdAt, updatedAt: $updatedAt, available: $available)';
   }
 
   @override
@@ -738,15 +750,14 @@ class _$WalletImpl implements _Wallet {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.wallet, wallet) || other.wallet == wallet) &&
             (identical(other.available, available) ||
                 other.available == available));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, user, total, pending,
-      createdAt, updatedAt, wallet, available);
+  int get hashCode => Object.hash(
+      runtimeType, id, user, total, pending, createdAt, updatedAt, available);
 
   @JsonKey(ignore: true)
   @override
@@ -764,18 +775,18 @@ class _$WalletImpl implements _Wallet {
 
 abstract class _Wallet implements Wallet {
   factory _Wallet(
-      {required final String id,
+      {@JsonKey(name: '_id') required final String id,
       required final String user,
       required final int total,
       required final int pending,
       required final DateTime createdAt,
       required final DateTime updatedAt,
-      required final Wallet wallet,
       required final int available}) = _$WalletImpl;
 
   factory _Wallet.fromJson(Map<String, dynamic> json) = _$WalletImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
   String get user;
@@ -787,8 +798,6 @@ abstract class _Wallet implements Wallet {
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
-  @override
-  Wallet get wallet;
   @override
   int get available;
   @override

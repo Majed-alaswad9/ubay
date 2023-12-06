@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 import 'package:user/core/common/model/page_state/bloc_status.dart';
+import 'package:user/core/config/router/router.dart';
 import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/responsive_padding.dart';
@@ -17,7 +19,7 @@ import 'package:user/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({super.key});
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -40,16 +42,19 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state.signupStatus.isSuccess()) {}
+        if (state.signupStatus.isSuccess()) {
+          context.goNamed(GRouter.config.homeScreen.homeScreen);
+        }
       },
       child: AppScaffold(
         resizeToAvoidBottomInset: false,
         appBar: UBayAppBar(
-            appBarParams: AppBarParams(
-                title: LocaleKeys.signup_screen_title,
-                tittleStyle:
-                    const TextStyle(fontSize: 20, color: Colors.white)),
-            isLeading: true),
+          appBarParams: AppBarParams(
+              title: LocaleKeys.signup_screen_title,
+              tittleStyle:
+                  context.textTheme.titleMedium!.withColor(Colors.white)),
+          isLeading: true,
+        ),
         body: ListView(
           padding: HWEdgeInsets.only(
               left: 16,
@@ -79,8 +84,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: emailController,
                       name: 'email',
                       textInputType: TextInputType.emailAddress,
-                      title: LocaleKeys.signup_screen_Email.tr(),
-                      hintText: LocaleKeys.signup_screen_EnterYourEmail.tr(),
+                      title: LocaleKeys.login_screen_Email.tr(),
+                      hintText: LocaleKeys.login_screen_EnterYourEmail.tr(),
                       maxLines: 1,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -100,9 +105,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       name: 'password',
                       textInputType: TextInputType.visiblePassword,
                       isPasswordFiled: true,
-                      hintText: LocaleKeys.signup_screen_Password.tr(),
-                      labelText:
-                          LocaleKeys.signup_screen_EnterYourPassword.tr(),
+                      hintText: LocaleKeys.login_screen_Password.tr(),
+                      labelText: LocaleKeys.login_screen_EnterYourPassword.tr(),
                       maxLines: 1,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -122,7 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       name: 'rePasswordController',
                       textInputType: TextInputType.visiblePassword,
                       isPasswordFiled: true,
-                      hintText: LocaleKeys.signup_screen_Password.tr(),
+                      hintText: LocaleKeys.login_screen_Password.tr(),
                       labelText: LocaleKeys.signup_screen_rewrite_password.tr(),
                       maxLines: 1,
                       validator: FormBuilderValidators.compose([
@@ -145,7 +149,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 builder: (context, state) {
                   return AppElevatedButton(
                     text: LocaleKeys.signup,
-                    textStyle: context.textTheme.titleSmall.s17,
                     isLoading: state.isLoading(),
                     onPressed: () async {
                       _formkey.currentState!.save();

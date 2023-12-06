@@ -14,7 +14,7 @@ import 'package:user/features/products/domain/usecases/comment_use_case/add_comm
 import 'package:user/features/products/domain/usecases/product_use_case/add_post_use_case.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/get_comments_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/edit_product_use_case.dart';
-
+import 'package:http_parser/http_parser.dart' as mime;
 import '../../../../core/common/model/response_wrapper/response_wrapper.dart';
 
 @injectable
@@ -28,7 +28,7 @@ class HomeDataSource {
       final response = await clientApi.request(RequestConfig(
           endpoint: EndPoints.product.product,
           clientMethod: ClientMethod.get,
-          queryParameters: {'page': '1', 'limit': '5', 'is_paid': 'false'}));
+          queryParameters: {'page': '1', 'limit': '10', 'is_paid': 'false'}));
 
       return ResponseWrapper.fromJson(response.data, (json) {
         final posts = PostsModel.fromJson(response.data);
@@ -43,7 +43,8 @@ class HomeDataSource {
       Map data = params.map;
       List<MultipartFile> files = [];
       for (File file in photos) {
-        files.add(await MultipartFile.fromFile(file.path));
+        files.add(await MultipartFile.fromFile(file.path,
+            contentType: mime.MediaType('image', 'jpeg')));
       }
 
       data['photos'] = files;

@@ -15,9 +15,6 @@ class BasePage extends StatelessWidget {
 
   void _onTap(BuildContext context, int index) {
     child.goBranch(index);
-    if (index == 2) {
-      context.read<ChatBloc>().add(GetAllChatsEvent());
-    }
   }
 
   @override

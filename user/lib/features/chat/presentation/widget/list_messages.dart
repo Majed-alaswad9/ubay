@@ -1,13 +1,15 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/stream_socket.dart';
 import 'package:user/features/auth/data/model/login_model/login_model.dart';
 import 'package:user/features/chat/data/model/chat_model/chats_model.dart';
+import 'package:user/features/chat/domain/usecase/add_message_use_case.dart';
 
 import '../../../../core/common/model/page_state/bloc_status.dart';
 import '../../../../core/common/model/page_state/result_builder.dart';
@@ -16,24 +18,39 @@ import '../../../../generated/locale_keys.g.dart';
 import '../../../app/presentation/widgets/app_text_field.dart';
 import '../../../app/presentation/widgets/app_text_view.dart';
 import '../../../app/presentation/widgets/loading_indicator.dart';
+import 'align_message_widget.dart';
 import '../../data/model/messages_model/messages_model.dart';
 import '../bloc/chat_bloc.dart';
 
+// ignore: must_be_immutable
 class ListMessages extends StatelessWidget {
   ListMessages(
       {super.key,
       required this.streamSocket,
       required this.product,
       required this.user2,
-      required this.user});
+      required this.user,
+      required this.socket,
+      required this.chatId});
   final StreamSocket streamSocket;
   final Product product;
   final Customer user2;
-  final LoginModel user;
+  final UserModel user;
+  final IO.Socket socket;
+  final String chatId;
 
   late List<DataMessage> messages;
-  final GlobalKey<FormBuilderState> _formkey = GlobalKey<FormBuilderState>();
   final TextEditingController messageController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
+  bool isSuccess = false;
+  jumpTo() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      scrollController.animateTo(scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 1),
+          curve: Curves.fastOutSlowIn);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,6 +62,7 @@ class ListMessages extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.74,
                 child: ListView(
+                    controller: scrollController,
                     physics: const AlwaysScrollableScrollPhysics(),
                     shrinkWrap: true,
                     children: [
@@ -69,7 +87,7 @@ class ListMessages extends StatelessWidget {
                             TextButton(
                                 onPressed: () {},
                                 child: Text(
-                                  'view product',
+                                  LocaleKeys.home_screen_view_post.tr(),
                                   style: context.textTheme.titleMedium!
                                       .copyWith(
                                           decoration: TextDecoration.underline,
@@ -81,7 +99,18 @@ class ListMessages extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      BlocBuilder<ChatBloc, ChatState>(
+                      BlocConsumer<ChatBloc, ChatState>(
+                        listener: (context, state) {
+                          if (state.sendMessageStatus.isSuccess()) {
+                            socket.emit('new message', {
+                              'chatId': chatId,
+                              'message': state.dataMessage!.toJson()
+                            });
+                            print(messages.length);
+                            messageController.text = '';
+                            isSuccess = true;
+                          }
+                        },
                         builder: (context, state) {
                           return PageStateBuilder<MessagesModel>(
                               init: const SizedBox.shrink(),
@@ -93,6 +122,11 @@ class ListMessages extends StatelessWidget {
                                   messages.add(DataMessage.fromJson(
                                       snapshot.data!['newMessageReceived']));
                                 }
+                                if (isSuccess) {
+                                  messages.add(state.dataMessage!);
+                                  isSuccess = false;
+                                }
+                                jumpTo();
                                 return ListView.separated(
                                     physics:
                                         const NeverScrollableScrollPhysics(),
@@ -100,66 +134,41 @@ class ListMessages extends StatelessWidget {
                                     itemBuilder: (context, index) {
                                       return Column(
                                         children: [
-                                          if (messages[index].user ==
-                                              user.user.id)
-                                            Align(
-                                              alignment: AlignmentDirectional
-                                                  .centerStart,
-                                              child: Container(
-                                                padding: HWEdgeInsets.symmetric(
-                                                    vertical: 5,
-                                                    horizontal: 10),
-                                                decoration: BoxDecoration(
-                                                    color: context
-                                                        .colorScheme.primary,
-                                                    borderRadius:
-                                                        const BorderRadiusDirectional
-                                                            .only(
-                                                            bottomEnd: Radius
-                                                                .circular(10.0),
-                                                            topStart:
-                                                                Radius.circular(
-                                                                    10.0),
-                                                            topEnd:
-                                                                Radius.circular(
-                                                                    10.0))),
-                                                child: AppTextView(
-                                                  messages[index].content,
-                                                  style: context
-                                                      .textTheme.bodyMedium!
-                                                      .copyWith(
-                                                          color: Colors.white),
-                                                ),
-                                              ),
-                                            ),
+                                          if (messages[index].user == user.id)
+                                            alignMessage(
+                                                context: context,
+                                                borderRadius:
+                                                    const BorderRadiusDirectional
+                                                        .only(
+                                                        bottomEnd: Radius
+                                                            .circular(10.0),
+                                                        topStart:
+                                                            Radius.circular(
+                                                                10.0),
+                                                        topEnd: Radius.circular(
+                                                            10.0)),
+                                                message:
+                                                    messages[index].content,
+                                                color:
+                                                    context.colorScheme.primary,
+                                                alignment: AlignmentDirectional
+                                                    .centerStart),
                                           if (messages[index].user == user2.id)
-                                            Align(
-                                              alignment: AlignmentDirectional
-                                                  .centerEnd,
-                                              child: Container(
-                                                padding: HWEdgeInsets.symmetric(
-                                                    vertical: 5,
-                                                    horizontal: 10),
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey.shade300,
-                                                    borderRadius:
-                                                        const BorderRadiusDirectional
-                                                            .only(
-                                                            bottomStart: Radius
-                                                                .circular(10.0),
-                                                            topStart:
-                                                                Radius.circular(
-                                                                    10.0),
-                                                            topEnd:
-                                                                Radius.circular(
-                                                                    10.0))),
-                                                child: AppTextView(
-                                                  messages[index].content,
-                                                  style: context
-                                                      .textTheme.bodyMedium,
-                                                ),
-                                              ),
-                                            ),
+                                            alignMessage(
+                                              context: context,
+                                              message: messages[index].content,
+                                              messageColor: Colors.black,
+                                              color: Colors.grey.shade300,
+                                              borderRadius:
+                                                  const BorderRadiusDirectional
+                                                      .only(
+                                                      bottomStart:
+                                                          Radius.circular(10.0),
+                                                      topStart:
+                                                          Radius.circular(10.0),
+                                                      topEnd: Radius.circular(
+                                                          10.0)),
+                                            )
                                         ],
                                       );
                                     },
@@ -187,15 +196,11 @@ class ListMessages extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: FormBuilder(
-                      key: _formkey,
                       child: AppTextField(
-                        name: 'send',
-                        controller: messageController,
-                        hintText: 'write message',
-                      ),
-                    ),
-                  ),
+                    name: 'send',
+                    controller: messageController,
+                    hintText: LocaleKeys.home_screen_write_message.tr(),
+                  )),
                   //const Spacer(),
                   BlocSelector<ChatBloc, ChatState, BlocStatus>(
                       selector: (state) => state.sendMessageStatus,
@@ -204,9 +209,11 @@ class ListMessages extends StatelessWidget {
                           condition: !state.isLoading(),
                           builder: (context) => IconButton(
                               onPressed: () {
-                                _formkey.currentState!.save();
-                                _formkey.currentState!.validate();
-                                if (_formkey.currentState!.isValid) {}
+                                if (messageController.text.isNotEmpty) {
+                                  context.read<ChatBloc>().add(AddMessageEvent(
+                                      AddMessageParams(chatId,
+                                          messageController.text, user.id)));
+                                }
                               },
                               icon: Icon(
                                 Icons.send,

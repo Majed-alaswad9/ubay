@@ -6,7 +6,6 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:user/core/common/enums/status_code_type.dart';
 import 'package:user/features/app/domain/repository/prefs_repository.dart';
-import 'package:user/services/language_service.dart';
 import 'api_utils.dart';
 
 enum _StatusType {
@@ -28,7 +27,7 @@ class LoggerInterceptor extends Interceptor with LoggerHelper {
         "\n HTTP Method: ${options.method}"
         "\n token : ${options.headers[HttpHeaders.authorizationHeader]?.substring(0, 20)}"
         "\n query param : ${options.queryParameters}"
-        "\n param : ${options.data is FormData ? (options.data as FormData).fields : options.data}"
+        "\n param : ${options.data is FormData ? (options.data as FormData).files[0] : options.data}"
         "\n url: ${options.path}"
         "\n Header: ${options.headers}"
         "\n timeout: ${options.connectTimeout! ~/ 1000}s",

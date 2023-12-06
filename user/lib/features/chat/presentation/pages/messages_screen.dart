@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:user/core/common/constants/configuration/uri_routs.dart';
+import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/stream_socket.dart';
-import 'package:user/features/app/domain/repository/prefs_repository.dart';
+// ignore: library_prefixes
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
 import 'package:user/features/chat/presentation/widget/list_messages.dart';
+import '../../../../core/common/constants/constants.dart';
 import '../../data/model/chat_model/chats_model.dart' as chat;
 import '../bloc/chat_bloc.dart';
 
@@ -35,7 +36,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
     'autoConnect': false,
     'transports': ['websocket'],
   });
-  final user = GetIt.I<PrefsRepository>().user;
 
   StreamSocket streamSocket = StreamSocket();
 
@@ -50,6 +50,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
 
   initConnect() {
     socket.connect();
+    // ignore: avoid_print
     socket.onConnect((_) => print('connect'));
     socket.emit('join chat', widget.params.chatId);
     socket.emit('setup', user);
@@ -58,6 +59,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
     });
 
     socket.onError((error) {});
+    // ignore: avoid_print
     socket.onConnectError((err) => print(err));
   }
 
@@ -72,7 +74,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: UBayAppBar(
         appBarParams: AppBarParams(
           centerTitle: false,
@@ -87,8 +89,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
               ),
               Text(
                 widget.params.user2.name,
-                style: context.textTheme.titleMedium!
-                    .copyWith(color: Colors.white),
+                style: context.textTheme.titleMedium!.withColor(Colors.white),
               ),
             ],
           ),
@@ -99,14 +100,14 @@ class _MessagesScreenState extends State<MessagesScreen> {
       ),
       body: SingleChildScrollView(
         child: ListMessages(
-            user2: widget.params.user2,
-            user: user!,
-            product: widget.params.product,
-            streamSocket: streamSocket),
+          user2: widget.params.user2,
+          user: user,
+          product: widget.params.product,
+          streamSocket: streamSocket,
+          socket: socket,
+          chatId: widget.params.chatId,
+        ),
       ),
     );
   }
 }
-/*
-
-* */

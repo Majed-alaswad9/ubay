@@ -4,23 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:user/core/common/model/page_state/bloc_status.dart';
-import 'package:user/core/common/model/page_state/page_state.dart';
 import 'package:user/core/common/model/page_state/result_builder.dart';
 import 'package:user/core/config/themes/my_color_scheme.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/responsive_padding.dart';
-import 'package:user/features/app/domain/repository/prefs_repository.dart';
 import 'package:user/features/app/presentation/widgets/app_pop_up_coupon.dart';
 import 'package:user/features/app/presentation/widgets/app_text_field.dart';
 import 'package:user/features/app/presentation/widgets/app_text_view.dart';
 import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
-import 'package:user/features/auth/data/model/login_model/login_model.dart';
 import 'package:user/features/products/data/model/posts_model.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
+import '../../../../core/common/constants/constants.dart';
 import '../../../../core/util/chose_date_time.dart';
 import '../../../app/presentation/widgets/app_pop_up_edit_delete.dart';
 import '../../data/model/comments_model/comments_model.dart';
@@ -41,11 +37,9 @@ class CommentsWidget extends StatefulWidget {
 }
 
 class _CommentsWidgetState extends State<CommentsWidget> {
-  late LoginModel user;
   bool isUpdate = false;
   @override
   void initState() {
-    user = GetIt.I<PrefsRepository>().user!;
     super.initState();
   }
 
@@ -72,7 +66,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                     child: AppTextField(
                       name: 'comment',
                       controller: commentController,
-                      hintText: LocaleKeys.write_comment.tr(),
+                      hintText: LocaleKeys.home_screen_write_comment.tr(),
                     ),
                   ),
                 ),
@@ -90,7 +84,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                           if (_formkey.currentState!.isValid) {
                             context.read<HomeBloc>().add(AddCommentEvent(
                                 commentController.text,
-                                user.user.id,
+                                user.id,
                                 widget.postId));
                           }
                         },
@@ -159,7 +153,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                         ),
                                         const Spacer(),
                                         if (data.data![index].user.id ==
-                                            user.user.id)
+                                            user.id)
                                           PopUpMenuDeleteEdit(
                                             deleteFunction: () {
                                               context.read<HomeBloc>().add(
@@ -176,7 +170,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                             isProduct: false,
                                           )
                                         else if (widget.product.user!.id ==
-                                            user.user.id)
+                                            user.id)
                                           PopUpMenuCoupon(
                                             dataComment: data.data![index],
                                             fromContext: context,

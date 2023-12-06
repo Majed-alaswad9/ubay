@@ -6,6 +6,7 @@ import 'package:user/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:user/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:user/features/my_transactions/presintation/bloc/transactions_bloc.dart';
 import 'package:user/features/products/presintation/bloc/home_bloc.dart';
+import 'package:user/features/setting/presintation/bloc/setting_bloc.dart';
 
 class ServiceProvider extends StatelessWidget {
   const ServiceProvider({super.key, required this.child});
@@ -20,6 +21,7 @@ class ServiceProvider extends StatelessWidget {
         BlocProvider(create: (_) => GetIt.I<HomeBloc>()),
         BlocProvider(create: (_) => GetIt.I<TransactionsBloc>()),
         BlocProvider(create: (_) => GetIt.I<ChatBloc>()),
+        BlocProvider(create: (_) => GetIt.I<SettingBloc>())
       ],
       child: child,
     );

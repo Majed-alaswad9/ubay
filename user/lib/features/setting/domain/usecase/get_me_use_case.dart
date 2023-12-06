@@ -6,12 +6,13 @@ import 'package:user/features/auth/data/model/login_model/login_model.dart';
 import 'package:user/features/setting/domain/repository/setting_repository.dart';
 
 @injectable
-class GetNeUseCase extends UseCase<Result<ResponseWrapper<User>>, NoParams> {
+class GetMeUseCase
+    extends UseCase<Result<ResponseWrapper<UserModel>>, NoParams> {
   final SettingRepository settingRepository;
 
-  GetNeUseCase(this.settingRepository);
+  GetMeUseCase(this.settingRepository);
   @override
-  Future<Result<ResponseWrapper<User>>> call(NoParams params) async {
+  Future<Result<ResponseWrapper<UserModel>>> call(NoParams params) async {
     return settingRepository.getMyProfile();
   }
 }

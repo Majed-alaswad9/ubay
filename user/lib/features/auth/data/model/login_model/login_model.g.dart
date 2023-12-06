@@ -9,7 +9,7 @@ part of 'login_model.dart';
 _$LoginModelImpl _$$LoginModelImplFromJson(Map<String, dynamic> json) =>
     _$LoginModelImpl(
       token: json['token'] as String,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$LoginModelImplToJson(_$LoginModelImpl instance) =>
@@ -18,7 +18,8 @@ Map<String, dynamic> _$$LoginModelImplToJson(_$LoginModelImpl instance) =>
       'user': instance.user,
     };
 
-_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
+_$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
+    _$UserModelImpl(
       name: json['name'] as String,
       email: json['email'] as String,
       photo: json['photo'] as String,
@@ -28,19 +29,21 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       favoriteCities: (json['favoriteCities'] as List<dynamic>)
           .map((e) => Favorite.fromJson(e as Map<String, dynamic>))
           .toList(),
+      wallet: Wallet.fromJson(json['wallet'] as Map<String, dynamic>),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       role: json['role'] as String,
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
+Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'email': instance.email,
       'photo': instance.photo,
       'favoriteCategories': instance.favoriteCategories,
       'favoriteCities': instance.favoriteCities,
+      'wallet': instance.wallet,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       'role': instance.role,
@@ -48,25 +51,23 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     };
 
 _$WalletImpl _$$WalletImplFromJson(Map<String, dynamic> json) => _$WalletImpl(
-      id: json['id'] as String,
+      id: json['_id'] as String,
       user: json['user'] as String,
       total: json['total'] as int,
       pending: json['pending'] as int,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      wallet: Wallet.fromJson(json['wallet'] as Map<String, dynamic>),
       available: json['available'] as int,
     );
 
 Map<String, dynamic> _$$WalletImplToJson(_$WalletImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'user': instance.user,
       'total': instance.total,
       'pending': instance.pending,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
-      'wallet': instance.wallet,
       'available': instance.available,
     };
 

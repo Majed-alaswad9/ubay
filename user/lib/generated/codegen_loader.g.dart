@@ -29,7 +29,7 @@ class CodegenLoader extends AssetLoader{
     "EnterYourEmail": "Enter Your Email",
     "Password": "Password",
     "EnterYourPassword": "Enter Your Password",
-    "ForgetPassword": "Forget Password?",
+    "ForgetPassword": "Forgot Password",
     "CreateAccount": "Create account"
   },
   "validation": {
@@ -44,11 +44,7 @@ class CodegenLoader extends AssetLoader{
     "title": "Create account",
     "rewrite_password": "rewrite password",
     "FullName": "Full Name",
-    "EnterYourFullName": "Enter Your Full Name",
-    "Email": "Email",
-    "EnterYourEmail": "Enter Your Email",
-    "Password": "Password",
-    "EnterYourPassword": "Enter Your Password"
+    "EnterYourFullName": "Enter Your Full Name"
   },
   "date": {
     "ago": "ago",
@@ -67,15 +63,40 @@ class CodegenLoader extends AssetLoader{
     "store": "store",
     "photos": "photos"
   },
-  "delete_post": "Delete Post",
-  "sure_delete": "Are you sure you want to delete this post?",
   "yes": "Yes",
+  "save": "Save",
   "edit": "Edit",
   "delete": "Delete",
   "cancel": "Cancel",
-  "likes": "likes",
-  "comments": "comments",
-  "write_comment": "Write Comment",
+  "home_screen": {
+    "delete_post": "Delete Post",
+    "sure_delete": "Are you sure you want to delete this post?",
+    "likes": "likes",
+    "comments": "comments",
+    "write_comment": "Write Comment",
+    "write_message": "Write message",
+    "view_post": "View post",
+    "details": "product details",
+    "price": "price: ",
+    "generate_qr": "Generate QR"
+  },
+  "settings": {
+    "setting": "Settings",
+    "account": "Account",
+    "account_and_security": "Account and security",
+    "privacy_and_security": "Privacy and security",
+    "update_profile": "Update Profile",
+    "change_password": "Change Password",
+    "favourite": "Favourite",
+    "favourite_cities": "Favourite cities",
+    "favourite_categories": "Favourite categories",
+    "current_password": "Current Password",
+    "enter_current_password": "Enter current password",
+    "pending_money": "Pending money",
+    "total_money": "Total money"
+  },
+  "delete_this_chat": "Are you sure you want to delete this chat?",
+  "delete_this_message": "Are you sure you want to delete this message?",
   "no_data": "No Data",
   "add": "Add",
   "photos": "Photos",
@@ -85,9 +106,6 @@ class CodegenLoader extends AssetLoader{
   "the_user_who_will_receive_the_discount": "The user who will receive the discount",
   "add_a_discount_for_the_item": "Add a discount for the item:",
   "lbl_loading": "Loading...",
-  "details": "product details",
-  "price": "price: ",
-  "generate_qr": "Generate QR",
   "deliveryStatus": {
     "seller": {
       "seller": "Delivered to the warehouse",
@@ -102,7 +120,10 @@ class CodegenLoader extends AssetLoader{
     }
   },
   "delivery_of_the_product": "Delivery of the product: ",
-  "receive_the_product": "Receive the product: "
+  "receive_the_product": "Receive the product: ",
+  "use_ago": "used sgo",
+  "camera": "Camera",
+  "gallery": "Gallery"
 };
 static const Map<String,dynamic> ar = {
   "home": "الرئيسية",
@@ -119,7 +140,7 @@ static const Map<String,dynamic> ar = {
     "EnterYourEmail": "ادخل البريد الالكتروني",
     "Password": "كلمة المرور",
     "EnterYourPassword": "ادخل كلمة المرور",
-    "ForgetPassword": "نسيت كلمة المرور؟",
+    "ForgetPassword": "نسيت كلمة المرور",
     "CreateAccount": "انشاء حساب"
   },
   "validation": {
@@ -134,11 +155,7 @@ static const Map<String,dynamic> ar = {
     "title": "إنشاء حساب",
     "rewrite_password": "إعادة كتابة كلمة المرور",
     "FullName": "الاسم كامل",
-    "EnterYourFullName": "ادخل اسمك الكامل",
-    "Email": "البريد الالكتروني",
-    "EnterYourEmail": "ادخل البريد الالكتروني",
-    "Password": "كلمة المرور",
-    "EnterYourPassword": "ادخل كلمة المرور"
+    "EnterYourFullName": "ادخل اسمك الكامل"
   },
   "date": {
     "ago": "منذ",
@@ -157,15 +174,40 @@ static const Map<String,dynamic> ar = {
     "store": "المستودع الذي ستسلم القطعة له",
     "photos": "الصور"
   },
-  "delete_post": "حذف المنشور",
-  "sure_delete": "هل انت متأكد من حذف هذا المنشور؟",
   "yes": "نعم",
+  "save": "حفظ",
   "edit": "تعديل",
   "cancel": "الغاء",
   "delete": "حذف",
-  "likes": "إعجاب",
-  "comments": "تعليق",
-  "write_comment": "اكتب تعليق",
+  "home_screen": {
+    "delete_post": "حذف المنشور",
+    "sure_delete": "هل انت متاكد من حذف هذا المنشور؟",
+    "likes": "اعجاب",
+    "comments": "تعليقات",
+    "write_comment": "اكتب تعليق",
+    "write_message": "اكتب رسالة",
+    "view_post": "عرض المنشور",
+    "details": "تفاصيل القطعة",
+    "price": "السعر : ",
+    "generate_qr": "توليد رمز QR"
+  },
+  "settings": {
+    "setting": "الاعدادات",
+    "account_and_security": "الحساب والامن",
+    "privacy_and_security": "الخصوصية والامن",
+    "account": "الحساب",
+    "update_profile": "تحديث معلومات الملف الشخصي",
+    "change_password": "تغيير كلمة المرور",
+    "favourite": "المفضلة",
+    "favourite_cities": "المدن المفضلة",
+    "favourite_categories": "الاصناف المفضلة",
+    "current_password": "كلمة المرور الحالية",
+    "enter_current_password": "ادخل كلمة المرور الحالية",
+    "pending_money": "الاموال المعلقة",
+    "total_money": "الاموال المتوفرة"
+  },
+  "delete_this_chat": "هل انت متأكد من حذف هذه المحادثة؟",
+  "delete_this_message": "هل انت متأكد من حذف هذه الرسالة؟",
   "no_data": "لا يوجد بيانات لعرضها",
   "add": "إضافة",
   "photos": "الصور",
@@ -175,9 +217,6 @@ static const Map<String,dynamic> ar = {
   "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",
   "add_a_discount_for_the_item": "إضافة حسم للقطعة:",
   "lbl_loading": " الرجاء الانتظار ...",
-  "details": "تفاصيل القطعة",
-  "price": "السعر: ",
-  "generate_qr": "توليد رمز QR",
   "deliveryStatus": {
     "seller": {
       "seller": "تم التسليم للمستودع",
@@ -192,7 +231,10 @@ static const Map<String,dynamic> ar = {
     }
   },
   "delivery_of_the_product": "تسليم القطعة: ",
-  "receive_the_product": "استلام القطعة: "
+  "receive_the_product": "استلام القطعة: ",
+  "use_ago": "مستخدم منذ",
+  "camera": "الكاميرا",
+  "gallery": "المعرض"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ar": ar};
 }

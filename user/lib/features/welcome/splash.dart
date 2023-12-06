@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:user/core/common/constants/constants.dart';
 import 'package:user/core/config/router/router.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/domain/repository/prefs_repository.dart';
@@ -22,10 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(const Duration(seconds: 2), () {
       if (GetIt.I<PrefsRepository>().registeredUser) {
+        user = GetIt.I<PrefsRepository>().user!;
         context.goNamed(GRouter.config.homeScreen.homeScreen);
-        print('token');
       } else {
-        print('no token');
         context.goNamed(GRouter.config.authRoutes.login);
       }
     });

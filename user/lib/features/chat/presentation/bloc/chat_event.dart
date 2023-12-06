@@ -17,3 +17,21 @@ class GetAllMessagesEvent extends ChatEvent {
 
   GetAllMessagesEvent({this.page = 1, this.limit = 20, required this.chatId});
 }
+
+class AddMessageEvent extends ChatEvent {
+  final AddMessageParams params;
+
+  AddMessageEvent(this.params);
+}
+
+class DeleteMessageEvent extends ChatEvent {
+  final DeleteMessageParams params;
+
+  DeleteMessageEvent(this.params);
+}
+
+class DeleteChatEvent extends ChatEvent {
+  final String id;
+
+  DeleteChatEvent(this.id);
+}

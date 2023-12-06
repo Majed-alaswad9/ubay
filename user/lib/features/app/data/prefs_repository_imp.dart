@@ -45,17 +45,17 @@ class PrefsRepositoryImpl extends PrefsRepository {
       sharedPreferences.setString(PrefsKey.token, token);
 
   @override
-  Future<bool> setUser(LoginModel user) =>
+  Future<bool> setUser(UserModel user) =>
       sharedPreferences.setString(PrefsKey.user, jsonEncode(user.toJson()));
 
   @override
   String? get token => sharedPreferences.getString(PrefsKey.token);
 
   @override
-  LoginModel? get user {
+  UserModel? get user {
     final user = sharedPreferences.getString(PrefsKey.user);
     if (user == null) return null;
 
-    return LoginModel.fromJson(json.decode(user));
+    return UserModel.fromJson(json.decode(user));
   }
 }

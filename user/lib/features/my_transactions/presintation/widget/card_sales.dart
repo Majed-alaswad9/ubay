@@ -79,7 +79,7 @@ class ListTransactions extends StatelessWidget {
                       height: 10,
                     ),
                     Row(children: [
-                      AppTextView(LocaleKeys.price.tr(),
+                      AppTextView(LocaleKeys.home_screen_price.tr(),
                           style: context.textTheme.titleMedium),
                       AppTextView(formatter.format(price),
                           style: context.textTheme.titleSmall!
@@ -101,7 +101,7 @@ class ListTransactions extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12)),
                               child: Center(
                                 child: Text(
-                                  LocaleKeys.details.tr(),
+                                  LocaleKeys.home_screen_details.tr(),
                                   style: context.textTheme.titleSmall!.copyWith(
                                       color: context.colorScheme.secondary,
                                       fontSize: 12),
@@ -156,7 +156,7 @@ class ListTransactions extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Text(
-                                    LocaleKeys.generate_qr.tr(),
+                                    LocaleKeys.home_screen_generate_qr.tr(),
                                     style: context.textTheme.titleSmall!
                                         .copyWith(
                                             color: context.colorScheme.white,

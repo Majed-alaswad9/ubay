@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/theme.dart';
+import 'package:user/core/util/extensions/build_context.dart';
 
 // ignore: must_be_immutable
 class TextFormWidget extends StatelessWidget {
@@ -42,29 +41,32 @@ class TextFormWidget extends StatelessWidget {
             prefixIcon: IconButton(
               onPressed: onPressed,
               icon: Icon(prefixIcon),
-              color: primaryColor,
+              color: context.colorScheme.primary,
             ),
             labelText: hintText,
-           labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: primaryColor),
+            labelStyle: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: context.colorScheme.primary),
             suffixIcon: Icon(
-              color: primaryColor,
+              color: context.colorScheme.primary,
               suffixIcon,
             ),
-            errorBorder:  const OutlineInputBorder(
+            errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.red),
-              borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
             focusedErrorBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
-              borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
-              borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: primaryColor),
-              borderRadius: const BorderRadius.all(Radius.circular(borderRadius)),
+              borderSide: BorderSide(color: context.colorScheme.primary),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
             ),
             contentPadding: const EdgeInsets.all(10)),
       ),

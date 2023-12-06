@@ -20,7 +20,7 @@ import 'package:user/generated/locale_keys.g.dart';
 import '../bloc/auth/auth_bloc.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -45,9 +45,9 @@ class _LoginPageState extends State<LoginPage> {
           resizeToAvoidBottomInset: false,
           appBar: UBayAppBar(
               appBarParams: AppBarParams(
-                  title: LocaleKeys.login,
+                  title: LocaleKeys.login.tr(),
                   tittleStyle:
-                      const TextStyle(fontSize: 20, color: Colors.white)),
+                      context.textTheme.titleMedium!.withColor(Colors.white)),
               isLeading: false),
           body: ListView(
             padding: HWEdgeInsets.only(
@@ -109,7 +109,8 @@ class _LoginPageState extends State<LoginPage> {
                   InkWell(
                     child: AppTextView(
                       LocaleKeys.login_screen_ForgetPassword,
-                      style: context.textTheme.labelMedium,
+                      style: context.textTheme.labelMedium!
+                          .copyWith(color: context.colorScheme.primary),
                     ),
                   ),
                   InkWell(
@@ -117,7 +118,8 @@ class _LoginPageState extends State<LoginPage> {
                         context.pushNamed(GRouter.config.authRoutes.signup),
                     child: AppTextView(
                       LocaleKeys.login_screen_CreateAccount,
-                      style: context.textTheme.labelMedium,
+                      style: context.textTheme.labelMedium!
+                          .copyWith(color: context.colorScheme.primary),
                     ),
                   )
                 ],
@@ -127,14 +129,11 @@ class _LoginPageState extends State<LoginPage> {
                   selector: (state) => state.loginStatus,
                   builder: (context, state) {
                     return AppElevatedButton(
-                      text: LocaleKeys.login,
-                      textStyle: context.textTheme.titleSmall.s17,
+                      text: LocaleKeys.login.tr(),
                       isLoading: state.isLoading(),
                       onPressed: () async {
-                        print(emailController.text);
                         _formkey.currentState!.save();
                         _formkey.currentState!.validate();
-                        print(_formkey.currentState!.value);
                         if (_formkey.currentState!.isValid) {
                           context.read<AuthBloc>().add(LoginEvent(
                                 email: emailController.text,

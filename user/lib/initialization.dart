@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,13 +9,6 @@ Future<void> initialization(FutureOr<Widget> Function() builder,
     {LocalizationConfig? localizationConfig}) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ErrorWidget.builder = (errorDetails) {
-  //   return Container();
-  // };
-  //
-  // PlatformDispatcher.instance.onError = (error, stack) {
-  //   return true;
-  // };
   await configureDependencies();
   final Widget app;
   if (localizationConfig != null) {

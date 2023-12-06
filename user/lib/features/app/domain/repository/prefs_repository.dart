@@ -8,6 +8,6 @@ abstract class PrefsRepository {
   ThemeMode get getTheme;
   Future<bool> clearUser();
   bool get registeredUser;
-  LoginModel? get user;
-  Future<bool> setUser(LoginModel user);
+  UserModel? get user;
+  Future<bool> setUser(UserModel user);
 }

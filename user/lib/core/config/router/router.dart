@@ -10,7 +10,11 @@ import 'package:user/features/auth/presentation/pages/register_page.dart';
 import 'package:user/features/chat/presentation/pages/chat_screen.dart';
 import 'package:user/features/products/presintation/pages/add_post_screen.dart';
 import 'package:user/features/products/presintation/pages/home_screen.dart';
+import 'package:user/features/setting/presintation/pages/accont_and_security.dart';
+import 'package:user/features/setting/presintation/pages/change_password_screen.dart';
+import 'package:user/features/setting/presintation/pages/profile_screen.dart';
 import 'package:user/features/setting/presintation/pages/setting_screen.dart';
+import 'package:user/features/setting/presintation/pages/update_profile_screen.dart';
 import 'package:user/features/welcome/splash.dart';
 
 import '../../../features/my_transactions/presintation/pages/transaction_screen.dart';
@@ -105,15 +109,63 @@ class GRouter {
                       })
                 ]),
             StatefulShellBranch(
-                initialLocation: _config.profileScreen.profileScreen,
+                initialLocation: _config.settingScreen.settings,
                 routes: [
                   GoRoute(
-                      path: _config.profileScreen.profileScreen,
-                      name: _config.profileScreen.profileScreen,
+                      path: _config.settingScreen.settings,
+                      name: _config.settingScreen.settings,
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return _builderPage(
                             child: const SettingScreen(), state: state);
-                      })
+                      },
+                      routes: [
+                        GoRoute(
+                            path: _config.settingScreen.accountScreen,
+                            name: _config.settingScreen.accountScreen,
+                            parentNavigatorKey: _rootNavigatorKey,
+                            pageBuilder:
+                                (BuildContext context, GoRouterState state) {
+                              return _builderPage(
+                                  child: const AccountAndSecurity(),
+                                  state: state);
+                            },
+                            routes: [
+                              GoRoute(
+                                  path: _config.settingScreen.profileScreen,
+                                  name: _config.settingScreen.profileScreen,
+                                  parentNavigatorKey: _rootNavigatorKey,
+                                  pageBuilder: (BuildContext context,
+                                      GoRouterState state) {
+                                    return _builderPage(
+                                        child: const ProfileScreen(),
+                                        state: state);
+                                  }),
+                              GoRoute(
+                                  path:
+                                      _config.settingScreen.updateProfileScreen,
+                                  name:
+                                      _config.settingScreen.updateProfileScreen,
+                                  parentNavigatorKey: _rootNavigatorKey,
+                                  pageBuilder: (BuildContext context,
+                                      GoRouterState state) {
+                                    return _builderPage(
+                                        child: UpdateProfileScreen(),
+                                        state: state);
+                                  }),
+                              GoRoute(
+                                  path: _config
+                                      .settingScreen.changePasswordScreen,
+                                  name: _config
+                                      .settingScreen.changePasswordScreen,
+                                  parentNavigatorKey: _rootNavigatorKey,
+                                  pageBuilder: (BuildContext context,
+                                      GoRouterState state) {
+                                    return _builderPage(
+                                        child: ChangePasswordScreen(),
+                                        state: state);
+                                  }),
+                            ])
+                      ])
                 ]),
           ],
         )

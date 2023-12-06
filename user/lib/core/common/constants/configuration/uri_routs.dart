@@ -7,6 +7,7 @@ abstract class EndPoints {
   static const product = Product();
   static const stores = Stores();
   static const chats = Chat();
+  static const user = User();
 }
 
 class Auth {
@@ -15,7 +16,6 @@ class Auth {
   final signup = '/users/signup';
   final forgotPassword = '/users/forgotPassword';
   final resetPassword = '/users/resetPassword';
-  final updateMyPassword = '/users/updateMyPassword';
 }
 
 class Product {
@@ -44,4 +44,5 @@ class User {
   const User();
   final user = '/users/me';
   final favourites = '/users/favorites';
+  final updateMyPassword = '/users/updateMyPassword';
 }

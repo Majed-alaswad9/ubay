@@ -10,7 +10,7 @@ import '../../../domain/usecases/login_usecase.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
-@Injectable()
+@lazySingleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase loginUseCase;
   final SignUpUseCase signUpUseCase;

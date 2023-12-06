@@ -294,7 +294,7 @@ class _AppTextFieldState extends State<AppTextField> {
                       : widget.labelText,
                   labelStyle: widget.labelTextStyle ??
                       context.textTheme.bodyMedium?.s13
-                          .withColor(context.colorScheme.white),
+                          .withColor(context.colorScheme.primary),
                 ),
               );
             }),

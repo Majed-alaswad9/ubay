@@ -81,7 +81,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
         appBar: UBayAppBar(
           appBarParams: AppBarParams(
             title: LocaleKeys.add_post_screen_new_post.tr(),
-            tittleStyle: const TextStyle(fontSize: 20, color: Colors.white),
+            tittleStyle: context.textTheme.titleMedium!.withColor(Colors.white),
             centerTitle: true,
           ),
           isLeading: true,

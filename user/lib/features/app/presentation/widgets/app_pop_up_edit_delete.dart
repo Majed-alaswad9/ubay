@@ -44,8 +44,8 @@ class PopUpMenuDeleteEdit extends StatelessWidget {
           } else if (value == Const.delete) {
             Const.showMyDialog(
               context: context,
-              title: LocaleKeys.delete_post.tr(),
-              content: LocaleKeys.sure_delete.tr(),
+              title: LocaleKeys.home_screen_delete_post.tr(),
+              content: LocaleKeys.home_screen_sure_delete.tr(),
               onPressed: deleteFunction,
             );
           }

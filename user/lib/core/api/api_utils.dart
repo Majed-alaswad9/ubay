@@ -7,6 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:user/core/api/exceptions.dart';
 import 'package:user/core/api/result.dart';
 
+import '../util/show_message.dart';
+
 Future<T> throwAppException<T>(FutureOr<T> Function() call) async {
   try {
     return (await call());
@@ -26,17 +28,6 @@ Future<T> throwAppException<T>(FutureOr<T> Function() call) async {
     log(e.toString(), stackTrace: s);
     throw AppException.unknown(message: e.toString(), exception: e);
   }
-}
-
-void showMessage(String message, {bool isSuccess = false}) {
-  Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.TOP,
-      timeInSecForIosWeb: 1,
-      backgroundColor: isSuccess ? Colors.greenAccent : Colors.red,
-      textColor: Colors.white,
-      fontSize: 16.0);
 }
 
 Future<Result<T>> toApiResult<T>(FutureOr<T> Function() call) async {

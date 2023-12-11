@@ -106,6 +106,14 @@ class CodegenLoader extends AssetLoader{
   "the_user_who_will_receive_the_discount": "The user who will receive the discount",
   "add_a_discount_for_the_item": "Add a discount for the item:",
   "lbl_loading": "Loading...",
+  "messages": {
+    "success": {
+      "update_successfully": "Update successfully",
+      "chat_has_been_deleted": "Chat has been deleted",
+      "message_has_been_deleted": "Message has been deleted",
+      "post_has_ben_deleted": "Post has been deleted"
+    }
+  },
   "deliveryStatus": {
     "seller": {
       "seller": "Delivered to the warehouse",
@@ -228,6 +236,14 @@ static const Map<String,dynamic> ar = {
       "seller": "يرجى الذهاب لإستلام القطعة",
       "customer": "تم الإستلام",
       "wait": "بإنتظار البائع لإحضار القطعة للمستودع"
+    }
+  },
+  "messages": {
+    "success": {
+      "update_successfully": "تم التحديث بنجاح",
+      "chat_has_been_deleted": "تم حذف المحادثة",
+      "message_has_been_deleted": "تم خذف الرسالة",
+      "post_has_ben_deleted": "تم حذف المنشور"
     }
   },
   "delivery_of_the_product": "تسليم القطعة: ",

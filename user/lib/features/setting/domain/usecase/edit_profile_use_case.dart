@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:user/core/api/result.dart';
 import 'package:user/core/common/model/response_wrapper/response_wrapper.dart';

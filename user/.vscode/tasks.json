@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "run server",
+      "type": "shell",
+      "command": "/home/majed/bin/start_ubay",
+      "isBackground": true,
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "run dashboard",
+      "type": "shell",
+      "command": "cd /home/majed/Desktop/uBay/admin/ && yarn dev",
+      "isBackground": true,
+      "runOptions": {
+        "runOn": "default"
+      }
+    }
+  ]
+}

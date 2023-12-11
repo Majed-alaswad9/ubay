@@ -5,7 +5,7 @@ class RouterConfiguration {
   final homeScreen = const _HomeRoutes._();
   final chatScreen = const _ChatRoutes._();
   final transactionScreen = const _TransactionRoutes._();
-  final settingScreen = const _SettingsScreen._();
+  final settingScreen = const _SettingsRoutes._();
 }
 
 class AuthRoutes {
@@ -22,7 +22,7 @@ class _HomeRoutes {
 
   final String homeScreen = '/homeScreen';
   final String addPostScreen = 'addPostScreen';
-  final String commentsScreen = 'commentsScreen';
+  final String viewProductScreen = '/viewProductScreen';
 }
 
 class _ChatRoutes {
@@ -37,8 +37,8 @@ class _TransactionRoutes {
   final String transactionScreen = '/transactionScreen';
 }
 
-class _SettingsScreen {
-  const _SettingsScreen._();
+class _SettingsRoutes {
+  const _SettingsRoutes._();
   final String settings = '/settings';
   final String accountScreen = 'accountScreen';
   final String profileScreen = 'profileScreen';

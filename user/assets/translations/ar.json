@@ -103,6 +103,14 @@
             "wait": "بإنتظار البائع لإحضار القطعة للمستودع"
         }
     },
+    "messages": {
+        "success": {
+            "update_successfully": "تم التحديث بنجاح",
+            "chat_has_been_deleted": "تم حذف المحادثة",
+            "message_has_been_deleted": "تم خذف الرسالة",
+            "post_has_ben_deleted": "تم حذف المنشور"
+        }
+    },
     "delivery_of_the_product": "تسليم القطعة: ",
     "receive_the_product": "استلام القطعة: ",
     "use_ago": "مستخدم منذ",

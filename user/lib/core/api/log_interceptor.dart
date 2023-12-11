@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:user/core/common/enums/status_code_type.dart';
 import 'package:user/features/app/domain/repository/prefs_repository.dart';
+import '../util/show_message.dart';
 import 'api_utils.dart';
 
 enum _StatusType {
@@ -84,7 +85,9 @@ class LoggerInterceptor extends Interceptor with LoggerHelper {
     final data = err.response?.data;
     if (data != null && data != "") {
       if (data is Map<String, dynamic>) {
-        showMessage(data['errors'][0]['message']);
+        data['errors'].forEach((element) {
+          showMessage(element['message']);
+        });
       } else {
         showMessage('Something went wrong!!');
       }

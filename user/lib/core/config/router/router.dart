@@ -8,8 +8,10 @@ import 'package:user/features/app/presentation/pages/base_page.dart';
 import 'package:user/features/auth/presentation/pages/login_page.dart';
 import 'package:user/features/auth/presentation/pages/register_page.dart';
 import 'package:user/features/chat/presentation/pages/chat_screen.dart';
+import 'package:user/features/products/data/model/posts_model.dart';
 import 'package:user/features/products/presintation/pages/add_post_screen.dart';
 import 'package:user/features/products/presintation/pages/home_screen.dart';
+import 'package:user/features/products/presintation/pages/view_product.dart';
 import 'package:user/features/setting/presintation/pages/accont_and_security.dart';
 import 'package:user/features/setting/presintation/pages/change_password_screen.dart';
 import 'package:user/features/setting/presintation/pages/profile_screen.dart';
@@ -47,13 +49,21 @@ class GRouter {
             path: _config.authRoutes.login,
             name: _config.authRoutes.login,
             pageBuilder: (BuildContext context, GoRouterState state) {
-              return _builderPage(child: LoginPage(), state: state);
+              return _builderPage(child: const LoginPage(), state: state);
             }),
         GoRoute(
             path: _config.authRoutes.signup,
             name: _config.authRoutes.signup,
             pageBuilder: (BuildContext context, GoRouterState state) {
-              return _builderPage(child: RegisterPage(), state: state);
+              return _builderPage(child: const RegisterPage(), state: state);
+            }),
+        GoRoute(
+            path: _config.homeScreen.viewProductScreen,
+            name: _config.homeScreen.viewProductScreen,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return _builderPage(
+                  child: ViewProduct(product: state.extra as Data),
+                  state: state);
             }),
         StatefulShellRoute.indexedStack(
           builder: (context, state, child) {

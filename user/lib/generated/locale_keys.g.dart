@@ -85,6 +85,12 @@ abstract class  LocaleKeys {
   static const the_user_who_will_receive_the_discount = 'the_user_who_will_receive_the_discount';
   static const add_a_discount_for_the_item = 'add_a_discount_for_the_item';
   static const lbl_loading = 'lbl_loading';
+  static const messages_success_update_successfully = 'messages.success.update_successfully';
+  static const messages_success_chat_has_been_deleted = 'messages.success.chat_has_been_deleted';
+  static const messages_success_message_has_been_deleted = 'messages.success.message_has_been_deleted';
+  static const messages_success_post_has_ben_deleted = 'messages.success.post_has_ben_deleted';
+  static const messages_success = 'messages.success';
+  static const messages = 'messages';
   static const deliveryStatus_seller_seller = 'deliveryStatus.seller.seller';
   static const deliveryStatus_seller_customer = 'deliveryStatus.seller.customer';
   static const deliveryStatus_seller_wait = 'deliveryStatus.seller.wait';

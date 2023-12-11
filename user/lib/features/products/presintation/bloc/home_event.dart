@@ -59,9 +59,8 @@ class AddCommentEvent extends HomeEvent {
 
 class DeleteProductEvent extends HomeEvent {
   final String id;
-  final int index;
 
-  DeleteProductEvent(this.id, this.index);
+  DeleteProductEvent(this.id);
 }
 
 class EditProductEvent extends HomeEvent {

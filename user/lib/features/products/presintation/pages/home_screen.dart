@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   deleteFunction: () {
                                     context.read<HomeBloc>().add(
                                         DeleteProductEvent(
-                                            data.data![index].id, index));
+                                            data.data![index].id));
                                     if (state.deletePostOrComment.isSuccess()) {
                                       context.pop();
                                     }
@@ -135,53 +135,70 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: context.colorScheme.grey,
                           ),
                           10.verticalSpace,
-                          AppTextView(data.data![index].title,
-                              style: context.textTheme.titleLarge),
-                          10.verticalSpace,
-                          AppTextView(data.data![index].content,
-                              style: context.textTheme.titleMedium),
-                          10.verticalSpace,
-                          if (data.data![index].coupons!.isEmpty)
-                            Container(
-                                padding: HWEdgeInsets.all(3.5),
-                                decoration: BoxDecoration(
-                                    color: context.colorScheme.secondary,
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: AppTextView(
-                                    '${formatter.format(data.data![index].price)} ل س',
-                                    style:
-                                        context.textTheme.titleSmall!.withColor(
-                                      Colors.white,
-                                    ))),
-                          if (data.data![index].coupons!.isNotEmpty) ...[
-                            Container(
-                                padding: HWEdgeInsets.all(3.5),
-                                decoration: BoxDecoration(
-                                    color: context.colorScheme.secondary,
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: AppTextView(
-                                    '${formatter.format(data.data![index].price - data.data![index].coupons![0].discount!)} ل س',
-                                    style: context.textTheme.titleSmall!
-                                        .withColor(Colors.white))),
-                          ],
-                          10.verticalSpace,
-                          SizedBox(
-                              height: 300,
-                              child: PhotoGrid(
-                                  imageUrls: data.data![index].photos)),
-                          2.verticalSpace,
-                          Row(
-                            children: [
-                              if (data.data![index].comments != 0)
-                                AppTextView(
-                                    '${data.data![index].comments} ${LocaleKeys.home_screen_comments.tr()}',
-                                    style: context.textTheme.titleSmall),
-                              5.horizontalSpace,
-                              if (data.data![index].likes != 0)
-                                AppTextView(
-                                    '${data.data![index].likes} ${LocaleKeys.home_screen_likes.tr()}',
-                                    style: context.textTheme.titleSmall)
-                            ],
+                          InkWell(
+                            onTap: () {
+                              context.pushNamed(
+                                  GRouter.config.homeScreen.viewProductScreen,
+                                  extra: data.data![index]);
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AppTextView(data.data![index].title,
+                                    style: context.textTheme.titleLarge),
+                                10.verticalSpace,
+                                AppTextView(data.data![index].content,
+                                    style: context.textTheme.titleMedium),
+                                10.verticalSpace,
+                                if (data.data![index].coupons!.isEmpty)
+                                  Container(
+                                      padding: HWEdgeInsets.all(3.5),
+                                      decoration: BoxDecoration(
+                                          color: context.colorScheme.secondary,
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: AppTextView(
+                                          '${formatter.format(data.data![index].price)} ل س',
+                                          style: context.textTheme.titleSmall!
+                                              .withColor(
+                                            Colors.white,
+                                          ))),
+                                if (data.data![index].coupons!.isNotEmpty) ...[
+                                  Container(
+                                      padding: HWEdgeInsets.all(3.5),
+                                      decoration: BoxDecoration(
+                                          color: context.colorScheme.secondary,
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: AppTextView(
+                                          '${formatter.format(data.data![index].price - data.data![index].coupons![0].discount!)} ل س',
+                                          style: context.textTheme.titleSmall!
+                                              .withColor(Colors.white))),
+                                ],
+                                10.verticalSpace,
+                                SizedBox(
+                                    width: double.infinity,
+                                    height: data.data![index].photos.length < 3
+                                        ? 250
+                                        : 350,
+                                    child: PhotoGrid(
+                                        imageUrls: data.data![index].photos)),
+                                2.verticalSpace,
+                                Row(
+                                  children: [
+                                    if (data.data![index].comments != 0)
+                                      AppTextView(
+                                          '${data.data![index].comments} ${LocaleKeys.home_screen_comments.tr()}',
+                                          style: context.textTheme.titleSmall),
+                                    5.horizontalSpace,
+                                    if (data.data![index].likes != 0)
+                                      AppTextView(
+                                          '${data.data![index].likes} ${LocaleKeys.home_screen_likes.tr()}',
+                                          style: context.textTheme.titleSmall),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                           const Divider(
                             color: Colors.grey,

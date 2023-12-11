@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:user/core/config/router/router.dart';
 import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/responsive_padding.dart';
+import 'package:user/features/app/domain/repository/prefs_repository.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
 import 'package:user/features/app/presentation/widgets/app_text_view.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
@@ -112,7 +114,17 @@ class AccountAndSecurity extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        CardSettings(title: LocaleKeys.logout.tr())
+                        InkWell(
+                          onTap: () {
+                            GetIt.I<PrefsRepository>()
+                                .clearUser()
+                                .then((value) {
+                              print(value);
+                              context.goNamed(GRouter.config.authRoutes.login);
+                            });
+                          },
+                          child: CardSettings(title: LocaleKeys.logout.tr()),
+                        )
                       ],
                     ),
                   ))

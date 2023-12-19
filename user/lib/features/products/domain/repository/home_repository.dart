@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:user/core/common/model/response_wrapper/response_wrapper.dart';
 import 'package:user/features/products/data/model/category_model/category_model.dart';
 import 'package:user/features/products/data/model/comments_model/comments_model.dart';
+import 'package:user/features/products/data/model/coupon_model/coupon_model.dart';
 import 'package:user/features/products/data/model/posts_model.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/add_comment_use_case.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/edit_comment_use_case.dart';
+import 'package:user/features/products/domain/usecases/coupons_use_case/get_coupons_use_case.dart';
+import 'package:user/features/products/domain/usecases/payment_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/add_post_use_case.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/get_comments_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/edit_product_use_case.dart';
@@ -30,4 +33,7 @@ abstract class HomeRepository {
   Future<Result<bool>> deleteComment(String idComment);
   Future<Result<ResponseWrapper<DataComment>>> editComment(
       EditCommentParams params);
+  Future<Result<ResponseWrapper<CouponModel>>> getCoupons(
+      GetCouponsParams params);
+  Future<Result<bool>> addPayment(PaymentParams params);
 }

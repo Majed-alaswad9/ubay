@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:user/core/config/router/router.dart';
+import 'package:user/core/config/themes/app_theme.dart';
 import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/responsive_padding.dart';
@@ -116,6 +117,68 @@ class AccountAndSecurity extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text('هل أنت متأكد؟'),
+                                content:
+                                    Text('هل تريد تسجيل خروج من حسابك الحالي'),
+                                actions: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              context, LocaleKeys.cancel.tr()),
+                                          child: Container(
+                                            padding: HWEdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: context
+                                                        .colorScheme.primary),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        kbrButton),
+                                                color: context.colorScheme
+                                                    .secondaryContainer),
+                                            child: Text(
+                                              LocaleKeys.cancel.tr(),
+                                              style: context
+                                                  .textTheme.titleSmall!
+                                                  .copyWith(
+                                                      color: context
+                                                          .colorScheme.primary),
+                                            ),
+                                          )),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                                kbrButton),
+                                            color: Colors.red),
+                                        child: MaterialButton(
+                                            onPressed: () {},
+                                            child: Row(
+                                              children: [
+                                                const Icon(
+                                                  Icons.logout_outlined,
+                                                  color: Colors.white,
+                                                ),
+                                                8.horizontalSpace,
+                                                Text(
+                                                  LocaleKeys.logout.tr(),
+                                                  style: context
+                                                      .textTheme.titleSmall!
+                                                      .copyWith(
+                                                          color: Colors.white),
+                                                )
+                                              ],
+                                            )),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            );
                             GetIt.I<PrefsRepository>()
                                 .clearUser()
                                 .then((value) {

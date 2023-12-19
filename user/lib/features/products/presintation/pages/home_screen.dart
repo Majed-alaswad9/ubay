@@ -116,6 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               if (data.data![index].user!.id == user.id) ...[
                                 const Spacer(),
                                 PopUpMenuDeleteEdit(
+                                  isCoupon: false,
                                   product: data.data![index],
                                   deleteFunction: () {
                                     context.read<HomeBloc>().add(

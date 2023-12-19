@@ -84,12 +84,24 @@
     "no_data": "لا يوجد بيانات لعرضها",
     "add": "إضافة",
     "photos": "الصور",
-    "the_price_will_be_after_discount": "سيصبح السعر بعد الحسم",
-    "end_of_validity": "انتهاء الصلاحية",
-    "discount": "الحسم",
-    "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",
-    "add_a_discount_for_the_item": "إضافة حسم للقطعة:",
+    "not_found": "لا يوجد",
+
+    "coupon": {
+        "the_price_will_be_after_discount": "سيصبح السعر بعد الحسم",
+        "end_of_validity": "انتهاء الصلاحية",
+        "discount": "الحسم",
+        "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",
+        "add_a_discount_for_the_item": "إضافة حسم للقطعة: ",
+        "view_coupons": "عرض الحسومات"
+    },
     "lbl_loading": " الرجاء الانتظار ...",
+    "payment": {
+        "buy": "شراء",
+        "error": "يرجى شحن حسابك قبل شراء القطعة",
+        "success": "تم شراء القطعة بنجاح",
+        "lbl_first": "- سيتم إشعارك للذهاب لاستلام القطعة فور احضار البائع لها",
+        "lbl_second": "- عند وصول الإشعار الرجاء التوجه إلى المستودع المذكور ضمن الإشعار"
+    },
     "deliveryStatus": {
         "seller": {
             "seller": "تم التسليم للمستودع",

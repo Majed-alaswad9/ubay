@@ -168,13 +168,19 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                             },
                                             fromContext: context,
                                             isProduct: false,
+                                            isCoupon: false,
                                           )
                                         else if (widget.product.user!.id ==
                                             user.id)
                                           PopUpMenuCoupon(
-                                            dataComment: data.data![index],
-                                            fromContext: context,
-                                            product: widget.product,
+                                            title:
+                                                '${LocaleKeys.coupon_add_a_discount_for_the_item.tr()} ${widget.product.title}',
+                                            priceProduct: widget.product.price,
+                                            context: context,
+                                            userName:
+                                                data.data![index].user.name,
+                                            userPhoto:
+                                                data.data![index].user.photo,
                                           )
                                       ],
                                     ),

@@ -5,10 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user/core/config/themes/my_color_scheme.dart';
 import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/extensions/build_context.dart';
+import 'package:user/core/util/show_message.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
 import 'package:user/features/products/data/model/posts_model.dart';
+import 'package:user/features/products/presintation/widget/button_buy.dart';
+import 'package:user/features/products/presintation/widget/button_coupon.dart';
 import '../../../../core/common/constants/constants.dart';
 import '../../../../core/util/chose_date_time.dart';
 import '../../../../core/util/responsive_padding.dart';
@@ -21,6 +24,7 @@ import '../widget/like_button.dart';
 
 class ViewProduct extends StatelessWidget {
   const ViewProduct({super.key, required this.product});
+
   final Data product;
 
   @override
@@ -30,166 +34,185 @@ class ViewProduct extends StatelessWidget {
           appBarParams: AppBarParams(),
           isLeading: true,
         ),
-        body: ListView(
-          shrinkWrap: true,
-          physics: const AlwaysScrollableScrollPhysics(),
-          children: [
-            Card(
-              color: Colors.white,
-              clipBehavior: Clip.antiAlias,
-              child: Padding(
-                padding: HWEdgeInsets.all(5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(product.user!.photo),
-                          radius: 26,
-                        ),
-                        10.horizontalSpace,
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AppTextView(
-                                style: context.textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                                product.user!.name),
-                            5.verticalSpace,
-                            AppTextView(
-                                ChoseDateTime().chose(product.createdAt),
-                                style: context.textTheme.titleSmall!.copyWith(
-                                    fontSize: 10,
-                                    color: context.colorScheme.grey))
-                          ],
-                        ),
-                        10.horizontalSpace,
-                        if (product.user!.id == user.id) ...[
-                          const Spacer(),
-                          PopUpMenuDeleteEdit(
-                            product: product,
-                            deleteFunction: () {
-                              context
-                                  .read<HomeBloc>()
-                                  .add(DeleteProductEvent(product.id));
-                            },
-                            fromContext: context,
-                            isProduct: true,
-                          )
-                        ]
-                      ],
-                    ),
-                    Divider(
-                      color: context.colorScheme.grey,
-                    ),
-                    10.verticalSpace,
-                    AppTextView(product.title,
-                        style: context.textTheme.titleLarge),
-                    10.verticalSpace,
-                    AppTextView(product.content,
-                        style: context.textTheme.titleMedium),
-                    10.verticalSpace,
-                    if (product.coupons!.isEmpty)
-                      Container(
-                          padding: HWEdgeInsets.all(3.5),
-                          decoration: BoxDecoration(
-                              color: context.colorScheme.secondary,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: AppTextView(
-                              '${formatter.format(product.price)} ل س',
-                              style: context.textTheme.titleSmall!.withColor(
-                                Colors.white,
-                              ))),
-                    if (product.coupons!.isNotEmpty) ...[
-                      Container(
-                          padding: HWEdgeInsets.all(3.5),
-                          decoration: BoxDecoration(
-                              color: context.colorScheme.secondary,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: AppTextView(
-                              '${formatter.format(product.price - product.coupons![0].discount!)} ل س',
-                              style: context.textTheme.titleSmall!
-                                  .withColor(Colors.white))),
-                    ],
-                    10.verticalSpace,
-                    if (product.comments != 0)
-                      AppTextView(
-                          '${product.comments} ${LocaleKeys.home_screen_comments.tr()}',
-                          style: context.textTheme.titleSmall),
-                    if (product.likes != 0)
-                      AppTextView(
-                          '${product.likes} ${LocaleKeys.home_screen_likes.tr()}',
-                          style: context.textTheme.titleSmall),
-                    const Divider(
-                      color: Colors.grey,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: LikeButton(
-                              postId: product.id, isLike: product.likedByMe),
-                        ),
-                        Expanded(
-                          child: MaterialButton(
-                            onPressed: () {
-                              context
-                                  .read<HomeBloc>()
-                                  .add(GetCommentsEvent(product.id));
-                              showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  context: context,
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(16))),
-                                  builder: (context) => SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.8,
-                                      child: CommentsWidget(
-                                        product: product,
-                                        postId: product.id,
-                                      )));
-                            },
-                            child: Icon(
-                              Icons.comment,
-                              color: context.colorScheme.primary,
-                            ),
+        body: BlocListener<HomeBloc, HomeState>(
+          listener: (context, state) {
+            if (state.addPaymentStatus.isSuccess()) {
+              showMessage(LocaleKeys.payment_success.tr(), isSuccess: true);
+            } else if (state.addPaymentStatus.isFail()) {
+              showMessage(LocaleKeys.payment_error.tr());
+            }
+          },
+          child: ListView(
+            shrinkWrap: true,
+            physics: const AlwaysScrollableScrollPhysics(),
+            children: [
+              Card(
+                color: Colors.white,
+                clipBehavior: Clip.antiAlias,
+                child: Padding(
+                  padding: HWEdgeInsets.all(5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(product.user!.photo),
+                            radius: 26,
                           ),
-                        ),
-                        Expanded(
-                          child: MaterialButton(
-                            onPressed: () {},
-                            child: Icon(
-                              Icons.telegram_sharp,
-                              size: 35,
-                              color: context.colorScheme.primary,
-                            ),
+                          10.horizontalSpace,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppTextView(
+                                  style: context.textTheme.titleSmall!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                  product.user!.name),
+                              5.verticalSpace,
+                              AppTextView(
+                                  ChoseDateTime().chose(product.createdAt),
+                                  style: context.textTheme.titleSmall!.copyWith(
+                                      fontSize: 10,
+                                      color: context.colorScheme.grey))
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                    ),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => Image.network(
-                        product.photos[index],
-                        fit: BoxFit.contain,
+                          10.horizontalSpace,
+                          if (product.user!.id == user.id) ...[
+                            const Spacer(),
+                            PopUpMenuDeleteEdit(
+                              product: product,
+                              deleteFunction: () {
+                                context
+                                    .read<HomeBloc>()
+                                    .add(DeleteProductEvent(product.id));
+                              },
+                              fromContext: context,
+                              isProduct: true,
+                              isCoupon: false,
+                            )
+                          ]
+                        ],
                       ),
-                      separatorBuilder: (context, _) => 5.verticalSpace,
-                      itemCount: product.photos.length,
-                    )
-                  ],
+                      Divider(
+                        color: context.colorScheme.grey,
+                      ),
+                      10.verticalSpace,
+                      AppTextView(product.title,
+                          style: context.textTheme.titleLarge),
+                      10.verticalSpace,
+                      AppTextView(product.content,
+                          style: context.textTheme.titleMedium),
+                      10.verticalSpace,
+                      if (product.coupons!.isEmpty)
+                        Container(
+                            padding: HWEdgeInsets.all(3.5),
+                            decoration: BoxDecoration(
+                                color: context.colorScheme.secondary,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: AppTextView(
+                                '${formatter.format(product.price)} ل س',
+                                style: context.textTheme.titleSmall!.withColor(
+                                  Colors.white,
+                                ))),
+                      if (product.coupons!.isNotEmpty) ...[
+                        Container(
+                            padding: HWEdgeInsets.all(3.5),
+                            decoration: BoxDecoration(
+                                color: context.colorScheme.secondary,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: AppTextView(
+                                '${formatter.format(product.price - product.coupons![0].discount!)} ل س',
+                                style: context.textTheme.titleSmall!
+                                    .withColor(Colors.white))),
+                      ],
+                      10.verticalSpace,
+                      if (product.comments != 0)
+                        AppTextView(
+                            '${product.comments} ${LocaleKeys.home_screen_comments.tr()}',
+                            style: context.textTheme.titleSmall),
+                      if (product.likes != 0)
+                        AppTextView(
+                            '${product.likes} ${LocaleKeys.home_screen_likes.tr()}',
+                            style: context.textTheme.titleSmall),
+                      const Divider(
+                        color: Colors.grey,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: LikeButton(
+                                postId: product.id, isLike: product.likedByMe),
+                          ),
+                          Expanded(
+                            child: MaterialButton(
+                              onPressed: () {
+                                context
+                                    .read<HomeBloc>()
+                                    .add(GetCommentsEvent(product.id));
+                                showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    context: context,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(16))),
+                                    builder: (context) => SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.8,
+                                        child: CommentsWidget(
+                                          product: product,
+                                          postId: product.id,
+                                        )));
+                              },
+                              child: Icon(
+                                Icons.comment,
+                                color: context.colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: MaterialButton(
+                              onPressed: () {},
+                              child: Icon(
+                                Icons.telegram_sharp,
+                                size: 35,
+                                color: context.colorScheme.primary,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      const Divider(
+                        color: Colors.grey,
+                      ),
+                      Row(
+                        children: [
+                          if (product.user!.id == user.id)
+                            ButtonCoupon(id: product.id, price: product.price),
+                          if (product.user!.id != user.id)
+                            ButtonBuy(id: product.id, price: product.price),
+                        ],
+                      ),
+                      10.verticalSpace,
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) => Image.network(
+                          product.photos[index],
+                          fit: BoxFit.contain,
+                        ),
+                        separatorBuilder: (context, _) => 5.verticalSpace,
+                        itemCount: product.photos.length,
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }

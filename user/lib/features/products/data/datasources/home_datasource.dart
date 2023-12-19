@@ -9,8 +9,11 @@ import 'package:user/core/common/constants/configuration/uri_routs.dart';
 import 'package:user/features/products/data/model/category_model/category_model.dart';
 import 'package:user/features/products/data/model/city_model/city_model.dart';
 import 'package:user/features/products/data/model/comments_model/comments_model.dart';
+import 'package:user/features/products/data/model/coupon_model/coupon_model.dart';
 import 'package:user/features/products/data/model/posts_model.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/add_comment_use_case.dart';
+import 'package:user/features/products/domain/usecases/coupons_use_case/get_coupons_use_case.dart';
+import 'package:user/features/products/domain/usecases/payment_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/add_post_use_case.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/get_comments_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/edit_product_use_case.dart';
@@ -48,9 +51,9 @@ class HomeDataSource {
       }
 
       data['photos'] = files;
-      print(data);
+
       FormData formData = FormData.fromMap(data as Map<String, dynamic>);
-      print(formData.files.length);
+
       final response = await clientApi.request(RequestConfig(
           data: formData,
           endpoint: EndPoints.product.product,
@@ -63,7 +66,7 @@ class HomeDataSource {
 
   Future<void> addLike(String postId) {
     return throwAppException(() async {
-      final response = await clientApi.request(RequestConfig(
+      await clientApi.request(RequestConfig(
           endpoint:
               '${EndPoints.product.product}/$postId${EndPoints.product.likes}',
           clientMethod: ClientMethod.post));
@@ -72,7 +75,7 @@ class HomeDataSource {
 
   Future<void> deleteLike(String postId) {
     return throwAppException(() async {
-      final response = await clientApi.request(RequestConfig(
+      await clientApi.request(RequestConfig(
           endpoint:
               '${EndPoints.product.product}/$postId${EndPoints.product.likes}',
           clientMethod: ClientMethod.delete));
@@ -108,7 +111,6 @@ class HomeDataSource {
           endpoint:
               '${EndPoints.product.product}/${params.id}${EndPoints.product.comments}',
           clientMethod: ClientMethod.get,
-          data: params.idMap,
           queryParameters: params.queryMap));
       return ResponseWrapper.fromJson(response.data, (json) {
         final result = CommentsModel.fromJson(response.data);
@@ -138,7 +140,7 @@ class HomeDataSource {
       for (File file in params.photos) {
         files.add(await MultipartFile.fromFile(file.path));
       }
-      data['photos'] = files;
+
       FormData formData = FormData.fromMap(data as Map<String, dynamic>);
       final response = await clientApi.request(RequestConfig(
           endpoint: '${EndPoints.product.product}/${params.id}',
@@ -164,6 +166,30 @@ class HomeDataSource {
       await clientApi.request(RequestConfig(
           endpoint: '${EndPoints.product.comments}/$id',
           clientMethod: ClientMethod.delete));
+      return true;
+    });
+  }
+
+  Future<ResponseWrapper<CouponModel>> getCoupons(GetCouponsParams params) {
+    return throwAppException(() async {
+      final response = await clientApi.request(RequestConfig(
+          endpoint:
+              '${EndPoints.product.product}/${params.id}${EndPoints.product.coupons}',
+          queryParameters: params.map,
+          clientMethod: ClientMethod.get));
+      return ResponseWrapper.fromJson(response.data, (json) {
+        final result = CouponModel.fromJson(response.data);
+        return result;
+      });
+    });
+  }
+
+  Future<bool> addPayment(PaymentParams params) {
+    return throwAppException(() async {
+      await clientApi.request(RequestConfig(
+          endpoint: EndPoints.product.payment,
+          clientMethod: ClientMethod.post,
+          data: params.map));
       return true;
     });
   }

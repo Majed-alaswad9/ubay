@@ -90,3 +90,26 @@ class EditCommentEvent extends HomeEvent {
 
   EditCommentEvent(this.content, this.userId, this.postId, this.id);
 }
+
+class GetCouponsEvent extends HomeEvent {
+  final String id;
+  final String page;
+  final String limit;
+  final String sort;
+  final String search;
+  final String fields;
+
+  GetCouponsEvent(
+      {required this.id,
+      this.page = '1',
+      this.limit = '20',
+      this.sort = '',
+      this.search = '',
+      this.fields = ''});
+}
+
+class AddPaymentEvent extends HomeEvent {
+  final String product;
+
+  AddPaymentEvent(this.product);
+}

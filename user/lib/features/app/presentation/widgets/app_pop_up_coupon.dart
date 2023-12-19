@@ -3,20 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/presentation/widgets/app_elevated_button.dart';
 import 'package:user/features/app/presentation/widgets/app_text_field.dart';
-import 'package:user/features/products/data/model/comments_model/comments_model.dart';
-import 'package:user/features/products/data/model/posts_model.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
 class PopUpMenuCoupon extends StatefulWidget {
-  const PopUpMenuCoupon(
+  PopUpMenuCoupon(
       {super.key,
-      required this.product,
-      required this.fromContext,
-      required this.dataComment});
+      required this.title,
+      this.expire,
+      this.discount,
+      required this.context,
+      required this.userPhoto,
+      required this.userName,
+      required this.priceProduct});
 
-  final Data product;
-  final DataComment dataComment;
-  final BuildContext fromContext;
+  final BuildContext context;
+  final String title;
+  final String userPhoto;
+  final String userName;
+  final int priceProduct;
+  DateTime? expire;
+  int? discount;
 
   @override
   State<PopUpMenuCoupon> createState() => _PopUpMenuCouponState();
@@ -26,6 +32,15 @@ class _PopUpMenuCouponState extends State<PopUpMenuCoupon> {
   TextEditingController textEditingController = TextEditingController();
   TextEditingController dateInput = TextEditingController();
   int price = 0;
+  @override
+  void initState() {
+    textEditingController.text =
+        widget.discount != null ? widget.discount.toString() : '';
+    dateInput.text = widget.expire != null
+        ? DateFormat('yyyy-MM-dd').format(widget.expire!)
+        : '';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +54,7 @@ class _PopUpMenuCouponState extends State<PopUpMenuCoupon> {
               context: context,
               builder: (BuildContext context) => AlertDialog(
                       title: Text(
-                        '${LocaleKeys.add_a_discount_for_the_item.tr()} ${widget.product.title}',
+                        widget.title,
                         style: context.textTheme.titleMedium!
                             .copyWith(color: context.colorScheme.primary),
                       ),
@@ -48,7 +63,8 @@ class _PopUpMenuCouponState extends State<PopUpMenuCoupon> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                              LocaleKeys.the_user_who_will_receive_the_discount
+                              LocaleKeys
+                                  .coupon_the_user_who_will_receive_the_discount
                                   .tr(),
                               style: context.textTheme.titleSmall),
                           const SizedBox(
@@ -60,14 +76,14 @@ class _PopUpMenuCouponState extends State<PopUpMenuCoupon> {
                               child: Row(
                                 children: [
                                   CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        widget.product.user!.photo),
+                                    backgroundImage:
+                                        NetworkImage(widget.userPhoto),
                                   ),
                                   const SizedBox(
                                     width: 10,
                                   ),
                                   Text(
-                                    widget.dataComment.user.name,
+                                    widget.userName,
                                     style: context.textTheme.titleSmall,
                                   )
                                 ],
@@ -81,7 +97,7 @@ class _PopUpMenuCouponState extends State<PopUpMenuCoupon> {
                             name: 'coupon',
                             controller: textEditingController,
                             textInputType: TextInputType.number,
-                            labelText: LocaleKeys.discount.tr(),
+                            labelText: LocaleKeys.coupon_discount.tr(),
                             onChange: (value) {
                               price = int.parse(value.toString());
                             },
@@ -89,7 +105,7 @@ class _PopUpMenuCouponState extends State<PopUpMenuCoupon> {
                                 .copyWith(color: context.colorScheme.primary),
                           ),
                           Text(
-                            '${LocaleKeys.the_price_will_be_after_discount.tr()} ${widget.product.price - price} ل س',
+                            '${LocaleKeys.coupon_the_price_will_be_after_discount.tr()} ${widget.priceProduct - price} ل س',
                             style: context.textTheme.bodySmall,
                           ),
                           const SizedBox(
@@ -98,14 +114,13 @@ class _PopUpMenuCouponState extends State<PopUpMenuCoupon> {
                           AppTextField(
                             name: 'date',
                             controller: dateInput,
-                            labelText: LocaleKeys.end_of_validity.tr(),
+                            labelText: LocaleKeys.coupon_end_of_validity.tr(),
                             labelTextStyle: context.textTheme.titleSmall!
                                 .copyWith(color: context.colorScheme.primary),
                             readOnly: true,
                             onTap: () async {
                               DateTime? pickedDate = await showDatePicker(
                                   context: context,
-                                  initialDate: DateTime.now(),
                                   firstDate: DateTime(DateTime.now().day),
                                   //DateTime.now() - not to allow to choose before today.
                                   lastDate: DateTime(2100));

@@ -8,10 +8,13 @@ import 'package:user/features/products/data/datasources/home_datasource.dart';
 import 'package:user/features/products/data/model/category_model/category_model.dart';
 import 'package:user/features/products/data/model/city_model/city_model.dart';
 import 'package:user/features/products/data/model/comments_model/comments_model.dart';
+import 'package:user/features/products/data/model/coupon_model/coupon_model.dart';
 import 'package:user/features/products/data/model/posts_model.dart';
 import 'package:user/features/products/domain/repository/home_repository.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/add_comment_use_case.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/edit_comment_use_case.dart';
+import 'package:user/features/products/domain/usecases/coupons_use_case/get_coupons_use_case.dart';
+import 'package:user/features/products/domain/usecases/payment_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/add_post_use_case.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/get_comments_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/edit_product_use_case.dart';
@@ -112,6 +115,23 @@ class HomeRepositoryImplement extends HomeRepository {
   Future<Result<ResponseWrapper<bool>>> editProduct(EditProductParams params) {
     return toApiResult(() {
       final result = homeDataSource.editProduct(params);
+      return result;
+    });
+  }
+
+  @override
+  Future<Result<ResponseWrapper<CouponModel>>> getCoupons(
+      GetCouponsParams params) {
+    return toApiResult(() {
+      final result = homeDataSource.getCoupons(params);
+      return result;
+    });
+  }
+
+  @override
+  Future<Result<bool>> addPayment(PaymentParams params) {
+    return toApiResult(() {
+      final result = homeDataSource.addPayment(params);
       return result;
     });
   }

@@ -15,11 +15,14 @@ import 'package:user/features/products/data/model/city_model/city_model.dart';
 
 import '../../data/model/category_model/category_model.dart';
 import '../../data/model/comments_model/comments_model.dart';
+import '../../data/model/coupon_model/coupon_model.dart';
 import '../../data/model/posts_model.dart';
 import '../../domain/usecases/comment_use_case/add_comment_use_case.dart';
 import '../../domain/usecases/add_like_use_case.dart';
 import '../../domain/usecases/comment_use_case/delete_comment_use_case.dart';
 import '../../domain/usecases/comment_use_case/edit_comment_use_case.dart';
+import '../../domain/usecases/coupons_use_case/get_coupons_use_case.dart';
+import '../../domain/usecases/payment_use_case.dart';
 import '../../domain/usecases/product_use_case/add_post_use_case.dart';
 import '../../domain/usecases/delete_like_use_case.dart';
 import '../../domain/usecases/product_use_case/delete_product_use_case.dart';
@@ -47,6 +50,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final DeleteCommentUseCase deleteCommentUseCase;
   final EditCommentUseCase editCommentUseCase;
   final DeleteProductUseCase deleteProductUseCase;
+  final GetCouponsUseCase getCouponsUseCase;
+  final AddPaymentUseCase addPaymentUseCase;
   HomeBloc(
     this.getAllPostsUseCase,
     this.addLikeUseCase,
@@ -60,6 +65,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     this.deleteCommentUseCase,
     this.editCommentUseCase,
     this.deleteProductUseCase,
+    this.getCouponsUseCase,
+    this.addPaymentUseCase,
   ) : super(const HomeState()) {
     on<GetAllPostsEvent>(_onGetAllPosts);
     on<AddPostEvent>(_onAddPostEvent);
@@ -74,6 +81,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<DeleteProductEvent>(_onDeleteProduct);
     on<DeleteCommentEvent>(_onDeleteCommentEvent);
     on<EditCommentEvent>(_onEditCommentEvent);
+    on<GetCouponsEvent>(_onGetCouponsEvent);
+    on<AddPaymentEvent>(_onAddPaymentEvent);
   }
 
   FutureOr<void> _onGetAllPosts(
@@ -271,5 +280,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(addComment: const BlocStatus.success()));
       add(GetCommentsEvent(event.postId));
     });
+  }
+
+  FutureOr<void> _onGetCouponsEvent(
+      GetCouponsEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(couponsState: const PageState.loading()));
+    final result = await getCouponsUseCase(GetCouponsParams(event.id,
+        event.page, event.limit, event.sort, event.fields, event.search));
+    result.fold((exception, message) {
+      emit(state.copyWith(couponsState: PageState.error(exception: exception)));
+    }, (value) {
+      emit(state.copyWith(couponsState: PageState.loaded(data: value.data)));
+    });
+  }
+
+  FutureOr<void> _onAddPaymentEvent(
+      AddPaymentEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(addPaymentStatus: const BlocStatus.loading()));
+    final result = await addPaymentUseCase(PaymentParams(event.product));
+    result.fold((exception, message) {
+      emit(state.copyWith(addPaymentStatus: BlocStatus.fail(error: message)));
+    }, (value) {
+      emit(state.copyWith(addPaymentStatus: const BlocStatus.success()));
+    });
+    emit(state.copyWith(addPaymentStatus: const BlocStatus.initial()));
   }
 }

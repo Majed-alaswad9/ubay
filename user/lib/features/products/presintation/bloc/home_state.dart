@@ -14,6 +14,9 @@ class HomeState {
   final PageState<CommentsModel> commentsStatus;
   final BlocStatus addComment;
   final DataComment? commentsModel;
+  final PageState<CouponModel> couponsState;
+  final BlocStatus addPaymentStatus;
+  final BlocStatus deleteCoupon;
 
   const HomeState(
       {this.addLikeStatus = const BlocStatus.initial(),
@@ -27,7 +30,10 @@ class HomeState {
       this.categoryStatus = const PageState.init(),
       this.allPosts = const PageState.init(),
       this.commentsModel,
-      this.commentsStatus = const PageState.init()});
+      this.commentsStatus = const PageState.init(),
+      this.couponsState = const PageState.init(),
+      this.addPaymentStatus = const BlocStatus.initial(),
+      this.deleteCoupon = const BlocStatus.initial()});
 
   HomeState copyWith(
       {final PageState<PostsModel>? allPosts,
@@ -41,7 +47,10 @@ class HomeState {
       final BlocStatus? deleteLikeStatus,
       final PageState<CommentsModel>? commentsStatus,
       final DataComment? commentsModel,
-      final BlocStatus? addComment}) {
+      final BlocStatus? addComment,
+      final PageState<CouponModel>? couponsState,
+      final BlocStatus? addPaymentStatus,
+      final BlocStatus? deleteCoupon}) {
     return HomeState(
         allPosts: allPosts ?? this.allPosts,
         addPost: addPost ?? const BlocStatus.initial(),
@@ -54,6 +63,9 @@ class HomeState {
         storeStatus: storeStatus ?? this.storeStatus,
         commentsStatus: commentsStatus ?? this.commentsStatus,
         commentsModel: commentsModel ?? this.commentsModel,
-        addComment: addComment ?? this.addComment);
+        addComment: addComment ?? this.addComment,
+        couponsState: couponsState ?? this.couponsState,
+        addPaymentStatus: addPaymentStatus ?? this.addPaymentStatus,
+        deleteCoupon: deleteCoupon ?? this.deleteCoupon);
   }
 }

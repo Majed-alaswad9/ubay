@@ -50,9 +50,9 @@ BottomSheetThemeData _bottomSheetThemeData(ThemeData theme) =>
       backgroundColor: theme.colorScheme.background,
     );
 
-final double kbrDefault = 15.r;
-final double kbrBorderTextField = 5.r;
-final double kbrButton = 6.r;
+final double kbrDefault = 12.r;
+final double kbrBorderTextField = 8.r;
+final double kbrButton = 8.r;
 
 const kDesignSize = Size(428, 923);
 const double kpPaddingPage = 20;

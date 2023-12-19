@@ -100,12 +100,23 @@ class CodegenLoader extends AssetLoader{
   "no_data": "No Data",
   "add": "Add",
   "photos": "Photos",
-  "the_price_will_be_after_discount": "The price will be after discount",
-  "end_of_validity": "End of validity",
-  "discount": "discount",
-  "the_user_who_will_receive_the_discount": "The user who will receive the discount",
-  "add_a_discount_for_the_item": "Add a discount for the item:",
+  "not_found": "Not found",
+  "coupon": {
+    "the_price_will_be_after_discount": "The price will be after discount",
+    "end_of_validity": "End of validity",
+    "discount": "discount",
+    "the_user_who_will_receive_the_discount": "The user who will receive the discount",
+    "add_a_discount_for_the_item": "Add a discount for the item: ",
+    "view_coupons": "View coupons"
+  },
   "lbl_loading": "Loading...",
+  "payment": {
+    "buy": "Buying",
+    "error": "Please charge your account before purchasing the product",
+    "success": "The item has been purchased successfully",
+    "lbl_first": "- You will be notified to go pick up the item as soon as the seller brings it",
+    "lbl_second": "- When the notice arrives, please go to the warehouse mentioned in the notice"
+  },
   "messages": {
     "success": {
       "update_successfully": "Update successfully",
@@ -219,12 +230,23 @@ static const Map<String,dynamic> ar = {
   "no_data": "لا يوجد بيانات لعرضها",
   "add": "إضافة",
   "photos": "الصور",
-  "the_price_will_be_after_discount": "سيصبح السعر بعد الحسم",
-  "end_of_validity": "انتهاء الصلاحية",
-  "discount": "الحسم",
-  "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",
-  "add_a_discount_for_the_item": "إضافة حسم للقطعة:",
+  "not_found": "لا يوجد",
+  "coupon": {
+    "the_price_will_be_after_discount": "سيصبح السعر بعد الحسم",
+    "end_of_validity": "انتهاء الصلاحية",
+    "discount": "الحسم",
+    "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",
+    "add_a_discount_for_the_item": "إضافة حسم للقطعة: ",
+    "view_coupons": "عرض الحسومات"
+  },
   "lbl_loading": " الرجاء الانتظار ...",
+  "payment": {
+    "buy": "شراء",
+    "error": "يرجى شحن حسابك قبل شراء القطعة",
+    "success": "تم شراء القطعة بنجاح",
+    "lbl_first": "- سيتم إشعارك للذهاب لاستلام القطعة فور احضار البائع لها",
+    "lbl_second": "- عند وصول الإشعار الرجاء التوجه إلى المستودع المذكور ضمن الإشعار"
+  },
   "deliveryStatus": {
     "seller": {
       "seller": "تم التسليم للمستودع",

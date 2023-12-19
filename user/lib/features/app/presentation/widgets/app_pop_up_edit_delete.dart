@@ -20,12 +20,16 @@ class PopUpMenuDeleteEdit extends StatelessWidget {
     required this.fromContext,
     this.product,
     required this.isProduct,
+    this.editFunction,
+    required this.isCoupon,
   });
 
   final Function() deleteFunction;
   final BuildContext fromContext;
   final Data? product;
+  final Function()? editFunction;
   final bool isProduct;
+  final bool isCoupon;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +44,12 @@ class PopUpMenuDeleteEdit extends StatelessWidget {
               fromContext.goNamed(GRouter.config.homeScreen.addPostScreen,
                   extra:
                       AddPostScreenParams(isUpdate: true, postsModel: product));
+            } else {
+              editFunction!;
             }
           } else if (value == Const.delete) {
             Const.showMyDialog(
+              isCoupon: isCoupon,
               context: context,
               title: LocaleKeys.home_screen_delete_post.tr(),
               content: LocaleKeys.home_screen_sure_delete.tr(),
@@ -68,7 +75,8 @@ class Const {
           {required context,
           required String title,
           required String content,
-          required dynamic Function()? onPressed}) =>
+          required dynamic Function()? onPressed,
+          required bool isCoupon}) =>
       showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
@@ -99,7 +107,9 @@ class Const {
                           ),
                         )),
                     BlocSelector<HomeBloc, HomeState, BlocStatus>(
-                      selector: (state) => state.deletePostOrComment,
+                      selector: (state) => isCoupon
+                          ? state.deleteCoupon
+                          : state.deletePostOrComment,
                       builder: (context, state) {
                         return ConditionalBuilder(
                           condition: !state.isLoading(),

@@ -1,7 +1,7 @@
 abstract class EndPoints {
   EndPoints._();
 
-  static const String baseUrl = 'http://192.168.1.102:3000/api/v1/';
+  static const String baseUrl = 'http://192.168.1.116:3000/api/v1/';
   static const String socketUrl = 'ws://192.168.1.102:3000';
   static const auth = Auth();
   static const product = Product();
@@ -26,6 +26,8 @@ class Product {
   final productMine = '/products/mine';
   final category = '/categories';
   final comments = '/comments';
+  final coupons = '/coupons';
+  final payment = '/payments';
 }
 
 class Stores {

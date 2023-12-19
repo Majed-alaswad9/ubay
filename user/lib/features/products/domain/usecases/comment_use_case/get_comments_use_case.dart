@@ -28,11 +28,6 @@ class CommentsParams {
 
   CommentsParams(
       this.id, this.page, this.limit, this.sort, this.fields, this.search);
-  Map<String, dynamic> get idMap {
-    return {
-      'id': id,
-    };
-  }
 
   Map<String, dynamic> get queryMap {
     return {

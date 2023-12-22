@@ -13,6 +13,8 @@ import 'package:user/features/products/data/model/posts_model.dart';
 import 'package:user/features/products/domain/repository/home_repository.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/add_comment_use_case.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/edit_comment_use_case.dart';
+import 'package:user/features/products/domain/usecases/coupons_use_case/add_coupon_use_case.dart';
+import 'package:user/features/products/domain/usecases/coupons_use_case/edit_coupon_use_case.dart';
 import 'package:user/features/products/domain/usecases/coupons_use_case/get_coupons_use_case.dart';
 import 'package:user/features/products/domain/usecases/payment_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/add_post_use_case.dart';
@@ -132,6 +134,30 @@ class HomeRepositoryImplement extends HomeRepository {
   Future<Result<bool>> addPayment(PaymentParams params) {
     return toApiResult(() {
       final result = homeDataSource.addPayment(params);
+      return result;
+    });
+  }
+
+  @override
+  Future<Result<bool>> addCoupon(AddCouponParams params) {
+    return toApiResult(() {
+      final result = homeDataSource.addCoupon(params);
+      return result;
+    });
+  }
+
+  @override
+  Future<Result<bool>> deleteCoupon(String params) {
+    return toApiResult(() {
+      final result = homeDataSource.deleteCoupon(params);
+      return result;
+    });
+  }
+
+  @override
+  Future<Result<bool>> editCoupon(EditCouponParams params) {
+    return toApiResult(() {
+      final result = homeDataSource.editCoupon(params);
       return result;
     });
   }

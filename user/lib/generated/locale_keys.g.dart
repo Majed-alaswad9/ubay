@@ -81,11 +81,14 @@ abstract class  LocaleKeys {
   static const photos = 'photos';
   static const not_found = 'not_found';
   static const coupon_the_price_will_be_after_discount = 'coupon.the_price_will_be_after_discount';
+  static const coupon_the_price_after_discount = 'coupon.the_price_after_discount';
   static const coupon_end_of_validity = 'coupon.end_of_validity';
   static const coupon_discount = 'coupon.discount';
   static const coupon_the_user_who_will_receive_the_discount = 'coupon.the_user_who_will_receive_the_discount';
   static const coupon_add_a_discount_for_the_item = 'coupon.add_a_discount_for_the_item';
   static const coupon_view_coupons = 'coupon.view_coupons';
+  static const coupon_delete_coupon = 'coupon.delete_coupon';
+  static const coupon_sure_delete = 'coupon.sure_delete';
   static const coupon = 'coupon';
   static const lbl_loading = 'lbl_loading';
   static const payment_buy = 'payment.buy';

@@ -54,7 +54,8 @@ class _CommentsWidgetState extends State<CommentsWidget> {
           commentController.text = '';
         }
       },
-      child: Column(
+      child: ListView(
+        shrinkWrap: true,
         children: [
           Padding(
             padding: HWEdgeInsets.all(10.0),
@@ -176,7 +177,8 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                             title:
                                                 '${LocaleKeys.coupon_add_a_discount_for_the_item.tr()} ${widget.product.title}',
                                             priceProduct: widget.product.price,
-                                            context: context,
+                                            productId: widget.product.id,
+                                            userId: data.data![index].user.id,
                                             userName:
                                                 data.data![index].user.name,
                                             userPhoto:

@@ -156,7 +156,18 @@ class AccountAndSecurity extends StatelessWidget {
                                                 kbrButton),
                                             color: Colors.red),
                                         child: MaterialButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              GetIt.I<PrefsRepository>()
+                                                  .clearUser()
+                                                  .then((value) {
+                                                value
+                                                    ? context.goNamed(GRouter
+                                                        .config
+                                                        .authRoutes
+                                                        .login)
+                                                    : null;
+                                              });
+                                            },
                                             child: Row(
                                               children: [
                                                 const Icon(
@@ -179,12 +190,6 @@ class AccountAndSecurity extends StatelessWidget {
                                 ],
                               ),
                             );
-                            GetIt.I<PrefsRepository>()
-                                .clearUser()
-                                .then((value) {
-                              print(value);
-                              context.goNamed(GRouter.config.authRoutes.login);
-                            });
                           },
                           child: CardSettings(title: LocaleKeys.logout.tr()),
                         )

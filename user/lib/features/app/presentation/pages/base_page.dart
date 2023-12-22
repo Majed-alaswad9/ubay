@@ -40,7 +40,7 @@ class BasePage extends StatelessWidget {
               icon: const Icon(
                 Icons.transfer_within_a_station,
               ),
-              label: 'trans',
+              label: LocaleKeys.transactions.tr(),
               activeIcon: Icon(
                 Icons.transfer_within_a_station,
                 color: context.colorScheme.primary,
@@ -49,7 +49,7 @@ class BasePage extends StatelessWidget {
               icon: const Icon(
                 Icons.chat,
               ),
-              label: 'chat',
+              label: LocaleKeys.chat.tr(),
               activeIcon: Icon(
                 Icons.chat,
                 color: context.colorScheme.primary,
@@ -58,7 +58,7 @@ class BasePage extends StatelessWidget {
               icon: const Icon(
                 Icons.person,
               ),
-              label: 'profile',
+              label: LocaleKeys.profile.tr(),
               activeIcon: Icon(
                 Icons.person,
                 color: context.colorScheme.primary,

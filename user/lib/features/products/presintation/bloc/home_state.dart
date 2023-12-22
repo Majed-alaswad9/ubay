@@ -14,9 +14,11 @@ class HomeState {
   final PageState<CommentsModel> commentsStatus;
   final BlocStatus addComment;
   final DataComment? commentsModel;
-  final PageState<CouponModel> couponsState;
+  final PageState<CouponModel> couponsStatus;
+  final BlocStatus addCouponStatus;
+  final BlocStatus deleteCouponStatus;
+  final BlocStatus editCouponStatus;
   final BlocStatus addPaymentStatus;
-  final BlocStatus deleteCoupon;
 
   const HomeState(
       {this.addLikeStatus = const BlocStatus.initial(),
@@ -31,26 +33,31 @@ class HomeState {
       this.allPosts = const PageState.init(),
       this.commentsModel,
       this.commentsStatus = const PageState.init(),
-      this.couponsState = const PageState.init(),
+      this.couponsStatus = const PageState.init(),
+      this.addCouponStatus = const BlocStatus.initial(),
       this.addPaymentStatus = const BlocStatus.initial(),
-      this.deleteCoupon = const BlocStatus.initial()});
+      this.deleteCouponStatus = const BlocStatus.initial(),
+      this.editCouponStatus = const BlocStatus.initial()});
 
-  HomeState copyWith(
-      {final PageState<PostsModel>? allPosts,
-      final BlocStatus? addLikeStatus,
-      final BlocStatus? addPost,
-      final BlocStatus? editPost,
-      final BlocStatus? deletePostOrComment,
-      final PageState<StoreModel>? storeStatus,
-      final List<File>? photos,
-      final PageState<CategoryModel>? categoryStatus,
-      final BlocStatus? deleteLikeStatus,
-      final PageState<CommentsModel>? commentsStatus,
-      final DataComment? commentsModel,
-      final BlocStatus? addComment,
-      final PageState<CouponModel>? couponsState,
-      final BlocStatus? addPaymentStatus,
-      final BlocStatus? deleteCoupon}) {
+  HomeState copyWith({
+    final PageState<PostsModel>? allPosts,
+    final BlocStatus? addLikeStatus,
+    final BlocStatus? addPost,
+    final BlocStatus? editPost,
+    final BlocStatus? deletePostOrComment,
+    final PageState<StoreModel>? storeStatus,
+    final List<File>? photos,
+    final PageState<CategoryModel>? categoryStatus,
+    final BlocStatus? deleteLikeStatus,
+    final PageState<CommentsModel>? commentsStatus,
+    final DataComment? commentsModel,
+    final BlocStatus? addComment,
+    final PageState<CouponModel>? couponsStatus,
+    final BlocStatus? addCouponStatus,
+    final BlocStatus? addPaymentStatus,
+    final BlocStatus? deleteCouponStatus,
+    final BlocStatus? editCouponStatus,
+  }) {
     return HomeState(
         allPosts: allPosts ?? this.allPosts,
         addPost: addPost ?? const BlocStatus.initial(),
@@ -64,8 +71,10 @@ class HomeState {
         commentsStatus: commentsStatus ?? this.commentsStatus,
         commentsModel: commentsModel ?? this.commentsModel,
         addComment: addComment ?? this.addComment,
-        couponsState: couponsState ?? this.couponsState,
+        couponsStatus: couponsStatus ?? this.couponsStatus,
+        addCouponStatus: addCouponStatus ?? this.addCouponStatus,
         addPaymentStatus: addPaymentStatus ?? this.addPaymentStatus,
-        deleteCoupon: deleteCoupon ?? this.deleteCoupon);
+        editCouponStatus: editCouponStatus ?? this.editCouponStatus,
+        deleteCouponStatus: deleteCouponStatus ?? this.deleteCouponStatus);
   }
 }

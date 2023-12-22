@@ -87,11 +87,14 @@
     "not_found": "Not found",
     "coupon": {
         "the_price_will_be_after_discount": "The price will be after discount",
+        "the_price_after_discount": "The price after discount",
         "end_of_validity": "End of validity",
         "discount": "discount",
         "the_user_who_will_receive_the_discount": "The user who will receive the discount",
         "add_a_discount_for_the_item": "Add a discount for the item: ",
-        "view_coupons": "View coupons"
+        "view_coupons": "View coupons",
+        "delete_coupon": "Delete coupon",
+        "sure_delete": "Are you sure you want to delete this coupon?"
     },
     "lbl_loading": "Loading...",
     "payment": {

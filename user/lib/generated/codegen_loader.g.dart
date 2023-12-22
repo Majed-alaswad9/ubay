@@ -103,11 +103,14 @@ class CodegenLoader extends AssetLoader{
   "not_found": "Not found",
   "coupon": {
     "the_price_will_be_after_discount": "The price will be after discount",
+    "the_price_after_discount": "The price after discount",
     "end_of_validity": "End of validity",
     "discount": "discount",
     "the_user_who_will_receive_the_discount": "The user who will receive the discount",
     "add_a_discount_for_the_item": "Add a discount for the item: ",
-    "view_coupons": "View coupons"
+    "view_coupons": "View coupons",
+    "delete_coupon": "Delete coupon",
+    "sure_delete": "Are you sure you want to delete this coupon?"
   },
   "lbl_loading": "Loading...",
   "payment": {
@@ -233,11 +236,14 @@ static const Map<String,dynamic> ar = {
   "not_found": "لا يوجد",
   "coupon": {
     "the_price_will_be_after_discount": "سيصبح السعر بعد الحسم",
+    "the_price_after_discount": " السعر بعد الحسم",
     "end_of_validity": "انتهاء الصلاحية",
     "discount": "الحسم",
     "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",
     "add_a_discount_for_the_item": "إضافة حسم للقطعة: ",
-    "view_coupons": "عرض الحسومات"
+    "view_coupons": "عرض الحسومات",
+    "delete_coupon": "حذف الحسم",
+    "sure_delete": "هل انت متأكد من حذف هذا الحسم؟"
   },
   "lbl_loading": " الرجاء الانتظار ...",
   "payment": {

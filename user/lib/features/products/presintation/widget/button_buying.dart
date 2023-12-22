@@ -13,8 +13,8 @@ import '../../../app/presentation/widgets/app_elevated_button.dart';
 import '../../../app/presentation/widgets/app_text_view.dart';
 import '../bloc/home_bloc.dart';
 
-class ButtonBuy extends StatelessWidget {
-  const ButtonBuy({super.key, required this.id, required this.price});
+class ButtonBuying extends StatelessWidget {
+  const ButtonBuying({super.key, required this.id, required this.price});
   final String id;
   final int price;
 

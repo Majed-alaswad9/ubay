@@ -12,6 +12,8 @@ import 'package:user/features/products/data/model/comments_model/comments_model.
 import 'package:user/features/products/data/model/coupon_model/coupon_model.dart';
 import 'package:user/features/products/data/model/posts_model.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/add_comment_use_case.dart';
+import 'package:user/features/products/domain/usecases/coupons_use_case/add_coupon_use_case.dart';
+import 'package:user/features/products/domain/usecases/coupons_use_case/edit_coupon_use_case.dart';
 import 'package:user/features/products/domain/usecases/coupons_use_case/get_coupons_use_case.dart';
 import 'package:user/features/products/domain/usecases/payment_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/add_post_use_case.dart';
@@ -170,6 +172,16 @@ class HomeDataSource {
     });
   }
 
+  Future<bool> addPayment(PaymentParams params) {
+    return throwAppException(() async {
+      await clientApi.request(RequestConfig(
+          endpoint: EndPoints.product.payment,
+          clientMethod: ClientMethod.post,
+          data: params.map));
+      return true;
+    });
+  }
+
   Future<ResponseWrapper<CouponModel>> getCoupons(GetCouponsParams params) {
     return throwAppException(() async {
       final response = await clientApi.request(RequestConfig(
@@ -184,11 +196,30 @@ class HomeDataSource {
     });
   }
 
-  Future<bool> addPayment(PaymentParams params) {
+  Future<bool> deleteCoupon(String id) {
     return throwAppException(() async {
       await clientApi.request(RequestConfig(
-          endpoint: EndPoints.product.payment,
+          endpoint: "${EndPoints.product.coupons}/$id",
+          clientMethod: ClientMethod.delete));
+      return true;
+    });
+  }
+
+  Future<bool> addCoupon(AddCouponParams params) {
+    return throwAppException(() async {
+      await clientApi.request(RequestConfig(
+          endpoint: EndPoints.product.coupons,
           clientMethod: ClientMethod.post,
+          data: params.map));
+      return true;
+    });
+  }
+
+  Future<bool> editCoupon(EditCouponParams params) {
+    return throwAppException(() async {
+      await clientApi.request(RequestConfig(
+          endpoint: '${EndPoints.product.coupons}/${params.couponId}',
+          clientMethod: ClientMethod.patch,
           data: params.map));
       return true;
     });

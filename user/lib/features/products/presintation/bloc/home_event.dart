@@ -108,6 +108,24 @@ class GetCouponsEvent extends HomeEvent {
       this.fields = ''});
 }
 
+class AddCouponEvent extends HomeEvent {
+  final AddCouponParams params;
+
+  AddCouponEvent(this.params);
+}
+
+class EditCouponEvent extends HomeEvent {
+  final EditCouponParams params;
+
+  EditCouponEvent(this.params);
+}
+
+class DeleteCouponEvent extends HomeEvent {
+  final String id;
+
+  DeleteCouponEvent(this.id);
+}
+
 class AddPaymentEvent extends HomeEvent {
   final String product;
 

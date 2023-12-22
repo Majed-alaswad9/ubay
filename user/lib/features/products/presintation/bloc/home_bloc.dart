@@ -12,6 +12,8 @@ import 'package:user/core/common/model/page_state/page_state.dart';
 import 'package:user/core/config/router/router.dart';
 import 'package:user/core/use_case/use_case.dart';
 import 'package:user/features/products/data/model/city_model/city_model.dart';
+import 'package:user/features/products/domain/usecases/coupons_use_case/add_coupon_use_case.dart';
+import 'package:user/features/products/domain/usecases/coupons_use_case/edit_coupon_use_case.dart';
 
 import '../../data/model/category_model/category_model.dart';
 import '../../data/model/comments_model/comments_model.dart';
@@ -21,6 +23,7 @@ import '../../domain/usecases/comment_use_case/add_comment_use_case.dart';
 import '../../domain/usecases/add_like_use_case.dart';
 import '../../domain/usecases/comment_use_case/delete_comment_use_case.dart';
 import '../../domain/usecases/comment_use_case/edit_comment_use_case.dart';
+import '../../domain/usecases/coupons_use_case/delete_coupon_use_case.dart';
 import '../../domain/usecases/coupons_use_case/get_coupons_use_case.dart';
 import '../../domain/usecases/payment_use_case.dart';
 import '../../domain/usecases/product_use_case/add_post_use_case.dart';
@@ -52,22 +55,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final DeleteProductUseCase deleteProductUseCase;
   final GetCouponsUseCase getCouponsUseCase;
   final AddPaymentUseCase addPaymentUseCase;
+  final AddCouponUseCase addCouponUseCase;
+  final EditCouponUseCase editCouponUseCase;
+  final DeleteCouponUseCase deleteCouponUseCase;
   HomeBloc(
-    this.getAllPostsUseCase,
-    this.addLikeUseCase,
-    this.deleteLikeUseCase,
-    this.getCityUseCase,
-    this.getCategoryUseCase,
-    this.addPostUseCase,
-    this.getCommentsUseCase,
-    this.addCommentUseCase,
-    this.editProductUseCase,
-    this.deleteCommentUseCase,
-    this.editCommentUseCase,
-    this.deleteProductUseCase,
-    this.getCouponsUseCase,
-    this.addPaymentUseCase,
-  ) : super(const HomeState()) {
+      this.getAllPostsUseCase,
+      this.addLikeUseCase,
+      this.deleteLikeUseCase,
+      this.getCityUseCase,
+      this.getCategoryUseCase,
+      this.addPostUseCase,
+      this.getCommentsUseCase,
+      this.addCommentUseCase,
+      this.editProductUseCase,
+      this.deleteCommentUseCase,
+      this.editCommentUseCase,
+      this.deleteProductUseCase,
+      this.getCouponsUseCase,
+      this.addPaymentUseCase,
+      this.addCouponUseCase,
+      this.editCouponUseCase,
+      this.deleteCouponUseCase)
+      : super(const HomeState()) {
     on<GetAllPostsEvent>(_onGetAllPosts);
     on<AddPostEvent>(_onAddPostEvent);
     on<AddLikeEvent>(_onAddLike);
@@ -83,6 +92,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<EditCommentEvent>(_onEditCommentEvent);
     on<GetCouponsEvent>(_onGetCouponsEvent);
     on<AddPaymentEvent>(_onAddPaymentEvent);
+    on<AddCouponEvent>(_onAddCouponEvent);
+    on<EditCouponEvent>(_onEditCouponEvent);
+    on<DeleteCouponEvent>(_onDeleteCouponEvent);
   }
 
   FutureOr<void> _onGetAllPosts(
@@ -284,13 +296,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> _onGetCouponsEvent(
       GetCouponsEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(couponsState: const PageState.loading()));
+    emit(state.copyWith(couponsStatus: const PageState.loading()));
     final result = await getCouponsUseCase(GetCouponsParams(event.id,
         event.page, event.limit, event.sort, event.fields, event.search));
     result.fold((exception, message) {
-      emit(state.copyWith(couponsState: PageState.error(exception: exception)));
+      emit(
+          state.copyWith(couponsStatus: PageState.error(exception: exception)));
     }, (value) {
-      emit(state.copyWith(couponsState: PageState.loaded(data: value.data)));
+      emit(state.copyWith(couponsStatus: PageState.loaded(data: value.data)));
     });
   }
 
@@ -304,5 +317,43 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(addPaymentStatus: const BlocStatus.success()));
     });
     emit(state.copyWith(addPaymentStatus: const BlocStatus.initial()));
+  }
+
+  FutureOr<void> _onAddCouponEvent(
+      AddCouponEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(addCouponStatus: const BlocStatus.loading()));
+    final result = await addCouponUseCase(AddCouponParams(event.params.userId,
+        event.params.productId, event.params.discount, event.params.expire));
+    result.fold((exception, message) {
+      emit(state.copyWith(addCouponStatus: BlocStatus.fail(error: message)));
+    }, (value) {
+      emit(state.copyWith(addCouponStatus: const BlocStatus.success()));
+    });
+  }
+
+  FutureOr<void> _onEditCouponEvent(
+      EditCouponEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(editCouponStatus: const BlocStatus.loading()));
+    final result = await editCouponUseCase(EditCouponParams(
+        couponId: event.params.couponId,
+        userId: event.params.userId,
+        productId: event.params.productId,
+        discount: event.params.discount));
+    result.fold((exception, message) {
+      emit(state.copyWith(editCouponStatus: BlocStatus.fail(error: message)));
+    }, (value) {
+      emit(state.copyWith(editCouponStatus: const BlocStatus.success()));
+    });
+  }
+
+  FutureOr<void> _onDeleteCouponEvent(
+      DeleteCouponEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(deleteCouponStatus: const BlocStatus.loading()));
+    final result = await deleteCouponUseCase(event.id);
+    result.fold((exception, message) {
+      emit(state.copyWith(deleteCouponStatus: BlocStatus.fail(error: message)));
+    }, (value) {
+      emit(state.copyWith(deleteCouponStatus: const BlocStatus.success()));
+    });
   }
 }

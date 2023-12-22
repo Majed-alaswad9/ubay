@@ -10,7 +10,7 @@ import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
 import 'package:user/features/products/data/model/posts_model.dart';
-import 'package:user/features/products/presintation/widget/button_buy.dart';
+import 'package:user/features/products/presintation/widget/button_buying.dart';
 import 'package:user/features/products/presintation/widget/button_coupon.dart';
 import '../../../../core/common/constants/constants.dart';
 import '../../../../core/util/chose_date_time.dart';
@@ -129,14 +129,19 @@ class ViewProduct extends StatelessWidget {
                                     .withColor(Colors.white))),
                       ],
                       10.verticalSpace,
-                      if (product.comments != 0)
-                        AppTextView(
-                            '${product.comments} ${LocaleKeys.home_screen_comments.tr()}',
-                            style: context.textTheme.titleSmall),
-                      if (product.likes != 0)
-                        AppTextView(
-                            '${product.likes} ${LocaleKeys.home_screen_likes.tr()}',
-                            style: context.textTheme.titleSmall),
+                      Row(
+                        children: [
+                          if (product.comments != 0)
+                            AppTextView(
+                                '${product.comments} ${LocaleKeys.home_screen_comments.tr()}',
+                                style: context.textTheme.titleSmall),
+                          8.horizontalSpace,
+                          if (product.likes != 0)
+                            AppTextView(
+                                '${product.likes} ${LocaleKeys.home_screen_likes.tr()}',
+                                style: context.textTheme.titleSmall),
+                        ],
+                      ),
                       const Divider(
                         color: Colors.grey,
                       ),
@@ -193,7 +198,7 @@ class ViewProduct extends StatelessWidget {
                           if (product.user!.id == user.id)
                             ButtonCoupon(id: product.id, price: product.price),
                           if (product.user!.id != user.id)
-                            ButtonBuy(id: product.id, price: product.price),
+                            ButtonBuying(id: product.id, price: product.price),
                         ],
                       ),
                       10.verticalSpace,

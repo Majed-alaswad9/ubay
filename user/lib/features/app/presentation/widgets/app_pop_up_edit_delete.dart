@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:user/core/common/model/page_state/bloc_status.dart';
 import 'package:user/core/config/router/router.dart';
+import 'package:user/core/config/themes/app_theme.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/responsive_padding.dart';
 import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
@@ -45,14 +46,19 @@ class PopUpMenuDeleteEdit extends StatelessWidget {
                   extra:
                       AddPostScreenParams(isUpdate: true, postsModel: product));
             } else {
+              print(true);
               editFunction!;
             }
           } else if (value == Const.delete) {
             Const.showMyDialog(
               isCoupon: isCoupon,
               context: context,
-              title: LocaleKeys.home_screen_delete_post.tr(),
-              content: LocaleKeys.home_screen_sure_delete.tr(),
+              title: isCoupon
+                  ? LocaleKeys.coupon_delete_coupon.tr()
+                  : LocaleKeys.home_screen_delete_post.tr(),
+              content: isCoupon
+                  ? LocaleKeys.coupon_sure_delete.tr()
+                  : LocaleKeys.home_screen_sure_delete.tr(),
               onPressed: deleteFunction,
             );
           }
@@ -90,44 +96,52 @@ class Const {
                     style: context.textTheme.titleSmall,
                   ),
                   actions: [
-                    TextButton(
-                        onPressed: () =>
-                            Navigator.pop(context, LocaleKeys.cancel.tr()),
-                        child: Container(
-                          padding: HWEdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: context.colorScheme.primary),
-                              borderRadius: BorderRadius.circular(16),
-                              color: context.colorScheme.secondaryContainer),
-                          child: Text(
-                            LocaleKeys.cancel.tr(),
-                            style: context.textTheme.titleSmall!
-                                .copyWith(color: context.colorScheme.primary),
-                          ),
-                        )),
-                    BlocSelector<HomeBloc, HomeState, BlocStatus>(
-                      selector: (state) => isCoupon
-                          ? state.deleteCoupon
-                          : state.deletePostOrComment,
-                      builder: (context, state) {
-                        return ConditionalBuilder(
-                          condition: !state.isLoading(),
-                          fallback: (context) => const LoadingIndicator(),
-                          builder: (context) => Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: Colors.red),
-                            child: MaterialButton(
-                                onPressed: onPressed,
-                                child: Text(
-                                  LocaleKeys.yes.tr(),
-                                  style: context.textTheme.titleSmall!
-                                      .copyWith(color: Colors.white),
-                                )),
-                          ),
-                        );
-                      },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                            onPressed: () =>
+                                Navigator.pop(context, LocaleKeys.cancel.tr()),
+                            child: Container(
+                              padding: HWEdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: context.colorScheme.primary),
+                                  borderRadius:
+                                      BorderRadius.circular(kbrButton),
+                                  color:
+                                      context.colorScheme.secondaryContainer),
+                              child: Text(
+                                LocaleKeys.cancel.tr(),
+                                style: context.textTheme.titleSmall!.copyWith(
+                                    color: context.colorScheme.primary),
+                              ),
+                            )),
+                        BlocSelector<HomeBloc, HomeState, BlocStatus>(
+                          selector: (state) => isCoupon
+                              ? state.deleteCouponStatus
+                              : state.deletePostOrComment,
+                          builder: (context, state) {
+                            return ConditionalBuilder(
+                              condition: !state.isLoading(),
+                              fallback: (context) => const LoadingIndicator(),
+                              builder: (context) => Container(
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(kbrButton),
+                                    color: Colors.red),
+                                child: MaterialButton(
+                                    onPressed: onPressed,
+                                    child: Text(
+                                      LocaleKeys.yes.tr(),
+                                      style: context.textTheme.titleSmall!
+                                          .copyWith(color: Colors.white),
+                                    )),
+                              ),
+                            );
+                          },
+                        )
+                      ],
                     )
                   ]));
 

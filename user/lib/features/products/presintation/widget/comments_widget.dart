@@ -13,7 +13,7 @@ import 'package:user/features/app/presentation/widgets/app_pop_up_coupon.dart';
 import 'package:user/features/app/presentation/widgets/app_text_field.dart';
 import 'package:user/features/app/presentation/widgets/app_text_view.dart';
 import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
-import 'package:user/features/products/data/model/posts_model.dart';
+import 'package:user/features/products/data/model/products_model.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
 import '../../../../core/common/constants/constants.dart';
@@ -29,7 +29,7 @@ class CommentsWidget extends StatefulWidget {
     required this.product,
   });
 
-  final Data product;
+  final Product product;
   final String postId;
 
   @override
@@ -161,7 +161,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                                   DeleteCommentEvent(
                                                       data.data![index].id,
                                                       widget.postId));
-                                              if (state.deletePostOrComment
+                                              if (state.deleteProductOrComment
                                                   .isSuccess()) {
                                                 Navigator.pop(context,
                                                     LocaleKeys.yes.tr());

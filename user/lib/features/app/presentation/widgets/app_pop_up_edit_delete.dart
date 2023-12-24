@@ -9,7 +9,7 @@ import 'package:user/core/config/themes/app_theme.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/responsive_padding.dart';
 import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
-import 'package:user/features/products/data/model/posts_model.dart';
+import 'package:user/features/products/data/model/products_model.dart';
 import 'package:user/features/products/presintation/bloc/home_bloc.dart';
 import 'package:user/features/products/presintation/pages/add_post_screen.dart';
 import 'package:user/generated/locale_keys.g.dart';
@@ -27,7 +27,7 @@ class PopUpMenuDeleteEdit extends StatelessWidget {
 
   final Function() deleteFunction;
   final BuildContext fromContext;
-  final Data? product;
+  final Product? product;
   final Function()? editFunction;
   final bool isProduct;
   final bool isCoupon;
@@ -46,7 +46,6 @@ class PopUpMenuDeleteEdit extends StatelessWidget {
                   extra:
                       AddPostScreenParams(isUpdate: true, postsModel: product));
             } else {
-              print(true);
               editFunction!;
             }
           } else if (value == Const.delete) {
@@ -120,7 +119,7 @@ class Const {
                         BlocSelector<HomeBloc, HomeState, BlocStatus>(
                           selector: (state) => isCoupon
                               ? state.deleteCouponStatus
-                              : state.deletePostOrComment,
+                              : state.deleteProductOrComment,
                           builder: (context, state) {
                             return ConditionalBuilder(
                               condition: !state.isLoading(),

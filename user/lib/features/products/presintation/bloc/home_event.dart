@@ -3,16 +3,28 @@ part of 'home_bloc.dart';
 @immutable
 class HomeEvent {}
 
-class GetAllPostsEvent extends HomeEvent {}
+class GetAllProductsEvent extends HomeEvent {
+  final int page;
+  final int? limit;
 
-class AddPostEvent extends HomeEvent {
+  GetAllProductsEvent({required this.page, this.limit = 10});
+}
+
+class GetProductEvent extends HomeEvent {
+  final String id;
+
+  GetProductEvent(this.id);
+}
+
+class AddProductEvent extends HomeEvent {
   final String title;
   final String content;
   final int price;
   final String store;
   final String category;
 
-  AddPostEvent(this.title, this.content, this.price, this.store, this.category);
+  AddProductEvent(
+      this.title, this.content, this.price, this.store, this.category);
 }
 
 class AddLikeEvent extends HomeEvent {
@@ -112,12 +124,6 @@ class AddCouponEvent extends HomeEvent {
   final AddCouponParams params;
 
   AddCouponEvent(this.params);
-}
-
-class EditCouponEvent extends HomeEvent {
-  final EditCouponParams params;
-
-  EditCouponEvent(this.params);
 }
 
 class DeleteCouponEvent extends HomeEvent {

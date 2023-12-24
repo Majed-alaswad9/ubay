@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'posts_model.dart';
+part of 'products_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PostsModelImpl _$$PostsModelImplFromJson(Map<String, dynamic> json) =>
-    _$PostsModelImpl(
+_$ProductsModelImpl _$$ProductsModelImplFromJson(Map<String, dynamic> json) =>
+    _$ProductsModelImpl(
       pageNumber: json['pageNumber'] as int,
       totalPages: json['totalPages'] as int,
       totalDataCount: json['totalDataCount'] as int,
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$PostsModelImplToJson(_$PostsModelImpl instance) =>
+Map<String, dynamic> _$$ProductsModelImplToJson(_$ProductsModelImpl instance) =>
     <String, dynamic>{
       'pageNumber': instance.pageNumber,
       'totalPages': instance.totalPages,
@@ -37,12 +37,11 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'photo': instance.photo,
     };
 
-_$DataImpl _$$DataImplFromJson(Map<String, dynamic> json) => _$DataImpl(
+_$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
+    _$ProductImpl(
       id: json['_id'] as String,
       title: json['title'] as String,
       content: json['content'] as String,
-      likedBy:
-          (json['likedBy'] as List<dynamic>?)?.map((e) => e as String).toList(),
       photos:
           (json['photos'] as List<dynamic>).map((e) => e as String).toList(),
       isPaid: json['is_paid'] as bool,
@@ -66,12 +65,11 @@ _$DataImpl _$$DataImplFromJson(Map<String, dynamic> json) => _$DataImpl(
       likedByMe: json['likedByMe'] as bool,
     );
 
-Map<String, dynamic> _$$DataImplToJson(_$DataImpl instance) =>
+Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'title': instance.title,
       'content': instance.content,
-      'likedBy': instance.likedBy,
       'photos': instance.photos,
       'is_paid': instance.isPaid,
       'price': instance.price,

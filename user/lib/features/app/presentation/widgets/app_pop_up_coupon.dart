@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user/core/common/model/page_state/bloc_status.dart';
 import 'package:user/core/config/themes/app_theme.dart';
-import 'package:user/core/config/themes/my_color_scheme.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/presentation/widgets/app_text_field.dart';
 import 'package:user/features/products/domain/usecases/coupons_use_case/add_coupon_use_case.dart';

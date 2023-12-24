@@ -1,12 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:user/core/config/themes/my_color_scheme.dart';
-import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
-import 'package:user/features/app/presentation/widgets/app_text_view.dart';
-import 'package:user/features/app/presentation/widgets/params_appbar.dart';
-import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
 import 'package:user/features/my_transactions/presintation/pages/purchases_screen.dart';
 import 'package:user/features/my_transactions/presintation/pages/sales_screen.dart';
 import 'package:user/generated/locale_keys.g.dart';

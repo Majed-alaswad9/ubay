@@ -2,7 +2,7 @@ abstract class EndPoints {
   EndPoints._();
 
   static const String baseUrl = 'http://192.168.1.101:3000/api/v1/';
-  static const String socketUrl = 'ws://192.168.1.102:3000';
+  static const String socketUrl = 'ws://192.168.1.101:3000';
   static const auth = Auth();
   static const product = Product();
   static const stores = Stores();

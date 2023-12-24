@@ -1,8 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:user/core/util/extensions/build_context.dart';
-import 'package:user/features/app/presentation/widgets/app_pop_up_edit_delete.dart';
-import 'package:user/generated/locale_keys.g.dart';
 
 import '../../../../core/util/responsive_padding.dart';
 import '../../../app/presentation/widgets/app_text_view.dart';

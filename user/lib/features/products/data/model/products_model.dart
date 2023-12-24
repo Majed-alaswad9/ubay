@@ -1,18 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'posts_model.freezed.dart';
-part 'posts_model.g.dart';
+part 'products_model.freezed.dart';
+part 'products_model.g.dart';
 
 @freezed
-class PostsModel with _$PostsModel {
-  factory PostsModel(
+class ProductsModel with _$ProductsModel {
+  factory ProductsModel(
       {required int pageNumber,
       required int totalPages,
       required int totalDataCount,
-      List<Data>? data}) = _PostsModel;
+      List<Product>? data}) = _ProductsModel;
 
-  factory PostsModel.fromJson(Map<String, dynamic> json) =>
-      _$PostsModelFromJson(json);
+  factory ProductsModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductsModelFromJson(json);
 }
 
 @freezed
@@ -26,12 +26,11 @@ class User with _$User {
 }
 
 @freezed
-class Data with _$Data {
-  factory Data(
+class Product with _$Product {
+  factory Product(
       {@JsonKey(name: '_id') required String id,
       required String title,
       required String content,
-      List<String>? likedBy,
       required List<String> photos,
       @JsonKey(name: 'is_paid') required bool isPaid,
       required int price,
@@ -43,9 +42,10 @@ class Data with _$Data {
       required DateTime updatedAt,
       required int likes,
       required int comments,
-      required bool likedByMe}) = _Data;
+      required bool likedByMe}) = _Product;
 
-  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
 }
 
 @freezed

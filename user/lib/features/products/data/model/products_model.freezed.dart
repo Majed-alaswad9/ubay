@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'posts_model.dart';
+part of 'products_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,37 +14,40 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PostsModel _$PostsModelFromJson(Map<String, dynamic> json) {
-  return _PostsModel.fromJson(json);
+ProductsModel _$ProductsModelFromJson(Map<String, dynamic> json) {
+  return _ProductsModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PostsModel {
+mixin _$ProductsModel {
   int get pageNumber => throw _privateConstructorUsedError;
   int get totalPages => throw _privateConstructorUsedError;
   int get totalDataCount => throw _privateConstructorUsedError;
-  List<Data>? get data => throw _privateConstructorUsedError;
+  List<Product>? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PostsModelCopyWith<PostsModel> get copyWith =>
+  $ProductsModelCopyWith<ProductsModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PostsModelCopyWith<$Res> {
-  factory $PostsModelCopyWith(
-          PostsModel value, $Res Function(PostsModel) then) =
-      _$PostsModelCopyWithImpl<$Res, PostsModel>;
+abstract class $ProductsModelCopyWith<$Res> {
+  factory $ProductsModelCopyWith(
+          ProductsModel value, $Res Function(ProductsModel) then) =
+      _$ProductsModelCopyWithImpl<$Res, ProductsModel>;
   @useResult
   $Res call(
-      {int pageNumber, int totalPages, int totalDataCount, List<Data>? data});
+      {int pageNumber,
+      int totalPages,
+      int totalDataCount,
+      List<Product>? data});
 }
 
 /// @nodoc
-class _$PostsModelCopyWithImpl<$Res, $Val extends PostsModel>
-    implements $PostsModelCopyWith<$Res> {
-  _$PostsModelCopyWithImpl(this._value, this._then);
+class _$ProductsModelCopyWithImpl<$Res, $Val extends ProductsModel>
+    implements $ProductsModelCopyWith<$Res> {
+  _$ProductsModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -75,29 +78,32 @@ class _$PostsModelCopyWithImpl<$Res, $Val extends PostsModel>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Data>?,
+              as List<Product>?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$PostsModelImplCopyWith<$Res>
-    implements $PostsModelCopyWith<$Res> {
-  factory _$$PostsModelImplCopyWith(
-          _$PostsModelImpl value, $Res Function(_$PostsModelImpl) then) =
-      __$$PostsModelImplCopyWithImpl<$Res>;
+abstract class _$$ProductsModelImplCopyWith<$Res>
+    implements $ProductsModelCopyWith<$Res> {
+  factory _$$ProductsModelImplCopyWith(
+          _$ProductsModelImpl value, $Res Function(_$ProductsModelImpl) then) =
+      __$$ProductsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int pageNumber, int totalPages, int totalDataCount, List<Data>? data});
+      {int pageNumber,
+      int totalPages,
+      int totalDataCount,
+      List<Product>? data});
 }
 
 /// @nodoc
-class __$$PostsModelImplCopyWithImpl<$Res>
-    extends _$PostsModelCopyWithImpl<$Res, _$PostsModelImpl>
-    implements _$$PostsModelImplCopyWith<$Res> {
-  __$$PostsModelImplCopyWithImpl(
-      _$PostsModelImpl _value, $Res Function(_$PostsModelImpl) _then)
+class __$$ProductsModelImplCopyWithImpl<$Res>
+    extends _$ProductsModelCopyWithImpl<$Res, _$ProductsModelImpl>
+    implements _$$ProductsModelImplCopyWith<$Res> {
+  __$$ProductsModelImplCopyWithImpl(
+      _$ProductsModelImpl _value, $Res Function(_$ProductsModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +114,7 @@ class __$$PostsModelImplCopyWithImpl<$Res>
     Object? totalDataCount = null,
     Object? data = freezed,
   }) {
-    return _then(_$PostsModelImpl(
+    return _then(_$ProductsModelImpl(
       pageNumber: null == pageNumber
           ? _value.pageNumber
           : pageNumber // ignore: cast_nullable_to_non_nullable
@@ -124,23 +130,23 @@ class __$$PostsModelImplCopyWithImpl<$Res>
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Data>?,
+              as List<Product>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$PostsModelImpl implements _PostsModel {
-  _$PostsModelImpl(
+class _$ProductsModelImpl implements _ProductsModel {
+  _$ProductsModelImpl(
       {required this.pageNumber,
       required this.totalPages,
       required this.totalDataCount,
-      final List<Data>? data})
+      final List<Product>? data})
       : _data = data;
 
-  factory _$PostsModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PostsModelImplFromJson(json);
+  factory _$ProductsModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductsModelImplFromJson(json);
 
   @override
   final int pageNumber;
@@ -148,9 +154,9 @@ class _$PostsModelImpl implements _PostsModel {
   final int totalPages;
   @override
   final int totalDataCount;
-  final List<Data>? _data;
+  final List<Product>? _data;
   @override
-  List<Data>? get data {
+  List<Product>? get data {
     final value = _data;
     if (value == null) return null;
     if (_data is EqualUnmodifiableListView) return _data;
@@ -160,14 +166,14 @@ class _$PostsModelImpl implements _PostsModel {
 
   @override
   String toString() {
-    return 'PostsModel(pageNumber: $pageNumber, totalPages: $totalPages, totalDataCount: $totalDataCount, data: $data)';
+    return 'ProductsModel(pageNumber: $pageNumber, totalPages: $totalPages, totalDataCount: $totalDataCount, data: $data)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PostsModelImpl &&
+            other is _$ProductsModelImpl &&
             (identical(other.pageNumber, pageNumber) ||
                 other.pageNumber == pageNumber) &&
             (identical(other.totalPages, totalPages) ||
@@ -185,26 +191,26 @@ class _$PostsModelImpl implements _PostsModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PostsModelImplCopyWith<_$PostsModelImpl> get copyWith =>
-      __$$PostsModelImplCopyWithImpl<_$PostsModelImpl>(this, _$identity);
+  _$$ProductsModelImplCopyWith<_$ProductsModelImpl> get copyWith =>
+      __$$ProductsModelImplCopyWithImpl<_$ProductsModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PostsModelImplToJson(
+    return _$$ProductsModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _PostsModel implements PostsModel {
-  factory _PostsModel(
+abstract class _ProductsModel implements ProductsModel {
+  factory _ProductsModel(
       {required final int pageNumber,
       required final int totalPages,
       required final int totalDataCount,
-      final List<Data>? data}) = _$PostsModelImpl;
+      final List<Product>? data}) = _$ProductsModelImpl;
 
-  factory _PostsModel.fromJson(Map<String, dynamic> json) =
-      _$PostsModelImpl.fromJson;
+  factory _ProductsModel.fromJson(Map<String, dynamic> json) =
+      _$ProductsModelImpl.fromJson;
 
   @override
   int get pageNumber;
@@ -213,10 +219,10 @@ abstract class _PostsModel implements PostsModel {
   @override
   int get totalDataCount;
   @override
-  List<Data>? get data;
+  List<Product>? get data;
   @override
   @JsonKey(ignore: true)
-  _$$PostsModelImplCopyWith<_$PostsModelImpl> get copyWith =>
+  _$$ProductsModelImplCopyWith<_$ProductsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -392,17 +398,16 @@ abstract class _User implements User {
       throw _privateConstructorUsedError;
 }
 
-Data _$DataFromJson(Map<String, dynamic> json) {
-  return _Data.fromJson(json);
+Product _$ProductFromJson(Map<String, dynamic> json) {
+  return _Product.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Data {
+mixin _$Product {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  List<String>? get likedBy => throw _privateConstructorUsedError;
   List<String> get photos => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_paid')
   bool get isPaid => throw _privateConstructorUsedError;
@@ -419,19 +424,18 @@ mixin _$Data {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DataCopyWith<Data> get copyWith => throw _privateConstructorUsedError;
+  $ProductCopyWith<Product> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DataCopyWith<$Res> {
-  factory $DataCopyWith(Data value, $Res Function(Data) then) =
-      _$DataCopyWithImpl<$Res, Data>;
+abstract class $ProductCopyWith<$Res> {
+  factory $ProductCopyWith(Product value, $Res Function(Product) then) =
+      _$ProductCopyWithImpl<$Res, Product>;
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
       String title,
       String content,
-      List<String>? likedBy,
       List<String> photos,
       @JsonKey(name: 'is_paid') bool isPaid,
       int price,
@@ -451,9 +455,9 @@ abstract class $DataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DataCopyWithImpl<$Res, $Val extends Data>
-    implements $DataCopyWith<$Res> {
-  _$DataCopyWithImpl(this._value, this._then);
+class _$ProductCopyWithImpl<$Res, $Val extends Product>
+    implements $ProductCopyWith<$Res> {
+  _$ProductCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -466,7 +470,6 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
     Object? id = null,
     Object? title = null,
     Object? content = null,
-    Object? likedBy = freezed,
     Object? photos = null,
     Object? isPaid = null,
     Object? price = null,
@@ -493,10 +496,6 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      likedBy: freezed == likedBy
-          ? _value.likedBy
-          : likedBy // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       photos: null == photos
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
@@ -586,17 +585,16 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
 }
 
 /// @nodoc
-abstract class _$$DataImplCopyWith<$Res> implements $DataCopyWith<$Res> {
-  factory _$$DataImplCopyWith(
-          _$DataImpl value, $Res Function(_$DataImpl) then) =
-      __$$DataImplCopyWithImpl<$Res>;
+abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
+  factory _$$ProductImplCopyWith(
+          _$ProductImpl value, $Res Function(_$ProductImpl) then) =
+      __$$ProductImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
       String title,
       String content,
-      List<String>? likedBy,
       List<String> photos,
       @JsonKey(name: 'is_paid') bool isPaid,
       int price,
@@ -619,10 +617,11 @@ abstract class _$$DataImplCopyWith<$Res> implements $DataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$DataImplCopyWithImpl<$Res>
-    extends _$DataCopyWithImpl<$Res, _$DataImpl>
-    implements _$$DataImplCopyWith<$Res> {
-  __$$DataImplCopyWithImpl(_$DataImpl _value, $Res Function(_$DataImpl) _then)
+class __$$ProductImplCopyWithImpl<$Res>
+    extends _$ProductCopyWithImpl<$Res, _$ProductImpl>
+    implements _$$ProductImplCopyWith<$Res> {
+  __$$ProductImplCopyWithImpl(
+      _$ProductImpl _value, $Res Function(_$ProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -631,7 +630,6 @@ class __$$DataImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? content = null,
-    Object? likedBy = freezed,
     Object? photos = null,
     Object? isPaid = null,
     Object? price = null,
@@ -645,7 +643,7 @@ class __$$DataImplCopyWithImpl<$Res>
     Object? comments = null,
     Object? likedByMe = null,
   }) {
-    return _then(_$DataImpl(
+    return _then(_$ProductImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -658,10 +656,6 @@ class __$$DataImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      likedBy: freezed == likedBy
-          ? _value._likedBy
-          : likedBy // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       photos: null == photos
           ? _value._photos
           : photos // ignore: cast_nullable_to_non_nullable
@@ -716,12 +710,11 @@ class __$$DataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DataImpl implements _Data {
-  _$DataImpl(
+class _$ProductImpl implements _Product {
+  _$ProductImpl(
       {@JsonKey(name: '_id') required this.id,
       required this.title,
       required this.content,
-      final List<String>? likedBy,
       required final List<String> photos,
       @JsonKey(name: 'is_paid') required this.isPaid,
       required this.price,
@@ -734,12 +727,11 @@ class _$DataImpl implements _Data {
       required this.likes,
       required this.comments,
       required this.likedByMe})
-      : _likedBy = likedBy,
-        _photos = photos,
+      : _photos = photos,
         _coupons = coupons;
 
-  factory _$DataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DataImplFromJson(json);
+  factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductImplFromJson(json);
 
   @override
   @JsonKey(name: '_id')
@@ -748,16 +740,6 @@ class _$DataImpl implements _Data {
   final String title;
   @override
   final String content;
-  final List<String>? _likedBy;
-  @override
-  List<String>? get likedBy {
-    final value = _likedBy;
-    if (value == null) return null;
-    if (_likedBy is EqualUnmodifiableListView) return _likedBy;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
   final List<String> _photos;
   @override
   List<String> get photos {
@@ -800,18 +782,17 @@ class _$DataImpl implements _Data {
 
   @override
   String toString() {
-    return 'Data(id: $id, title: $title, content: $content, likedBy: $likedBy, photos: $photos, isPaid: $isPaid, price: $price, category: $category, coupons: $coupons, user: $user, store: $store, createdAt: $createdAt, updatedAt: $updatedAt, likes: $likes, comments: $comments, likedByMe: $likedByMe)';
+    return 'Product(id: $id, title: $title, content: $content, photos: $photos, isPaid: $isPaid, price: $price, category: $category, coupons: $coupons, user: $user, store: $store, createdAt: $createdAt, updatedAt: $updatedAt, likes: $likes, comments: $comments, likedByMe: $likedByMe)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DataImpl &&
+            other is _$ProductImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
-            const DeepCollectionEquality().equals(other._likedBy, _likedBy) &&
             const DeepCollectionEquality().equals(other._photos, _photos) &&
             (identical(other.isPaid, isPaid) || other.isPaid == isPaid) &&
             (identical(other.price, price) || other.price == price) &&
@@ -838,7 +819,6 @@ class _$DataImpl implements _Data {
       id,
       title,
       content,
-      const DeepCollectionEquality().hash(_likedBy),
       const DeepCollectionEquality().hash(_photos),
       isPaid,
       price,
@@ -855,23 +835,22 @@ class _$DataImpl implements _Data {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
-      __$$DataImplCopyWithImpl<_$DataImpl>(this, _$identity);
+  _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
+      __$$ProductImplCopyWithImpl<_$ProductImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DataImplToJson(
+    return _$$ProductImplToJson(
       this,
     );
   }
 }
 
-abstract class _Data implements Data {
-  factory _Data(
+abstract class _Product implements Product {
+  factory _Product(
       {@JsonKey(name: '_id') required final String id,
       required final String title,
       required final String content,
-      final List<String>? likedBy,
       required final List<String> photos,
       @JsonKey(name: 'is_paid') required final bool isPaid,
       required final int price,
@@ -883,9 +862,9 @@ abstract class _Data implements Data {
       required final DateTime updatedAt,
       required final int likes,
       required final int comments,
-      required final bool likedByMe}) = _$DataImpl;
+      required final bool likedByMe}) = _$ProductImpl;
 
-  factory _Data.fromJson(Map<String, dynamic> json) = _$DataImpl.fromJson;
+  factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
   @override
   @JsonKey(name: '_id')
@@ -894,8 +873,6 @@ abstract class _Data implements Data {
   String get title;
   @override
   String get content;
-  @override
-  List<String>? get likedBy;
   @override
   List<String> get photos;
   @override
@@ -923,7 +900,7 @@ abstract class _Data implements Data {
   bool get likedByMe;
   @override
   @JsonKey(ignore: true)
-  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
+  _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

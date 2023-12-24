@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../products/data/model/posts_model.dart';
 
 part 'sales_model.freezed.dart';
 part 'sales_model.g.dart';

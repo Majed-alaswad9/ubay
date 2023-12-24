@@ -7,18 +7,18 @@ import 'package:user/core/use_case/use_case.dart';
 import 'package:user/features/products/domain/repository/home_repository.dart';
 
 @injectable
-class AddPostUseCase
-    extends UseCase<Result<ResponseWrapper<bool>>, AddPostParams> {
+class AddProductUseCase
+    extends UseCase<Result<ResponseWrapper<bool>>, AddProductParams> {
   final HomeRepository homeRepository;
 
-  AddPostUseCase(this.homeRepository);
+  AddProductUseCase(this.homeRepository);
   @override
-  Future<Result<ResponseWrapper<bool>>> call(AddPostParams params) async {
-    return homeRepository.addPost(params, params.photos);
+  Future<Result<ResponseWrapper<bool>>> call(AddProductParams params) async {
+    return homeRepository.addProduct(params, params.photos);
   }
 }
 
-class AddPostParams {
+class AddProductParams {
   final String title;
   final String content;
   final int price;
@@ -26,7 +26,7 @@ class AddPostParams {
   final String idCategory;
   final List<File> photos;
 
-  AddPostParams(this.title, this.content, this.price, this.idStore,
+  AddProductParams(this.title, this.content, this.price, this.idStore,
       this.idCategory, this.photos);
 
   Map<String, dynamic> get map {

@@ -10,16 +10,18 @@ import 'package:user/features/products/data/model/category_model/category_model.
 import 'package:user/features/products/data/model/city_model/city_model.dart';
 import 'package:user/features/products/data/model/comments_model/comments_model.dart';
 import 'package:user/features/products/data/model/coupon_model/coupon_model.dart';
-import 'package:user/features/products/data/model/posts_model.dart';
+import 'package:user/features/products/data/model/products_model.dart'
+    as products;
 import 'package:user/features/products/domain/usecases/comment_use_case/add_comment_use_case.dart';
 import 'package:user/features/products/domain/usecases/coupons_use_case/add_coupon_use_case.dart';
-import 'package:user/features/products/domain/usecases/coupons_use_case/edit_coupon_use_case.dart';
 import 'package:user/features/products/domain/usecases/coupons_use_case/get_coupons_use_case.dart';
+import 'package:user/features/products/domain/usecases/create_chat_use_case.dart';
 import 'package:user/features/products/domain/usecases/payment_use_case.dart';
-import 'package:user/features/products/domain/usecases/product_use_case/add_post_use_case.dart';
+import 'package:user/features/products/domain/usecases/product_use_case/add_product_use_case.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/get_comments_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/edit_product_use_case.dart';
 import 'package:http_parser/http_parser.dart' as mime;
+import 'package:user/features/products/domain/usecases/product_use_case/get_all_products_use_case.dart';
 import '../../../../core/common/model/response_wrapper/response_wrapper.dart';
 
 @injectable
@@ -28,22 +30,23 @@ class HomeDataSource {
 
   HomeDataSource(this.clientApi);
 
-  Future<ResponseWrapper<PostsModel>> getAllPosts() {
+  Future<ResponseWrapper<products.ProductsModel>> getAllProducts(
+      GetAllProductsParams params) {
     return throwAppException(() async {
       final response = await clientApi.request(RequestConfig(
           endpoint: EndPoints.product.product,
           clientMethod: ClientMethod.get,
-          queryParameters: {'page': '1', 'limit': '10', 'is_paid': 'false'}));
+          queryParameters: params.map));
 
       return ResponseWrapper.fromJson(response.data, (json) {
-        final posts = PostsModel.fromJson(response.data);
+        final posts = products.ProductsModel.fromJson(response.data);
         return posts;
       });
     });
   }
 
-  Future<ResponseWrapper<bool>> addPost(
-      AddPostParams params, List<File> photos) {
+  Future<ResponseWrapper<bool>> addProduct(
+      AddProductParams params, List<File> photos) {
     return throwAppException(() async {
       Map data = params.map;
       List<MultipartFile> files = [];
@@ -62,6 +65,18 @@ class HomeDataSource {
           clientMethod: ClientMethod.post));
       return ResponseWrapper.fromJson(response.data, (json) {
         return true;
+      });
+    });
+  }
+
+  Future<ResponseWrapper<products.Product>> getProduct(String id) {
+    return throwAppException(() async {
+      final response = await clientApi.request(RequestConfig(
+          endpoint: '${EndPoints.product.product}/$id',
+          clientMethod: ClientMethod.get));
+      return ResponseWrapper.fromJson(response.data, (json) {
+        final product = products.Product.fromJson(response.data);
+        return product;
       });
     });
   }
@@ -215,11 +230,11 @@ class HomeDataSource {
     });
   }
 
-  Future<bool> editCoupon(EditCouponParams params) {
+  Future<bool> createChat(CreateChatParams params) {
     return throwAppException(() async {
       await clientApi.request(RequestConfig(
-          endpoint: '${EndPoints.product.coupons}/${params.couponId}',
-          clientMethod: ClientMethod.patch,
+          endpoint: EndPoints.chats.chat,
+          clientMethod: ClientMethod.post,
           data: params.map));
       return true;
     });

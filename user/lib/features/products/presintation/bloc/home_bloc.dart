@@ -13,12 +13,11 @@ import 'package:user/core/config/router/router.dart';
 import 'package:user/core/use_case/use_case.dart';
 import 'package:user/features/products/data/model/city_model/city_model.dart';
 import 'package:user/features/products/domain/usecases/coupons_use_case/add_coupon_use_case.dart';
-import 'package:user/features/products/domain/usecases/coupons_use_case/edit_coupon_use_case.dart';
 
 import '../../data/model/category_model/category_model.dart';
 import '../../data/model/comments_model/comments_model.dart';
 import '../../data/model/coupon_model/coupon_model.dart';
-import '../../data/model/posts_model.dart';
+import '../../data/model/products_model.dart';
 import '../../domain/usecases/comment_use_case/add_comment_use_case.dart';
 import '../../domain/usecases/add_like_use_case.dart';
 import '../../domain/usecases/comment_use_case/delete_comment_use_case.dart';
@@ -26,13 +25,14 @@ import '../../domain/usecases/comment_use_case/edit_comment_use_case.dart';
 import '../../domain/usecases/coupons_use_case/delete_coupon_use_case.dart';
 import '../../domain/usecases/coupons_use_case/get_coupons_use_case.dart';
 import '../../domain/usecases/payment_use_case.dart';
-import '../../domain/usecases/product_use_case/add_post_use_case.dart';
+import '../../domain/usecases/product_use_case/add_product_use_case.dart';
 import '../../domain/usecases/delete_like_use_case.dart';
 import '../../domain/usecases/product_use_case/delete_product_use_case.dart';
 import '../../domain/usecases/product_use_case/edit_product_use_case.dart';
-import '../../domain/usecases/product_use_case/get_all_posts_use_case.dart';
+import '../../domain/usecases/product_use_case/get_all_products_use_case.dart';
 import '../../domain/usecases/product_use_case/get_category_use_case.dart';
 import '../../domain/usecases/comment_use_case/get_comments_use_case.dart';
+import '../../domain/usecases/product_use_case/get_product_use_case.dart';
 import '../../domain/usecases/product_use_case/get_store_use_case.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -46,7 +46,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final DeleteLikeUseCase deleteLikeUseCase;
   final GetStoreUseCase getCityUseCase;
   final GetCategoryUseCase getCategoryUseCase;
-  final AddPostUseCase addPostUseCase;
+  final AddProductUseCase addPostUseCase;
   final GetCommentsUseCase getCommentsUseCase;
   final AddCommentUseCase addCommentUseCase;
   final EditProductUseCase editProductUseCase;
@@ -56,8 +56,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetCouponsUseCase getCouponsUseCase;
   final AddPaymentUseCase addPaymentUseCase;
   final AddCouponUseCase addCouponUseCase;
-  final EditCouponUseCase editCouponUseCase;
   final DeleteCouponUseCase deleteCouponUseCase;
+  final GetProductUseCase getProductUseCase;
   HomeBloc(
       this.getAllPostsUseCase,
       this.addLikeUseCase,
@@ -74,11 +74,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       this.getCouponsUseCase,
       this.addPaymentUseCase,
       this.addCouponUseCase,
-      this.editCouponUseCase,
-      this.deleteCouponUseCase)
+      this.deleteCouponUseCase,
+      this.getProductUseCase)
       : super(const HomeState()) {
-    on<GetAllPostsEvent>(_onGetAllPosts);
-    on<AddPostEvent>(_onAddPostEvent);
+    on<GetAllProductsEvent>(_onGetAllPosts);
+    on<AddProductEvent>(_onAddPostEvent);
     on<AddLikeEvent>(_onAddLike);
     on<DeleteLikeEvent>(_onDeleteLike);
     on<GetStoreEvent>(_onStoreEvent);
@@ -93,29 +93,30 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<GetCouponsEvent>(_onGetCouponsEvent);
     on<AddPaymentEvent>(_onAddPaymentEvent);
     on<AddCouponEvent>(_onAddCouponEvent);
-    on<EditCouponEvent>(_onEditCouponEvent);
     on<DeleteCouponEvent>(_onDeleteCouponEvent);
+    on<GetProductEvent>(_onGetProduct);
   }
 
   FutureOr<void> _onGetAllPosts(
-      GetAllPostsEvent event, Emitter<HomeState> emit) async {
-    if (!state.deletePostOrComment.isSuccess()) {
-      emit(state.copyWith(allPosts: const PageState.loading()));
+      GetAllProductsEvent event, Emitter<HomeState> emit) async {
+    if (!state.deleteProductOrComment.isSuccess()) {
+      emit(state.copyWith(allProducts: const PageState.loading()));
     }
-    final result = await getAllPostsUseCase(NoParams());
+    final result = await getAllPostsUseCase(
+        GetAllProductsParams(event.page, event.limit!));
     result.fold((exception, message) {
       emit(state.copyWith(
-          allPosts: PageState.error(exception: exception),
-          deletePostOrComment: const BlocStatus.initial()));
+          allProducts: PageState.error(exception: exception),
+          deleteProductOrComment: const BlocStatus.initial()));
     }, (value) {
       if (value.data.data!.isNotEmpty) {
         emit(state.copyWith(
-            allPosts: PageState.loaded(data: value.data),
-            deletePostOrComment: const BlocStatus.initial()));
+            allProducts: PageState.loaded(data: value.data),
+            deleteProductOrComment: const BlocStatus.initial()));
       } else {
         emit(state.copyWith(
-            allPosts: const PageState.empty(),
-            deletePostOrComment: const BlocStatus.initial()));
+            allProducts: const PageState.empty(),
+            deleteProductOrComment: const BlocStatus.initial()));
       }
     });
   }
@@ -182,20 +183,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> _onAddPostEvent(
-      AddPostEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(addPost: const BlocStatus.loading()));
-    final result = await addPostUseCase(AddPostParams(event.title,
+      AddProductEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(addProduct: const BlocStatus.loading()));
+    final result = await addPostUseCase(AddProductParams(event.title,
         event.content, event.price, event.store, event.category, photos));
     result.fold((exception, message) {
-      emit(state.copyWith(addPost: BlocStatus.fail(error: message)));
+      emit(state.copyWith(addProduct: BlocStatus.fail(error: message)));
     }, (value) {
-      emit(state.copyWith(addPost: const BlocStatus.success()));
+      emit(state.copyWith(addProduct: const BlocStatus.success()));
     });
   }
 
   FutureOr<void> _onGetCommentsEvent(
       GetCommentsEvent event, Emitter<HomeState> emit) async {
-    if (!state.deletePostOrComment.isSuccess() &&
+    if (!state.deleteProductOrComment.isSuccess() &&
         !state.addComment.isSuccess()) {
       emit(state.copyWith(commentsStatus: const PageState.loading()));
     }
@@ -208,12 +209,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (value.data.data!.isNotEmpty) {
         emit(state.copyWith(
             commentsStatus: PageState.loaded(data: value.data),
-            deletePostOrComment: const BlocStatus.initial(),
+            deleteProductOrComment: const BlocStatus.initial(),
             addComment: const BlocStatus.initial()));
       } else {
         emit(state.copyWith(
             commentsStatus: const PageState.empty(),
-            deletePostOrComment: const BlocStatus.initial(),
+            deleteProductOrComment: const BlocStatus.initial(),
             addComment: const BlocStatus.initial()));
       }
     });
@@ -234,13 +235,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> _onDeleteCommentEvent(
       DeleteCommentEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(deletePostOrComment: const BlocStatus.loading()));
+    emit(state.copyWith(deleteProductOrComment: const BlocStatus.loading()));
     final result = await deleteCommentUseCase(event.id);
     result.fold((exception, message) {
-      emit(
-          state.copyWith(deletePostOrComment: BlocStatus.fail(error: message)));
+      emit(state.copyWith(
+          deleteProductOrComment: BlocStatus.fail(error: message)));
     }, (value) {
-      emit(state.copyWith(deletePostOrComment: const BlocStatus.success()));
+      emit(state.copyWith(deleteProductOrComment: const BlocStatus.success()));
       if (value) {
         add(GetCommentsEvent(event.postId));
       }
@@ -249,21 +250,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> _onDeleteProduct(
       DeleteProductEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(deletePostOrComment: const BlocStatus.loading()));
+    emit(state.copyWith(deleteProductOrComment: const BlocStatus.loading()));
     final result = await deleteProductUseCase(event.id);
     result.fold((exception, message) {
-      emit(
-          state.copyWith(deletePostOrComment: BlocStatus.fail(error: message)));
-      emit(state.copyWith(deletePostOrComment: const BlocStatus.initial()));
+      emit(state.copyWith(
+          deleteProductOrComment: BlocStatus.fail(error: message)));
+      emit(state.copyWith(deleteProductOrComment: const BlocStatus.initial()));
     }, (value) {
-      emit(state.copyWith(deletePostOrComment: const BlocStatus.success()));
-      add(GetAllPostsEvent());
+      emit(state.copyWith(deleteProductOrComment: const BlocStatus.success()));
+      add(GetAllProductsEvent(page: 1));
     });
   }
 
   FutureOr<void> _onEditProductEvent(
       EditProductEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(editPost: const BlocStatus.loading()));
+    emit(state.copyWith(editProduct: const BlocStatus.loading()));
     final result = await editProductUseCase(EditProductParams(
         title: event.title,
         content: event.content,
@@ -274,9 +275,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         photos: photos));
 
     result.fold((exception, message) {
-      emit(state.copyWith(editPost: BlocStatus.fail(error: message)));
+      emit(state.copyWith(editProduct: BlocStatus.fail(error: message)));
     }, (value) {
-      emit(state.copyWith(editPost: const BlocStatus.success()));
+      emit(state.copyWith(editProduct: const BlocStatus.success()));
       event.context.goNamed(GRouter.config.homeScreen.homeScreen);
     });
   }
@@ -331,21 +332,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
   }
 
-  FutureOr<void> _onEditCouponEvent(
-      EditCouponEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(editCouponStatus: const BlocStatus.loading()));
-    final result = await editCouponUseCase(EditCouponParams(
-        couponId: event.params.couponId,
-        userId: event.params.userId,
-        productId: event.params.productId,
-        discount: event.params.discount));
-    result.fold((exception, message) {
-      emit(state.copyWith(editCouponStatus: BlocStatus.fail(error: message)));
-    }, (value) {
-      emit(state.copyWith(editCouponStatus: const BlocStatus.success()));
-    });
-  }
-
   FutureOr<void> _onDeleteCouponEvent(
       DeleteCouponEvent event, Emitter<HomeState> emit) async {
     emit(state.copyWith(deleteCouponStatus: const BlocStatus.loading()));
@@ -354,6 +340,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(deleteCouponStatus: BlocStatus.fail(error: message)));
     }, (value) {
       emit(state.copyWith(deleteCouponStatus: const BlocStatus.success()));
+    });
+  }
+
+  FutureOr<void> _onGetProduct(
+      GetProductEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(getProduct: const PageState.loading()));
+    final result = await getProductUseCase(event.id);
+    result.fold((exception, message) {
+      emit(state.copyWith(getProduct: PageState.error(exception: exception)));
+    }, (value) {
+      emit(state.copyWith(getProduct: PageState.loaded(data: value.data)));
     });
   }
 }

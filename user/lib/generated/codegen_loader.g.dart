@@ -236,7 +236,7 @@ static const Map<String,dynamic> ar = {
   "not_found": "لا يوجد",
   "coupon": {
     "the_price_will_be_after_discount": "سيصبح السعر بعد الحسم",
-    "the_price_after_discount": " السعر بعد الحسم",
+    "the_price_after_discount": "السعر بعد الحسم",
     "end_of_validity": "انتهاء الصلاحية",
     "discount": "الحسم",
     "the_user_who_will_receive_the_discount": "المستخدم الذي سيحصل على الحسم",

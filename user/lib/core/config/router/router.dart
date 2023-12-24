@@ -8,7 +8,7 @@ import 'package:user/features/app/presentation/pages/base_page.dart';
 import 'package:user/features/auth/presentation/pages/login_page.dart';
 import 'package:user/features/auth/presentation/pages/register_page.dart';
 import 'package:user/features/chat/presentation/pages/chat_screen.dart';
-import 'package:user/features/products/data/model/posts_model.dart';
+import 'package:user/features/products/data/model/products_model.dart';
 import 'package:user/features/products/presintation/pages/add_post_screen.dart';
 import 'package:user/features/products/presintation/pages/home_screen.dart';
 import 'package:user/features/products/presintation/pages/view_product.dart';
@@ -62,8 +62,7 @@ class GRouter {
             name: _config.homeScreen.viewProductScreen,
             pageBuilder: (BuildContext context, GoRouterState state) {
               return _builderPage(
-                  child: ViewProduct(product: state.extra as Data),
-                  state: state);
+                  child: ViewProduct(id: state.extra as String), state: state);
             }),
         StatefulShellRoute.indexedStack(
           builder: (context, state, child) {

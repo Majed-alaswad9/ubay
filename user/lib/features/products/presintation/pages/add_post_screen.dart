@@ -14,7 +14,7 @@ import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
 import 'package:user/features/products/data/model/category_model/category_model.dart';
 import 'package:user/features/products/data/model/city_model/city_model.dart';
-import 'package:user/features/products/data/model/posts_model.dart';
+import 'package:user/features/products/data/model/products_model.dart';
 import 'package:user/features/products/presintation/widget/drop_down_category.dart';
 import 'package:user/features/products/presintation/widget/drop_down_store.dart';
 
@@ -25,7 +25,7 @@ import '../bloc/home_bloc.dart';
 
 class AddPostScreenParams {
   final bool isUpdate;
-  final Data? postsModel;
+  final Product? postsModel;
 
   AddPostScreenParams({required this.isUpdate, this.postsModel});
 }
@@ -267,8 +267,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   ),
                 20.verticalSpace,
                 BlocSelector<HomeBloc, HomeState, BlocStatus>(
-                  selector: (state) =>
-                      widget.params.isUpdate ? state.editPost : state.addPost,
+                  selector: (state) => widget.params.isUpdate
+                      ? state.editProduct
+                      : state.addProduct,
                   builder: (context, state) {
                     return AppElevatedButton(
                       isLoading: state.isLoading(),
@@ -288,7 +289,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                 categoryId,
                                 context));
                           } else {
-                            context.read<HomeBloc>().add(AddPostEvent(
+                            context.read<HomeBloc>().add(AddProductEvent(
                                 titleController.text,
                                 contentController.text,
                                 price,

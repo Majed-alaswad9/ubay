@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'dart:developer';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:user/core/api/exceptions.dart';
 import 'package:user/core/api/result.dart';
 
@@ -12,7 +10,7 @@ import '../util/show_message.dart';
 Future<T> throwAppException<T>(FutureOr<T> Function() call) async {
   try {
     return (await call());
-  } on AppException catch (e) {
+  } on AppException catch (_) {
     rethrow;
   } on SocketException catch (e) {
     showMessage(e.message);

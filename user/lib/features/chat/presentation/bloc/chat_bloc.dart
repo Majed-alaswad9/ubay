@@ -2,12 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:user/core/api/result.dart';
 import 'package:user/core/common/model/page_state/bloc_status.dart';
 import 'package:user/core/common/model/page_state/page_state.dart';
-import 'package:user/features/app/domain/repository/prefs_repository.dart';
 import 'package:user/features/chat/domain/usecase/add_message_use_case.dart';
 import 'package:user/features/chat/domain/usecase/delete_message_use_case.dart';
 import '../../../../core/common/constants/constants.dart';

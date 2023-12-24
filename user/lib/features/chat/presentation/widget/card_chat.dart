@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/responsive_padding.dart';
-import 'package:user/features/app/presentation/widgets/app_pop_up_edit_delete.dart';
 import 'package:user/features/app/presentation/widgets/app_text_view.dart';
 import 'package:user/features/chat/data/model/chat_model/chats_model.dart';
 import 'package:user/features/chat/presentation/bloc/chat_bloc.dart';

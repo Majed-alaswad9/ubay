@@ -5,8 +5,6 @@ import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
 import 'package:user/features/chat/presentation/pages/chat_purchases_screen.dart';
 import 'package:user/features/chat/presentation/pages/chat_sales_screen.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
-import '../../../../core/common/constants/configuration/uri_routs.dart';
 import '../../../../generated/locale_keys.g.dart';
 
 class ChatScreen extends StatefulWidget {

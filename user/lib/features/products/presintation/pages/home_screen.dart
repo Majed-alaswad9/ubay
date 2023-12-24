@@ -16,7 +16,7 @@ import 'package:user/features/app/presentation/widgets/loading_indicator.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/features/app/presentation/widgets/photo_grid.dart';
 import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
-import 'package:user/features/products/data/model/posts_model.dart';
+import 'package:user/features/products/data/model/products_model.dart';
 import 'package:user/features/products/presintation/pages/add_post_screen.dart';
 import 'package:user/features/products/presintation/widget/comments_widget.dart';
 import 'package:user/features/products/presintation/widget/like_button.dart';
@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   loadData() {
-    _homeBloc.add(GetAllPostsEvent());
+    _homeBloc.add(GetAllProductsEvent(page: 1));
   }
 
   @override
@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   .withColor(context.colorScheme.white))),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          return PageStateBuilder<PostsModel>(
+          return PageStateBuilder<ProductsModel>(
             init: const SizedBox.shrink(),
             success: (data) {
               return RefreshIndicator(
@@ -122,7 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     context.read<HomeBloc>().add(
                                         DeleteProductEvent(
                                             data.data![index].id));
-                                    if (state.deletePostOrComment.isSuccess()) {
+                                    if (state.deleteProductOrComment
+                                        .isSuccess()) {
                                       context.pop();
                                     }
                                   },
@@ -140,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {
                               context.pushNamed(
                                   GRouter.config.homeScreen.viewProductScreen,
-                                  extra: data.data![index]);
+                                  extra: data.data![index].id);
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -275,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
               LocaleKeys.no_data.tr(),
               style: context.textTheme.bodyMedium.s17,
             ),
-            result: state.allPosts!,
+            result: state.allProducts,
           );
         },
       ),

@@ -7,7 +7,6 @@ import 'package:logger/logger.dart';
 import 'package:user/core/common/enums/status_code_type.dart';
 import 'package:user/features/app/domain/repository/prefs_repository.dart';
 import '../util/show_message.dart';
-import 'api_utils.dart';
 
 enum _StatusType {
   succeed,

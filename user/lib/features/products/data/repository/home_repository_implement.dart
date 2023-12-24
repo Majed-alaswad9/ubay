@@ -9,17 +9,18 @@ import 'package:user/features/products/data/model/category_model/category_model.
 import 'package:user/features/products/data/model/city_model/city_model.dart';
 import 'package:user/features/products/data/model/comments_model/comments_model.dart';
 import 'package:user/features/products/data/model/coupon_model/coupon_model.dart';
-import 'package:user/features/products/data/model/posts_model.dart';
+import 'package:user/features/products/data/model/products_model.dart';
 import 'package:user/features/products/domain/repository/home_repository.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/add_comment_use_case.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/edit_comment_use_case.dart';
 import 'package:user/features/products/domain/usecases/coupons_use_case/add_coupon_use_case.dart';
-import 'package:user/features/products/domain/usecases/coupons_use_case/edit_coupon_use_case.dart';
 import 'package:user/features/products/domain/usecases/coupons_use_case/get_coupons_use_case.dart';
+import 'package:user/features/products/domain/usecases/create_chat_use_case.dart';
 import 'package:user/features/products/domain/usecases/payment_use_case.dart';
-import 'package:user/features/products/domain/usecases/product_use_case/add_post_use_case.dart';
+import 'package:user/features/products/domain/usecases/product_use_case/add_product_use_case.dart';
 import 'package:user/features/products/domain/usecases/comment_use_case/get_comments_use_case.dart';
 import 'package:user/features/products/domain/usecases/product_use_case/edit_product_use_case.dart';
+import 'package:user/features/products/domain/usecases/product_use_case/get_all_products_use_case.dart';
 
 @Injectable(as: HomeRepository)
 class HomeRepositoryImplement extends HomeRepository {
@@ -27,22 +28,24 @@ class HomeRepositoryImplement extends HomeRepository {
 
   HomeRepositoryImplement(this.homeDataSource);
   @override
-  Future<Result<ResponseWrapper<bool>>> addPost(
-      AddPostParams params, List<File> photos) {
+  Future<Result<ResponseWrapper<bool>>> addProduct(
+      AddProductParams params, List<File> photos) {
     return toApiResult(() {
-      final result = homeDataSource.addPost(params, photos);
+      final result = homeDataSource.addProduct(params, photos);
       return result;
     });
   }
 
   @override
-  Future<Result<ResponseWrapper<PostsModel>>> getAllPosts() {
+  Future<Result<ResponseWrapper<ProductsModel>>> getAllProducts(
+      GetAllProductsParams params) {
     return toApiResult(() {
-      final result = homeDataSource.getAllPosts();
+      final result = homeDataSource.getAllProducts(params);
       return result;
     });
   }
 
+  //todo convert void to bool
   @override
   Future<Result<void>> addLike(String postId) {
     return toApiResult(() {
@@ -50,6 +53,7 @@ class HomeRepositoryImplement extends HomeRepository {
     });
   }
 
+  //todo convert void to bool
   @override
   Future<Result<void>> deleteLike(String postId) {
     return toApiResult(() {
@@ -155,9 +159,17 @@ class HomeRepositoryImplement extends HomeRepository {
   }
 
   @override
-  Future<Result<bool>> editCoupon(EditCouponParams params) {
+  Future<Result<ResponseWrapper<Product>>> getProduct(String id) {
     return toApiResult(() {
-      final result = homeDataSource.editCoupon(params);
+      final result = homeDataSource.getProduct(id);
+      return result;
+    });
+  }
+
+  @override
+  Future<Result<bool>> createChat(CreateChatParams params) {
+    return toApiResult(() {
+      final result = homeDataSource.createChat(params);
       return result;
     });
   }

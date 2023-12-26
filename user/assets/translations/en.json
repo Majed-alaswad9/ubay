@@ -35,7 +35,9 @@
         "minute": "minute",
         "second": "second",
         "hour": "hour",
-        "day": "day"
+        "day": "day",
+        "seller_date": "Seller date:",
+        "customer_date": "Customer date:"
     },
     "add_post_screen": {
         "new_post": "New Product",
@@ -62,6 +64,7 @@
         "view_post": "View post",
         "details": "product details",
         "price": "price: ",
+        "price_after_discount": "Price after discount:",
         "generate_qr": "Generate QR"
     },
     "settings": {
@@ -72,6 +75,7 @@
         "update_profile": "Update Profile",
         "change_password": "Change Password",
         "favourite": "Favourite",
+        "post_preferences": "Post preferences",
         "favourite_cities": "Favourite cities",
         "favourite_categories": "Favourite categories",
         "current_password": "Current Password",

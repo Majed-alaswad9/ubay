@@ -46,7 +46,7 @@ class AccountAndSecurity extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             context.pushNamed(
-                                GRouter.config.settingScreen.profileScreen);
+                                GRouter.config.settingRoutes.profileScreen);
                           },
                           child: CardSettings(title: LocaleKeys.profile.tr()),
                         ),
@@ -56,7 +56,7 @@ class AccountAndSecurity extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             context.pushNamed(GRouter
-                                .config.settingScreen.updateProfileScreen);
+                                .config.settingRoutes.updateProfileScreen);
                           },
                           child: CardSettings(
                               title: LocaleKeys.settings_update_profile.tr()),
@@ -83,7 +83,7 @@ class AccountAndSecurity extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             context.pushNamed(GRouter
-                                .config.settingScreen.changePasswordScreen);
+                                .config.settingRoutes.changePasswordScreen);
                           },
                           child: CardSettings(
                               title: LocaleKeys.settings_change_password.tr()),

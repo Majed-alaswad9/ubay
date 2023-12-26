@@ -53,10 +53,14 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       List<Data> sales = [];
       List<Data> purchases = [];
       for (var element in value.data.data) {
-        if (user.id == element.customer.id) {
-          purchases.add(element);
-        } else {
-          sales.add(element);
+        if (!(element.product == null ||
+            element.customer == null ||
+            element.seller == null)) {
+          if (user.id == element.customer!.id) {
+            purchases.add(element);
+          } else {
+            sales.add(element);
+          }
         }
       }
       emit(state.copyWith(

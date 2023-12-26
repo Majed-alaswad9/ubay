@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user/core/config/themes/my_color_scheme.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
+import 'package:user/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:user/features/chat/presentation/pages/chat_purchases_screen.dart';
 import 'package:user/features/chat/presentation/pages/chat_sales_screen.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -20,6 +22,7 @@ class _ChatScreenState extends State<ChatScreen>
   @override
   void initState() {
     tabController = TabController(length: 2, vsync: this);
+    context.read<ChatBloc>().add(GetAllChatsEvent());
     super.initState();
   }
 

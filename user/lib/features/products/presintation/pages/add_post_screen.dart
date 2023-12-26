@@ -156,11 +156,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                 decoration: const InputDecoration(
                                     border: OutlineInputBorder()),
                                 validator: (value) {
-                                  return storeId == null
-                                      ? LocaleKeys
+                                  return storeId ??
+                                      LocaleKeys
                                           .validation_this_field_is_required
-                                          .tr()
-                                      : null;
+                                          .tr();
                                 },
                                 borderRadius: BorderRadius.circular(16),
                                 hint: Text(
@@ -199,11 +198,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                     DataCategory>(
                                 decoration: const InputDecoration(
                                     border: OutlineInputBorder()),
-                                validator: (value) => categoryId == null
-                                    ? LocaleKeys
-                                        .validation_this_field_is_required
-                                        .tr()
-                                    : null,
+                                validator: (value) =>
+                                    categoryId ??
+                                    LocaleKeys.validation_this_field_is_required
+                                        .tr(),
                                 borderRadius: BorderRadius.circular(16),
                                 hint: Text(
                                   widget.params.isUpdate

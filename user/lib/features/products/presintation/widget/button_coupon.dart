@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:user/core/common/constants/constants.dart';
 import 'package:user/core/config/themes/typography.dart';
+import 'package:user/core/util/core_helper.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/presentation/widgets/app_pop_up_edit_delete.dart';
 import 'package:user/features/products/data/model/coupon_model/coupon_model.dart';
@@ -109,7 +110,7 @@ class _ButtonCouponState extends State<ButtonCoupon> {
                                                           .secondary)),
                                               const Spacer(),
                                               AppTextView(
-                                                  '${formatter.format(data.data[index].discount)} ل س',
+                                                  '${CoreHelper.handlePrice(CoreHelper.formatter.format(data.data[index].discount))} ل س',
                                                   style: context
                                                       .textTheme.titleSmall!
                                                       .withColor(context
@@ -130,7 +131,7 @@ class _ButtonCouponState extends State<ButtonCoupon> {
                                                           .secondary)),
                                               const Spacer(),
                                               AppTextView(
-                                                  '${formatter.format(widget.price - data.data[index].discount)} ل س',
+                                                  '${CoreHelper.handlePrice(CoreHelper.formatter.format(widget.price - data.data[index].discount))} ل س',
                                                   style: context
                                                       .textTheme.titleSmall!
                                                       .withColor(context

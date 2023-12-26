@@ -1,15 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:user/core/config/router/router.dart';
 import 'package:user/core/config/themes/my_color_scheme.dart';
+import 'package:user/core/util/chose_date_time.dart';
+import 'package:user/core/util/core_helper.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/my_transactions/data/model/sales_model/sales_model.dart';
 import 'package:user/features/my_transactions/presintation/widget/photo_view.dart';
 import 'package:user/generated/locale_keys.g.dart';
-
-import '../../../../core/common/constants/constants.dart';
 import '../../../../core/util/responsive_padding.dart';
 import '../../../app/presentation/widgets/app_text_view.dart';
 
@@ -26,9 +27,11 @@ class ListTransactions extends StatelessWidget {
       required this.iconColor,
       required this.iconData,
       required this.isReceive,
-      this.productId});
+      this.sellerDate,
+      this.customerDate,
+      required this.productId});
   final String title;
-  final String? productId;
+  final String productId;
   final String header;
   final Color color;
   final Color iconColor;
@@ -38,6 +41,8 @@ class ListTransactions extends StatelessWidget {
   final Payment? payment;
   final bool barcode;
   final bool isReceive;
+  final DateTime? sellerDate;
+  final DateTime? customerDate;
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +61,7 @@ class ListTransactions extends StatelessWidget {
                     iconData,
                     color: iconColor,
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  10.horizontalSpace,
                   AppTextView(
                     header,
                     style: context.textTheme.bodyMedium,
@@ -74,28 +77,51 @@ class ListTransactions extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.4,
                       child: AppTextView(title,
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: context.textTheme.titleLarge),
+                          style: context.textTheme.titleMedium),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    10.verticalSpace,
                     Row(children: [
                       AppTextView(LocaleKeys.home_screen_price.tr(),
-                          style: context.textTheme.titleMedium),
-                      AppTextView(formatter.format(price),
-                          style: context.textTheme.titleSmall!
-                              .copyWith(color: context.colorScheme.primary))
+                          style: context.textTheme.bodyMedium),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.38,
+                        child: AppTextView(
+                            '${CoreHelper.handlePrice(CoreHelper.formatter.format(price))} ل س',
+                            overflow: TextOverflow.ellipsis,
+                            style: context.textTheme.bodyMedium!
+                                .copyWith(color: context.colorScheme.primary)),
+                      )
                     ]),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    if (sellerDate != null) ...[
+                      10.verticalSpace,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.49,
+                        child: AppTextView(
+                            '${LocaleKeys.date_seller_date.tr()} ${ChoseDateTime().chose(sellerDate!)}',
+                            style: context.textTheme.bodyMedium!
+                                .copyWith(color: context.colorScheme.grey)),
+                      ),
+                    ],
+                    if (customerDate != null) ...[
+                      10.verticalSpace,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.49,
+                        child: AppTextView(
+                            '${LocaleKeys.date_customer_date.tr()} ${ChoseDateTime().chose(customerDate!)}',
+                            style: context.textTheme.bodyMedium!
+                                .copyWith(color: context.colorScheme.grey)),
+                      ),
+                    ],
+                    10.verticalSpace,
                     Column(
                       children: [
                         InkWell(
                           onTap: () {
+                            print(productId);
                             context.pushNamed(
-                                GRouter.config.homeScreen.viewProductScreen,
+                                GRouter.config.homeRoutes.viewProductScreen,
                                 extra: productId);
                           },
                           child: Container(

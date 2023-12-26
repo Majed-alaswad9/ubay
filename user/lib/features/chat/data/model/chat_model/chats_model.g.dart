@@ -23,9 +23,15 @@ Map<String, dynamic> _$$ChatsModelImplToJson(_$ChatsModelImpl instance) =>
 _$DataImpl _$$DataImplFromJson(Map<String, dynamic> json) => _$DataImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      customer: Customer.fromJson(json['customer'] as Map<String, dynamic>),
-      seller: Customer.fromJson(json['seller'] as Map<String, dynamic>),
-      product: Product.fromJson(json['product'] as Map<String, dynamic>),
+      customer: json['customer'] == null
+          ? null
+          : Customer.fromJson(json['customer'] as Map<String, dynamic>),
+      seller: json['seller'] == null
+          ? null
+          : Customer.fromJson(json['seller'] as Map<String, dynamic>),
+      product: json['product'] == null
+          ? null
+          : Product.fromJson(json['product'] as Map<String, dynamic>),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       lastMessage: json['lastMessage'] as String?,

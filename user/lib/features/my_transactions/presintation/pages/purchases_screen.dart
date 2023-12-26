@@ -50,28 +50,9 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => ListTransactions(
+                            iconColor: Colors.orangeAccent,
                             iconData: Icons.warning_amber,
-                            iconColor: Colors.orange,
                             color: context.colorScheme.errorContainer,
-                            title: data.wait[index].product.title,
-                            header:
-                                LocaleKeys.deliveryStatus_customer_wait.tr(),
-                            price: data.wait[index].product.price,
-                            photos: data.wait[index].product.photos,
-                            barcode: false,
-                            isReceive: false,
-                          ),
-                      separatorBuilder: (context, _) => const SizedBox(
-                            height: 5,
-                          ),
-                      itemCount: data.wait.length),
-                  ListView.separated(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => ListTransactions(
-                            iconColor: Colors.green,
-                            iconData: Icons.check_circle_outline_outlined,
-                            color: const Color(0xFFC4B5FD),
                             header:
                                 LocaleKeys.deliveryStatus_customer_seller.tr(),
                             title: data.seller[index].product.title,
@@ -90,6 +71,27 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => ListTransactions(
+                            productId: data.wait[index].product.id,
+                            iconData: Icons.info_outline,
+                            iconColor: const Color(0xFF0288D1),
+                            color: const Color(0xFFC4B5FD),
+                            title: data.wait[index].product.title,
+                            header:
+                                LocaleKeys.deliveryStatus_customer_wait.tr(),
+                            price: data.wait[index].product.price,
+                            photos: data.wait[index].product.photos,
+                            barcode: false,
+                            isReceive: false,
+                          ),
+                      separatorBuilder: (context, _) => const SizedBox(
+                            height: 5,
+                          ),
+                      itemCount: data.wait.length),
+                  ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => ListTransactions(
+                            productId: data.customer[index].product.id,
                             iconColor: Colors.green,
                             iconData: Icons.check_circle_outline_outlined,
                             color: const Color(0xFFC4B5FD),

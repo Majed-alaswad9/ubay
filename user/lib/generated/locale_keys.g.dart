@@ -34,6 +34,8 @@ abstract class  LocaleKeys {
   static const date_second = 'date.second';
   static const date_hour = 'date.hour';
   static const date_day = 'date.day';
+  static const date_seller_date = 'date.seller_date';
+  static const date_customer_date = 'date.customer_date';
   static const date = 'date';
   static const add_post_screen_new_post = 'add_post_screen.new_post';
   static const add_post_screen_add = 'add_post_screen.add';
@@ -58,6 +60,7 @@ abstract class  LocaleKeys {
   static const home_screen_view_post = 'home_screen.view_post';
   static const home_screen_details = 'home_screen.details';
   static const home_screen_price = 'home_screen.price';
+  static const home_screen_price_after_discount = 'home_screen.price_after_discount';
   static const home_screen_generate_qr = 'home_screen.generate_qr';
   static const home_screen = 'home_screen';
   static const settings_setting = 'settings.setting';
@@ -67,6 +70,7 @@ abstract class  LocaleKeys {
   static const settings_update_profile = 'settings.update_profile';
   static const settings_change_password = 'settings.change_password';
   static const settings_favourite = 'settings.favourite';
+  static const settings_post_preferences = 'settings.post_preferences';
   static const settings_favourite_cities = 'settings.favourite_cities';
   static const settings_favourite_categories = 'settings.favourite_categories';
   static const settings_current_password = 'settings.current_password';

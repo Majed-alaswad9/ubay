@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user/core/common/model/page_state/result_builder.dart';
 import 'package:user/core/config/themes/my_color_scheme.dart';
 import 'package:user/core/config/themes/typography.dart';
+import 'package:user/core/util/core_helper.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/show_message.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
@@ -144,7 +145,7 @@ class _ViewProductState extends State<ViewProduct> {
                                     color: context.colorScheme.secondary,
                                     borderRadius: BorderRadius.circular(5)),
                                 child: AppTextView(
-                                    '${formatter.format(data.price)} ل س',
+                                    '${LocaleKeys.home_screen_price.tr()} ${CoreHelper.handlePrice(CoreHelper.formatter.format(data.price))} ل س',
                                     style:
                                         context.textTheme.titleSmall!.withColor(
                                       Colors.white,
@@ -156,7 +157,7 @@ class _ViewProductState extends State<ViewProduct> {
                                     color: context.colorScheme.secondary,
                                     borderRadius: BorderRadius.circular(5)),
                                 child: AppTextView(
-                                    '${formatter.format(data.price - data.coupons![0].discount!)} ل س',
+                                    'السعر بعد الحسم ${CoreHelper.handlePrice(CoreHelper.formatter.format(data.price - data.coupons![0].discount!))} ل س',
                                     style: context.textTheme.titleSmall!
                                         .withColor(Colors.white))),
                           ],

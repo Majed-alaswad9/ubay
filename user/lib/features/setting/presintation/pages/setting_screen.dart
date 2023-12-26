@@ -29,7 +29,7 @@ class SettingScreen extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  context.goNamed(GRouter.config.settingScreen.accountScreen);
+                  context.goNamed(GRouter.config.settingRoutes.accountScreen);
                 },
                 child: Row(
                   children: [
@@ -44,13 +44,17 @@ class SettingScreen extends StatelessWidget {
                 height: 10,
               ),
               const Divider(),
-              Row(
-                children: [
-                  AppTextView(LocaleKeys.settings_favourite.tr(),
-                      style: context.textTheme.bodyLarge),
-                  const Spacer(),
-                  const Icon(Icons.arrow_forward_rounded)
-                ],
+              InkWell(
+                onTap: () => context
+                    .pushNamed(GRouter.config.settingRoutes.favouriteScreen),
+                child: Row(
+                  children: [
+                    AppTextView(LocaleKeys.settings_favourite.tr(),
+                        style: context.textTheme.bodyLarge),
+                    const Spacer(),
+                    const Icon(Icons.arrow_forward_rounded)
+                  ],
+                ),
               ),
             ],
           ),

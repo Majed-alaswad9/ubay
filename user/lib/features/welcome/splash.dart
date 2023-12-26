@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       if (GetIt.I<PrefsRepository>().registeredUser) {
         user = GetIt.I<PrefsRepository>().user!;
-        context.goNamed(GRouter.config.homeScreen.homeScreen);
+        context.goNamed(GRouter.config.homeRoutes.homeScreen);
       } else {
         context.goNamed(GRouter.config.authRoutes.login);
       }

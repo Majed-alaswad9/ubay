@@ -278,7 +278,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(editProduct: BlocStatus.fail(error: message)));
     }, (value) {
       emit(state.copyWith(editProduct: const BlocStatus.success()));
-      event.context.goNamed(GRouter.config.homeScreen.homeScreen);
+      event.context.goNamed(GRouter.config.homeRoutes.homeScreen);
     });
   }
 

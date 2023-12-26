@@ -21,6 +21,7 @@ class _PhotoGridState extends State<PhotoGrid> {
       return Image.network(widget.imageUrls[0]);
     } else {
       return GridView(
+        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 300,
           crossAxisSpacing: 2,

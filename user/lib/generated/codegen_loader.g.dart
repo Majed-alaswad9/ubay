@@ -51,7 +51,9 @@ class CodegenLoader extends AssetLoader{
     "minute": "minute",
     "second": "second",
     "hour": "hour",
-    "day": "day"
+    "day": "day",
+    "seller_date": "Seller date:",
+    "customer_date": "Customer date:"
   },
   "add_post_screen": {
     "new_post": "New Product",
@@ -78,6 +80,7 @@ class CodegenLoader extends AssetLoader{
     "view_post": "View post",
     "details": "product details",
     "price": "price: ",
+    "price_after_discount": "Price after discount:",
     "generate_qr": "Generate QR"
   },
   "settings": {
@@ -88,6 +91,7 @@ class CodegenLoader extends AssetLoader{
     "update_profile": "Update Profile",
     "change_password": "Change Password",
     "favourite": "Favourite",
+    "post_preferences": "Post preferences",
     "favourite_cities": "Favourite cities",
     "favourite_categories": "Favourite categories",
     "current_password": "Current Password",
@@ -184,7 +188,9 @@ static const Map<String,dynamic> ar = {
     "minute": "دقيقة",
     "second": "ثانية",
     "hour": "ساعة",
-    "day": "يوم"
+    "day": "يوم",
+    "seller_date": "تاريخ التسليم:",
+    "customer_date": "تاريخ الاستلام:"
   },
   "add_post_screen": {
     "new_post": "قطعة جديدة",
@@ -211,6 +217,7 @@ static const Map<String,dynamic> ar = {
     "view_post": "عرض المنشور",
     "details": "تفاصيل القطعة",
     "price": "السعر : ",
+    "price_after_discount": "السعر بعد الحسم:",
     "generate_qr": "توليد رمز QR"
   },
   "settings": {
@@ -221,6 +228,7 @@ static const Map<String,dynamic> ar = {
     "update_profile": "تحديث معلومات الملف الشخصي",
     "change_password": "تغيير كلمة المرور",
     "favourite": "المفضلة",
+    "post_preferences": "تفضيلات المنشورات",
     "favourite_cities": "المدن المفضلة",
     "favourite_categories": "الاصناف المفضلة",
     "current_password": "كلمة المرور الحالية",

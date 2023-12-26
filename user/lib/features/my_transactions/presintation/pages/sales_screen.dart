@@ -69,6 +69,7 @@ class _SalesPageState extends State<SalesPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => ListTransactions(
+                          productId: data.unpaid[index].id,
                           iconData: Icons.error_outline,
                           iconColor: Colors.lightBlueAccent,
                           color: Colors.blue.shade50,
@@ -87,6 +88,7 @@ class _SalesPageState extends State<SalesPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => ListTransactions(
+                          productId: data.seller[index].product.id,
                           iconColor: Colors.green,
                           iconData: Icons.check_circle_outline_outlined,
                           color: const Color(0xFFC4B5FD),
@@ -94,6 +96,7 @@ class _SalesPageState extends State<SalesPage> {
                           title: data.seller[index].product.title,
                           price: data.seller[index].product.price,
                           photos: data.seller[index].product.photos,
+                          sellerDate: data.seller[index].sellerDate,
                           barcode: false,
                           isReceive: false,
                         ),
@@ -105,6 +108,7 @@ class _SalesPageState extends State<SalesPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => ListTransactions(
+                          productId: data.customer[index].product.id,
                           iconColor: Colors.green,
                           iconData: Icons.check_circle_outline_outlined,
                           color: const Color(0xFFC4B5FD),
@@ -113,6 +117,8 @@ class _SalesPageState extends State<SalesPage> {
                           title: data.customer[index].product.title,
                           price: data.customer[index].product.price,
                           photos: data.customer[index].product.photos,
+                          sellerDate: data.customer[index].sellerDate,
+                          customerDate: data.customer[index].customerDate,
                           barcode: false,
                           isReceive: false,
                         ),

@@ -19,9 +19,9 @@ class Data with _$Data {
   const factory Data({
     required String id,
     required String name,
-    required Customer customer,
-    required Customer seller,
-    required Product product,
+    required Customer? customer,
+    required Customer? seller,
+    required Product? product,
     required DateTime createdAt,
     required DateTime updatedAt,
     String? lastMessage,

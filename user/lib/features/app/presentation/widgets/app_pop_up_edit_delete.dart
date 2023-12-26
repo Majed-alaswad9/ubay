@@ -42,7 +42,7 @@ class PopUpMenuDeleteEdit extends StatelessWidget {
         onSelected: (value) {
           if (value == Const.edit) {
             if (isProduct) {
-              fromContext.goNamed(GRouter.config.homeScreen.addPostScreen,
+              fromContext.goNamed(GRouter.config.homeRoutes.addPostScreen,
                   extra:
                       AddPostScreenParams(isUpdate: true, postsModel: product));
             } else {

@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state.loginStatus.isSuccess()) {
-          context.goNamed(GRouter.config.homeScreen.homeScreen);
+          context.goNamed(GRouter.config.homeRoutes.homeScreen);
         }
       },
       child: AppScaffold(

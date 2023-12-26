@@ -183,9 +183,9 @@ Data _$DataFromJson(Map<String, dynamic> json) {
 mixin _$Data {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  Customer get customer => throw _privateConstructorUsedError;
-  Customer get seller => throw _privateConstructorUsedError;
-  Product get product => throw _privateConstructorUsedError;
+  Customer? get customer => throw _privateConstructorUsedError;
+  Customer? get seller => throw _privateConstructorUsedError;
+  Product? get product => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
   String? get lastMessage => throw _privateConstructorUsedError;
@@ -203,16 +203,16 @@ abstract class $DataCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      Customer customer,
-      Customer seller,
-      Product product,
+      Customer? customer,
+      Customer? seller,
+      Product? product,
       DateTime createdAt,
       DateTime updatedAt,
       String? lastMessage});
 
-  $CustomerCopyWith<$Res> get customer;
-  $CustomerCopyWith<$Res> get seller;
-  $ProductCopyWith<$Res> get product;
+  $CustomerCopyWith<$Res>? get customer;
+  $CustomerCopyWith<$Res>? get seller;
+  $ProductCopyWith<$Res>? get product;
 }
 
 /// @nodoc
@@ -230,9 +230,9 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? customer = null,
-    Object? seller = null,
-    Object? product = null,
+    Object? customer = freezed,
+    Object? seller = freezed,
+    Object? product = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? lastMessage = freezed,
@@ -246,18 +246,18 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      customer: null == customer
+      customer: freezed == customer
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
-              as Customer,
-      seller: null == seller
+              as Customer?,
+      seller: freezed == seller
           ? _value.seller
           : seller // ignore: cast_nullable_to_non_nullable
-              as Customer,
-      product: null == product
+              as Customer?,
+      product: freezed == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
-              as Product,
+              as Product?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -275,24 +275,36 @@ class _$DataCopyWithImpl<$Res, $Val extends Data>
 
   @override
   @pragma('vm:prefer-inline')
-  $CustomerCopyWith<$Res> get customer {
-    return $CustomerCopyWith<$Res>(_value.customer, (value) {
+  $CustomerCopyWith<$Res>? get customer {
+    if (_value.customer == null) {
+      return null;
+    }
+
+    return $CustomerCopyWith<$Res>(_value.customer!, (value) {
       return _then(_value.copyWith(customer: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $CustomerCopyWith<$Res> get seller {
-    return $CustomerCopyWith<$Res>(_value.seller, (value) {
+  $CustomerCopyWith<$Res>? get seller {
+    if (_value.seller == null) {
+      return null;
+    }
+
+    return $CustomerCopyWith<$Res>(_value.seller!, (value) {
       return _then(_value.copyWith(seller: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ProductCopyWith<$Res> get product {
-    return $ProductCopyWith<$Res>(_value.product, (value) {
+  $ProductCopyWith<$Res>? get product {
+    if (_value.product == null) {
+      return null;
+    }
+
+    return $ProductCopyWith<$Res>(_value.product!, (value) {
       return _then(_value.copyWith(product: value) as $Val);
     });
   }
@@ -308,19 +320,19 @@ abstract class _$$DataImplCopyWith<$Res> implements $DataCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      Customer customer,
-      Customer seller,
-      Product product,
+      Customer? customer,
+      Customer? seller,
+      Product? product,
       DateTime createdAt,
       DateTime updatedAt,
       String? lastMessage});
 
   @override
-  $CustomerCopyWith<$Res> get customer;
+  $CustomerCopyWith<$Res>? get customer;
   @override
-  $CustomerCopyWith<$Res> get seller;
+  $CustomerCopyWith<$Res>? get seller;
   @override
-  $ProductCopyWith<$Res> get product;
+  $ProductCopyWith<$Res>? get product;
 }
 
 /// @nodoc
@@ -335,9 +347,9 @@ class __$$DataImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? customer = null,
-    Object? seller = null,
-    Object? product = null,
+    Object? customer = freezed,
+    Object? seller = freezed,
+    Object? product = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? lastMessage = freezed,
@@ -351,18 +363,18 @@ class __$$DataImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      customer: null == customer
+      customer: freezed == customer
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
-              as Customer,
-      seller: null == seller
+              as Customer?,
+      seller: freezed == seller
           ? _value.seller
           : seller // ignore: cast_nullable_to_non_nullable
-              as Customer,
-      product: null == product
+              as Customer?,
+      product: freezed == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
-              as Product,
+              as Product?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -400,11 +412,11 @@ class _$DataImpl implements _Data {
   @override
   final String name;
   @override
-  final Customer customer;
+  final Customer? customer;
   @override
-  final Customer seller;
+  final Customer? seller;
   @override
-  final Product product;
+  final Product? product;
   @override
   final DateTime createdAt;
   @override
@@ -459,9 +471,9 @@ abstract class _Data implements Data {
   const factory _Data(
       {required final String id,
       required final String name,
-      required final Customer customer,
-      required final Customer seller,
-      required final Product product,
+      required final Customer? customer,
+      required final Customer? seller,
+      required final Product? product,
       required final DateTime createdAt,
       required final DateTime updatedAt,
       final String? lastMessage}) = _$DataImpl;
@@ -473,11 +485,11 @@ abstract class _Data implements Data {
   @override
   String get name;
   @override
-  Customer get customer;
+  Customer? get customer;
   @override
-  Customer get seller;
+  Customer? get seller;
   @override
-  Product get product;
+  Product? get product;
   @override
   DateTime get createdAt;
   @override

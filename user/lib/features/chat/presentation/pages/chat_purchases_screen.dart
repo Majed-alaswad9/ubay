@@ -23,8 +23,8 @@ class ChatPurchasesScreen extends StatelessWidget {
               return ListView.separated(
                   itemBuilder: (context, index) => CardChat(
                       chatId: data[index].id,
-                      user: data[index].seller,
-                      product: data[index].product),
+                      user: data[index].seller!,
+                      product: data[index].product!),
                   separatorBuilder: (context, _) => const SizedBox(
                         height: 5,
                       ),

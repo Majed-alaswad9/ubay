@@ -2,10 +2,10 @@ class RouterConfiguration {
   RouterConfiguration.init();
   final String kRootRoute = '/splash';
   final authRoutes = const AuthRoutes._();
-  final homeScreen = const _HomeRoutes._();
-  final chatScreen = const _ChatRoutes._();
-  final transactionScreen = const _TransactionRoutes._();
-  final settingScreen = const _SettingsRoutes._();
+  final homeRoutes = const _HomeRoutes._();
+  final chatRoutes = const _ChatRoutes._();
+  final transactionRoutes = const _TransactionRoutes._();
+  final settingRoutes = const _SettingsRoutes._();
 }
 
 class AuthRoutes {
@@ -44,4 +44,5 @@ class _SettingsRoutes {
   final String profileScreen = 'profileScreen';
   final String updateProfileScreen = 'updateProfileScreen';
   final String changePasswordScreen = 'changePasswordScreen';
+  final String favouriteScreen = 'favouriteScreen';
 }

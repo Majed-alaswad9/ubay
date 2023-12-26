@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:user/core/common/constants/constants.dart';
 import 'package:user/core/config/router/router.dart';
+import 'package:user/core/util/core_helper.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/core/util/responsive_padding.dart';
 import 'package:user/generated/locale_keys.g.dart';
@@ -77,7 +78,7 @@ class ProfileWidget extends StatelessWidget {
                 IconButton(
                     onPressed: () {
                       context.pushNamed(
-                          GRouter.config.settingScreen.updateProfileScreen);
+                          GRouter.config.settingRoutes.updateProfileScreen);
                     },
                     icon: Icon(
                       Icons.edit,
@@ -106,7 +107,8 @@ class ProfileWidget extends StatelessWidget {
                         style: context.textTheme.bodyMedium!
                             .copyWith(color: context.colorScheme.primary)),
                     10.horizontalSpace,
-                    AppTextView('${formatter.format(total)} ل س',
+                    AppTextView(
+                        '${CoreHelper.handlePrice(CoreHelper.formatter.format(total))} ل س',
                         style: context.textTheme.bodyMedium!
                             .copyWith(color: context.colorScheme.secondary))
                   ],
@@ -123,7 +125,8 @@ class ProfileWidget extends StatelessWidget {
                         style: context.textTheme.bodyMedium!
                             .copyWith(color: context.colorScheme.primary)),
                     10.horizontalSpace,
-                    AppTextView('${formatter.format(pending)} ل س',
+                    AppTextView(
+                        '${CoreHelper.handlePrice(CoreHelper.formatter.format(pending))} ل س',
                         style: context.textTheme.bodyMedium!
                             .copyWith(color: context.colorScheme.secondary))
                   ],

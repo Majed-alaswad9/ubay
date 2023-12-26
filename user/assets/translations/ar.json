@@ -35,7 +35,9 @@
         "minute": "دقيقة",
         "second": "ثانية",
         "hour": "ساعة",
-        "day": "يوم"
+        "day": "يوم",
+        "seller_date": "تاريخ التسليم:",
+        "customer_date": "تاريخ الاستلام:"
     },
     "add_post_screen": {
         "new_post": "قطعة جديدة",
@@ -62,6 +64,7 @@
         "view_post": "عرض المنشور",
         "details": "تفاصيل القطعة",
         "price": "السعر : ",
+        "price_after_discount": "السعر بعد الحسم:",
         "generate_qr": "توليد رمز QR"
     },
     "settings": {
@@ -72,6 +75,7 @@
         "update_profile": "تحديث معلومات الملف الشخصي",
         "change_password": "تغيير كلمة المرور",
         "favourite": "المفضلة",
+        "post_preferences": "تفضيلات المنشورات",
         "favourite_cities": "المدن المفضلة",
         "favourite_categories": "الاصناف المفضلة",
         "current_password": "كلمة المرور الحالية",

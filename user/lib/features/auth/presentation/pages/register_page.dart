@@ -43,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state.signupStatus.isSuccess()) {
-          context.goNamed(GRouter.config.homeScreen.homeScreen);
+          context.goNamed(GRouter.config.homeRoutes.homeScreen);
         }
       },
       child: AppScaffold(

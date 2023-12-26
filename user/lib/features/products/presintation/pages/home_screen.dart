@@ -8,6 +8,7 @@ import 'package:user/core/config/router/router.dart';
 import 'package:user/core/config/themes/my_color_scheme.dart';
 import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/chose_date_time.dart';
+import 'package:user/core/util/core_helper.dart';
 import 'package:user/core/util/extensions/build_context.dart';
 import 'package:user/features/app/presentation/widgets/app_pop_up_edit_delete.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
@@ -140,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           InkWell(
                             onTap: () {
                               context.pushNamed(
-                                  GRouter.config.homeScreen.viewProductScreen,
+                                  GRouter.config.homeRoutes.viewProductScreen,
                                   extra: data.data![index].id);
                             },
                             child: Column(
@@ -160,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       child: AppTextView(
-                                          '${formatter.format(data.data![index].price)} ل س',
+                                          '${CoreHelper.handlePrice(CoreHelper.formatter.format(data.data![index].price))} ل س',
                                           style: context.textTheme.titleSmall!
                                               .withColor(
                                             Colors.white,
@@ -173,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       child: AppTextView(
-                                          '${formatter.format(data.data![index].price - data.data![index].coupons![0].discount!)} ل س',
+                                          '${CoreHelper.handlePrice(CoreHelper.formatter.format(data.data![index].price - data.data![index].coupons![0].discount!))} ل س',
                                           style: context.textTheme.titleSmall!
                                               .withColor(Colors.white))),
                                 ],
@@ -282,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.pushNamed(GRouter.config.homeScreen.addPostScreen,
+          context.pushNamed(GRouter.config.homeRoutes.addPostScreen,
               extra: AddPostScreenParams(isUpdate: false));
         },
         backgroundColor: context.colorScheme.primary,

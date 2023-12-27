@@ -8,8 +8,10 @@ import 'package:injectable/injectable.dart';
 import 'package:user/core/common/model/page_state/bloc_status.dart';
 import 'package:user/core/common/model/page_state/page_state.dart';
 import 'package:user/core/use_case/use_case.dart';
+import 'package:user/features/products/data/model/category_model/category_model.dart';
 import 'package:user/features/setting/domain/usecase/change_password_use_case.dart';
 import 'package:user/features/setting/domain/usecase/edit_profile_use_case.dart';
+import 'package:user/features/setting/domain/usecase/git_cities_use_case.dart';
 
 import '../../../auth/data/model/login_model/login_model.dart';
 import '../../domain/usecase/get_me_use_case.dart';
@@ -22,13 +24,15 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   final GetMeUseCase getMeUseCase;
   final EditProfileUseCase editProfileUseCase;
   final ChangePasswordUseCase changePasswordUseCase;
-  SettingBloc(
-      this.getMeUseCase, this.editProfileUseCase, this.changePasswordUseCase)
+  final GetCitiesUseCase getCitiesUseCase;
+  SettingBloc(this.getMeUseCase, this.editProfileUseCase,
+      this.changePasswordUseCase, this.getCitiesUseCase)
       : super(const SettingState()) {
     on<GetMeEvent>(_onGetMeEvent);
     on<PickPhotoEvent>(_onPickImage);
     on<EditMyProfileEvent>(_onEditProfileEvent);
     on<ChangePasswordEvent>(_onChangePasswordEvent);
+    on<GetCitiesEvent>(_onGetCitiesEvent);
   }
 
   FutureOr<void> _onGetMeEvent(
@@ -80,6 +84,17 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       emit(state.copyWith(
           changePasswordStatus: const BlocStatus.success(),
           profileMe: PageState.loaded(data: value.data.user)));
+    });
+  }
+
+  FutureOr<void> _onGetCitiesEvent(
+      GetCitiesEvent event, Emitter<SettingState> emit) async {
+    emit(state.copyWith(citiesState: const PageState.loading()));
+    final result = await getCitiesUseCase(NoParams());
+    result.fold((exception, message) {
+      emit(state.copyWith(citiesState: PageState.error(exception: exception)));
+    }, (value) {
+      emit(state.copyWith(citiesState: PageState.loaded(data: value.data)));
     });
   }
 }

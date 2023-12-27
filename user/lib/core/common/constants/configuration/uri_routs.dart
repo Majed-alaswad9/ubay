@@ -28,6 +28,7 @@ class Product {
   final comments = '/comments';
   final coupons = '/coupons';
   final payment = '/payments';
+  final cities = '/cities';
 }
 
 class Stores {

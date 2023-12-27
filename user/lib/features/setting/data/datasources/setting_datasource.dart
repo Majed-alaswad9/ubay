@@ -9,6 +9,7 @@ import 'package:user/core/common/constants/constants.dart';
 import 'package:user/core/common/model/response_wrapper/response_wrapper.dart';
 import 'package:user/features/app/domain/repository/prefs_repository.dart';
 import 'package:user/features/auth/data/model/login_model/login_model.dart';
+import 'package:user/features/products/data/model/category_model/category_model.dart';
 import 'package:user/features/setting/domain/usecase/change_password_use_case.dart';
 import 'package:user/features/setting/domain/usecase/edit_profile_use_case.dart';
 import 'package:http_parser/http_parser.dart' as mime;
@@ -69,6 +70,16 @@ class SettingDataSource {
           ..setToken(userModel.token);
         user = prefsRepository.user!;
         return userModel;
+      });
+    });
+  }
+
+  Future<ResponseWrapper<CategoryModel>> getCities() {
+    return throwAppException(() async {
+      final response = await clientApi.request(RequestConfig(
+          endpoint: EndPoints.product.cities, clientMethod: ClientMethod.get));
+      return ResponseWrapper.fromJson(response.data, (json) {
+        return CategoryModel.fromJson(response.data);
       });
     });
   }

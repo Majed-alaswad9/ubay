@@ -23,3 +23,5 @@ class ChangePasswordEvent extends SettingEvent {
 
   ChangePasswordEvent(this.params);
 }
+
+class GetCitiesEvent extends SettingEvent {}

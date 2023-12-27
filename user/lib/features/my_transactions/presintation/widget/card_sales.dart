@@ -148,7 +148,7 @@ class ListTransactions extends StatelessWidget {
                             onTap: () {
                               final qr = QrImageView(
                                 data:
-                                    '{"isDeliver":"${!isReceive}" ,"product": "$productId","payment":"${payment!.id}"}',
+                                    '{"isDeliver":${!isReceive} ,"product": "$productId","payment":"${payment!.id}"}',
                                 version: QrVersions.auto,
                                 size: 200.0,
                               );

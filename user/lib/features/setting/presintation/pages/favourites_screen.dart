@@ -1,22 +1,29 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:user/core/config/themes/app_theme.dart';
 import 'package:user/core/config/themes/typography.dart';
 import 'package:user/core/util/extensions/build_context.dart';
+import 'package:user/core/util/responsive_padding.dart';
 import 'package:user/features/app/presentation/widgets/app_scaffold.dart';
 import 'package:user/features/app/presentation/widgets/app_text_view.dart';
 import 'package:user/features/app/presentation/widgets/params_appbar.dart';
 import 'package:user/features/app/presentation/widgets/ubay_appbar.dart';
+import 'package:user/features/setting/presintation/widget/cities_drop_down.dart';
 import 'package:user/generated/locale_keys.g.dart';
 
-import '../widget/favourite_item.dart';
+import '../../../products/data/model/category_model/category_model.dart';
+import '../../../products/presintation/widget/drop_down_category.dart';
 
 class FavouritesScreen extends StatelessWidget {
-  FavouritesScreen({super.key});
+  const FavouritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
+    DataCategory? dropdownValueCategory;
+    DataCategory? dropdownValueCities;
+    List<DataCategory> listCategoryFav = [];
+    List<DataCategory> listCitiesFav = [];
     return AppScaffold(
         appBar: UBayAppBar(
             isLeading: true,
@@ -25,108 +32,123 @@ class FavouritesScreen extends StatelessWidget {
                 tittleStyle:
                     context.textTheme.titleMedium.withColor(Colors.white),
                 centerTitle: true)),
-        body: Column(
-          children: [
-            Expanded(
-              flex: 3,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                padding: REdgeInsets.only(top: 14),
-                itemCount: filterMap.length,
-                itemBuilder: (context, index) {
-                  final key = filterMap.keys.elementAt(index);
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppTextView(
-                          style: context.textTheme.titleSmall,
-                          filterMap.keys.elementAt(index)),
-                      6.verticalSpace,
-                      ...filterMap[key]!.map(
-                        (e) => ValueListenableBuilder<int>(
-                          valueListenable: _selectedIndex,
-                          builder: (context, value, child) => FilterTypeItem(
-                            e.title,
-                            onTap: () =>
-                                _selectedIndex.value = _getOuterIndex(e.title),
-                            active: value == _getOuterIndex(e.title),
-                          ),
+        body: Padding(
+          padding: HWEdgeInsets.all(kpPaddingPage),
+          child: Column(
+            children: [
+              if (listCitiesFav.isNotEmpty) ...[
+                ListView.separated(
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: HWEdgeInsets.all(3.5),
+                        decoration: BoxDecoration(
+                            color: context.colorScheme.secondary,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Row(
+                          children: [
+                            Text(listCitiesFav[index].name),
+                            5.horizontalSpace,
+                            IconButton(
+                                onPressed: () {}, icon: const Icon(Icons.clear))
+                          ],
                         ),
+                      );
+                    },
+                    separatorBuilder: (context, _) => 10.horizontalSpace,
+                    itemCount: listCitiesFav.length),
+                10.verticalSpace
+              ],
+              DropDownCities(
+                  widget: (data) => DropdownButtonFormField<DataCategory>(
+                      decoration:
+                          const InputDecoration(border: OutlineInputBorder()),
+                      borderRadius: BorderRadius.circular(16),
+                      hint: Text(
+                        LocaleKeys.add_post_screen_category.tr(),
+                        style: context.textTheme.bodyMedium?.s13!
+                            .copyWith(color: context.colorScheme.primary),
                       ),
-                    ],
-                  );
-                },
-              ),
-            ),
-            Center(
-              child: SizedBox(
-                width: 100.w,
-                child: ElevatedButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        AppTextView(
-                          LocaleKeys.save.tr(),
-                          style: context.textTheme.titleSmall
-                              .withColor(Colors.white),
+                      isExpanded: true,
+                      value: dropdownValueCities,
+                      style: context.textTheme.titleSmall,
+                      items: data.data
+                          .map((e) => DropdownMenuItem<DataCategory>(
+                              value: e, child: Text(e.name)))
+                          .toList(),
+                      onChanged: (value) {
+                        dropdownValueCategory = value;
+                        listCitiesFav.add(value!);
+                      })),
+              12.verticalSpace,
+              if (listCitiesFav.isNotEmpty) ...[
+                ListView.separated(
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: HWEdgeInsets.all(3.5),
+                        decoration: BoxDecoration(
+                            color: context.colorScheme.secondary,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Row(
+                          children: [
+                            Text(listCategoryFav[index].name),
+                            5.horizontalSpace,
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.clear,
+                                  color: Colors.white,
+                                ))
+                          ],
                         ),
-                        5.horizontalSpace,
-                        const Icon(
-                          Icons.save,
-                          color: Colors.white,
-                        )
-                      ],
-                    )),
-              ),
-            )
-          ],
+                      );
+                    },
+                    separatorBuilder: (context, _) => 10.horizontalSpace,
+                    itemCount: listCitiesFav.length),
+                10.verticalSpace
+              ],
+              DropDownCategory(
+                  widget: (data) => DropdownButtonFormField<DataCategory>(
+                      decoration:
+                          const InputDecoration(border: OutlineInputBorder()),
+                      borderRadius: BorderRadius.circular(16),
+                      hint: Text(
+                        LocaleKeys.add_post_screen_category.tr(),
+                        style: context.textTheme.bodyMedium?.s13!
+                            .copyWith(color: context.colorScheme.primary),
+                      ),
+                      isExpanded: true,
+                      value: dropdownValueCategory,
+                      style: context.textTheme.titleSmall,
+                      items: data.data
+                          .map((e) => DropdownMenuItem<DataCategory>(
+                              value: e, child: Text(e.name)))
+                          .toList(),
+                      onChanged: (value) {
+                        dropdownValueCategory = value;
+                      })),
+              Center(
+                child: SizedBox(
+                  width: 100.w,
+                  child: ElevatedButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          AppTextView(
+                            LocaleKeys.save.tr(),
+                            style: context.textTheme.titleSmall
+                                .withColor(Colors.white),
+                          ),
+                          5.horizontalSpace,
+                          const Icon(
+                            Icons.save,
+                            color: Colors.white,
+                          )
+                        ],
+                      )),
+                ),
+              )
+            ],
+          ),
         ));
   }
-
-  int _getOuterIndex(String itemName) {
-    int index = 0;
-    for (final key in filterMap.keys) {
-      if (filterMap[key]!.any((element) => element.title == itemName)) {
-        return filterMap[key]!
-                .indexWhere((element) => element.title == itemName) +
-            index;
-      }
-      index += filterMap[key]!.length;
-    }
-    return index;
-  }
-
-  Map<String, List<FilterType>> filterMap = {
-    'General Filters': [
-      FilterType(
-        'Sort By',
-      ),
-      FilterType(
-        'Cuisines',
-      ),
-      FilterType(
-        'Price',
-      ),
-      FilterType(
-        'Rating',
-      ),
-      FilterType(
-        'Delivery time',
-      ),
-      FilterType(
-        'Allergies',
-      ),
-    ],
-    'Advanced Filters': [
-      FilterType('Open Now'),
-      FilterType('Vegetarian'),
-      FilterType('Halal'),
-    ],
-  };
-}
-
-class FilterType {
-  final String title;
-  const FilterType(this.title);
 }

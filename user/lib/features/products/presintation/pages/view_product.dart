@@ -139,27 +139,41 @@ class _ViewProductState extends State<ViewProduct> {
                               style: context.textTheme.titleMedium),
                           10.verticalSpace,
                           if (data.coupons!.isEmpty)
-                            Container(
-                                padding: HWEdgeInsets.all(3.5),
-                                decoration: BoxDecoration(
-                                    color: context.colorScheme.secondary,
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: AppTextView(
-                                    '${LocaleKeys.home_screen_price.tr()} ${CoreHelper.handlePrice(CoreHelper.formatter.format(data.price))} ل س',
-                                    style:
-                                        context.textTheme.titleSmall!.withColor(
-                                      Colors.white,
-                                    ))),
+                            Row(
+                              children: [
+                                AppTextView(LocaleKeys.home_screen_price.tr(),
+                                    style: context.textTheme.titleMedium),
+                                5.horizontalSpace,
+                                Container(
+                                    padding: HWEdgeInsets.all(3.5),
+                                    decoration: BoxDecoration(
+                                        color: context.colorScheme.secondary,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: AppTextView(
+                                        '${LocaleKeys.home_screen_price.tr()} ${CoreHelper.handlePrice(CoreHelper.formatter.format(data.price))} ل س',
+                                        style: context.textTheme.titleSmall!
+                                            .withColor(
+                                          Colors.white,
+                                        ))),
+                              ],
+                            ),
                           if (data.coupons!.isNotEmpty) ...[
-                            Container(
-                                padding: HWEdgeInsets.all(3.5),
-                                decoration: BoxDecoration(
-                                    color: context.colorScheme.secondary,
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: AppTextView(
-                                    'السعر بعد الحسم ${CoreHelper.handlePrice(CoreHelper.formatter.format(data.price - data.coupons![0].discount!))} ل س',
-                                    style: context.textTheme.titleSmall!
-                                        .withColor(Colors.white))),
+                            Row(
+                              children: [
+                                AppTextView('price',
+                                    style: context.textTheme.titleMedium),
+                                5.horizontalSpace,
+                                Container(
+                                    padding: HWEdgeInsets.all(3.5),
+                                    decoration: BoxDecoration(
+                                        color: context.colorScheme.secondary,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: AppTextView(
+                                        '${CoreHelper.handlePrice(CoreHelper.formatter.format(data.price - data.coupons![0].discount!))} ل س',
+                                        style: context.textTheme.titleSmall!
+                                            .withColor(Colors.white))),
+                              ],
+                            ),
                           ],
                           10.verticalSpace,
                           Row(

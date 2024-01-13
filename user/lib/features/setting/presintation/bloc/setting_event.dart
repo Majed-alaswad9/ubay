@@ -25,3 +25,9 @@ class ChangePasswordEvent extends SettingEvent {
 }
 
 class GetCitiesEvent extends SettingEvent {}
+
+class ChangeFavouriteCitiesEvent extends SettingEvent {
+  final List<DataCategory>? listCities;
+
+  ChangeFavouriteCitiesEvent(this.listCities);
+}

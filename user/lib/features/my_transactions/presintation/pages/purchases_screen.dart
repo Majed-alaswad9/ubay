@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user/core/util/extensions/build_context.dart';
+import 'package:user/core/util/responsive_padding.dart';
 import 'package:user/features/my_transactions/data/model/purchases_model/purchases_model.dart';
 
 import '../../../../core/common/model/page_state/result_builder.dart';
@@ -44,9 +45,11 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
                 context.read<TransactionsBloc>().add(GetAllPurchasesEvent());
               },
               child: ListView(
+                padding: EdgeInsets.zero,
                 physics: const BouncingScrollPhysics(),
                 children: [
                   ListView.separated(
+                      padding: HWEdgeInsets.all(0),
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => ListTransactions(
@@ -68,6 +71,7 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
                           ),
                       itemCount: data.seller.length),
                   ListView.separated(
+                      padding: EdgeInsets.zero,
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => ListTransactions(
@@ -88,6 +92,7 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
                           ),
                       itemCount: data.wait.length),
                   ListView.separated(
+                      padding: EdgeInsets.zero,
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => ListTransactions(

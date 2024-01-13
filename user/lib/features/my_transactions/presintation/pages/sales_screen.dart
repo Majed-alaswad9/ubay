@@ -43,9 +43,11 @@ class _SalesPageState extends State<SalesPage> {
               context.read<TransactionsBloc>().add(GetAllSalesEvent());
             },
             child: ListView(
+              padding: EdgeInsets.zero,
               physics: const BouncingScrollPhysics(),
               children: [
                 ListView.separated(
+                    padding: EdgeInsets.zero,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => ListTransactions(
@@ -66,6 +68,7 @@ class _SalesPageState extends State<SalesPage> {
                         ),
                     itemCount: data.wait.length),
                 ListView.separated(
+                    padding: EdgeInsets.zero,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => ListTransactions(
@@ -85,6 +88,7 @@ class _SalesPageState extends State<SalesPage> {
                         ),
                     itemCount: data.unpaid.length),
                 ListView.separated(
+                    padding: EdgeInsets.zero,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => ListTransactions(
@@ -105,6 +109,7 @@ class _SalesPageState extends State<SalesPage> {
                         ),
                     itemCount: data.seller.length),
                 ListView.separated(
+                    padding: EdgeInsets.zero,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => ListTransactions(

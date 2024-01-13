@@ -33,6 +33,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     on<EditMyProfileEvent>(_onEditProfileEvent);
     on<ChangePasswordEvent>(_onChangePasswordEvent);
     on<GetCitiesEvent>(_onGetCitiesEvent);
+    on<ChangeFavouriteCitiesEvent>(_onChangeCitiesEvent);
   }
 
   FutureOr<void> _onGetMeEvent(
@@ -96,5 +97,11 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     }, (value) {
       emit(state.copyWith(citiesState: PageState.loaded(data: value.data)));
     });
+  }
+
+  FutureOr<void> _onChangeCitiesEvent(
+      ChangeFavouriteCitiesEvent event, Emitter<SettingState> emit) async {
+    print(event.listCities!.length);
+    emit(state.copyWith(listCities: event.listCities));
   }
 }
